@@ -2,7 +2,7 @@ def get_login_for_registration(new_login : str):
     if len(new_login) < 6:
         print("Your login should has at least 6 symbols")
     else:
-        #Открыть окно для создания пароля????
+        #Открыть окно для создания пароля???? Dodik
         pass
 
 def get_password_for_registration(new_password: str):
