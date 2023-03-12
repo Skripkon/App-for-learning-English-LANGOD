@@ -3,12 +3,20 @@ from playsound import playsound
 import requests
 
 class Word:
+    api_key = "12371fe7-2adf-4ced-9985-1ce6bd6ba9b0"
     current_word: str = ""
         
         
     @classmethod
     def get_the_meaning_of_a_word(cls):
-        pass
+        url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{cls.current_word}?key={cls.api_key}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            if isinstance(data, list) and len(data) > 0:
+                definitions = data[0].get('shortdef', [])
+                return definitions
+        return []
     
     
     @classmethod
