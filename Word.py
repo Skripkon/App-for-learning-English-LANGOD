@@ -30,4 +30,28 @@ class Word:
     
     @classmethod
     def get_the_video_with_a_word(cls):
-        pass
+        phraseEncoded = ""
+        for char in phrase:
+            if (char == ' '):
+                phraseEncoded += "%20"
+            elif (char == "'"):
+                phraseEncoded += "%27"
+            elif (char == "!"):
+                phraseEncoded += "%21"
+            elif (char == ":"):
+                phraseEncoded += "%3A"
+            else:
+                phraseEncoded += char
+        URL: str = "https://yarn.co/yarn-find?text=" + phraseEncoded
+        request = requests.get(URL)
+        HTML: str = request.text
+        index: int = request.text.find('/yarn-clip/') + 11
+        video_url: str = ""
+        while (HTML[index] != '"'):
+            video_url += HTML[index]
+            index += 1
+        new_request_URL: str = "https://y.yarn.co/" + video_url + ".mp4"    
+        new_request = requests.get(new_request_URL)
+        file=open(r'file.mp4',"wb")
+        file.write(new_request.content)
+        file.close()
