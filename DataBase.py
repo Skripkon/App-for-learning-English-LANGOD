@@ -2,10 +2,9 @@ import sqlite3
 import os.path
 
 class DataBase:
-    
     @classmethod
-    def create_data_base(cls, name):    
-        
+    def create_data_base(cls, name):
+        global sqlite_create_table_query
         if name == "registration_info":
             sqlite_create_table_query = '''CREATE TABLE registration_info (
                                 login TEXT PRIMARY KEY,
@@ -33,9 +32,7 @@ class DataBase:
             
     @classmethod    
     def chech_whether_data_bases_exist(cls):
-        
         if os.path.exists("users_data.db") == False:
-            create_data_base("users_data")
-            
+            cls.create_data_base("users_data")
         if os.path.exists("registration_info.db") == False:
-             create_data_base("registration_info")
+             cls.create_data_base("registration_info")
