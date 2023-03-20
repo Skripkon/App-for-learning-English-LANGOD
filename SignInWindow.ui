@@ -20,17 +20,18 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>40</y>
-     <width>301</width>
-     <height>101</height>
+     <x>60</x>
+     <y>30</y>
+     <width>471</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(225, 225, 225); font-size:28pt;</string>
+    <string notr="true">color:rgb(225, 225, 225); 
+font: 75 italic 30pt &quot;Z003&quot;;</string>
    </property>
    <property name="text">
-    <string>Sign up</string>
+    <string>Welcome to LANGOD</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -39,9 +40,9 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>290</y>
-     <width>190</width>
+     <x>40</x>
+     <y>150</y>
+     <width>81</width>
      <height>60</height>
     </rect>
    </property>
@@ -57,14 +58,11 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QLineEdit" name="email">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>290</y>
+     <x>210</x>
+     <y>150</y>
      <width>300</width>
      <height>60</height>
     </rect>
-   </property>
-   <property name="mouseTracking">
-    <bool>true</bool>
    </property>
    <property name="styleSheet">
     <string notr="true">border-color: rgb(255, 255, 255);
@@ -73,23 +71,26 @@ selection-background-color: rgb(255, 255, 255);
 selection-color: rgb(46, 194, 126);
 background-color: rgb(3, 54, 22)</string>
    </property>
-   <property name="frame">
-    <bool>true</bool>
+   <property name="placeholderText">
+    <string/>
+   </property>
+   <property name="clearButtonEnabled">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLineEdit" name="password">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>390</y>
+     <x>210</x>
+     <y>260</y>
      <width>300</width>
      <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(255, 255, 255);
-font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">font-size:14pt; color:rgb(243, 243, 243);
 selection-background-color: rgb(255, 255, 255);
+border-color: rgb(255, 255, 255);
 selection-color: rgb(46, 194, 126);
 background-color: rgb(3, 54, 22)</string>
    </property>
@@ -100,65 +101,9 @@ background-color: rgb(3, 54, 22)</string>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>400</y>
-     <width>190</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font-size:18pt;
- color:rgb(255, 127, 127);
-border-color: rgb(255, 255, 255);</string>
-   </property>
-   <property name="text">
-    <string>Password</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="signupbutton">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>600</y>
-     <width>221</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:14pt; 
-color:rgb(243, 243, 243);</string>
-   </property>
-   <property name="text">
-    <string>Sign up</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="confirmpass">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>490</y>
-     <width>300</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border-color: rgb(255, 255, 255);
-font-size:14pt; color:rgb(243, 243, 243);
-selection-background-color: rgb(255, 255, 255);
-selection-color: rgb(46, 194, 126);
-background-color: rgb(3, 54, 22)</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>490</y>
-     <width>190</width>
+     <x>40</x>
+     <y>260</y>
+     <width>141</width>
      <height>60</height>
     </rect>
    </property>
@@ -168,16 +113,79 @@ background-color: rgb(3, 54, 22)</string>
 border-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Confirm Pass</string>
+    <string>Password</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="loginbutton">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>340</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:14pt; 
+color:rgb(243, 243, 243);
+</string>
+   </property>
+   <property name="text">
+    <string>Login</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>620</y>
+     <width>291</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:16pt; color:rgb(243, 243, 243);</string>
+   </property>
+   <property name="text">
+    <string>Don't have an account?</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::MarkdownText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="createaccbutton">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>690</y>
+     <width>181</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:14pt; 
+color:rgb(243, 243, 243);</string>
+   </property>
+   <property name="text">
+    <string>Create Account</string>
    </property>
   </widget>
   <zorder>label</zorder>
   <zorder>label_2</zorder>
   <zorder>password</zorder>
   <zorder>label_3</zorder>
-  <zorder>signupbutton</zorder>
-  <zorder>confirmpass</zorder>
+  <zorder>loginbutton</zorder>
   <zorder>label_4</zorder>
+  <zorder>createaccbutton</zorder>
   <zorder>email</zorder>
  </widget>
  <resources/>

@@ -1,19 +1,20 @@
 import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QMessageBox, QVBoxLayout, QHBoxLayout, QSpacerItem, \
-    QSizePolicy
+    QSizePolicy, QScrollArea
 from PyQt5.uic import loadUi
 import sqlite3
 import DataBase
+import Word
 
 
-class SignUpWindow(QDialog):
+class SignInWindow(QDialog):
     def __init__(self):
-        super(SignUpWindow, self).__init__()
-        loadUi("SignUpWindow.ui", self)
+        super(SignInWindow, self).__init__()
+        loadUi("SignInWindow.ui", self)
         self.loginbutton.clicked.connect(self.login_button_function)
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.createaccbutton.clicked.connect(self.sign_in_button_function)
+        self.createaccbutton.clicked.connect(self.sign_up_button_function)
 
     def login_button_function(self):
         DataBase.DataBase.check_whether_data_bases_exist()
@@ -27,9 +28,9 @@ class SignUpWindow(QDialog):
             self.open_the_window("ERROR", "Such user hasn't found")
 
     @classmethod
-    def sign_in_button_function(cls):
-        sign_in = SignInWindow()
-        widget.addWidget(sign_in)
+    def sign_up_button_function(cls):
+        sign_up = SignUpWindow()
+        widget.addWidget(sign_up)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
     @classmethod
@@ -42,11 +43,11 @@ class SignUpWindow(QDialog):
         msg_box.exec_()
 
 
-class SignInWindow(QDialog):
+class SignUpWindow(QDialog):
     def __init__(self):
-        super(SignInWindow, self).__init__()
-        loadUi("SignInWindow.ui", self)
-        self.signupbutton.clicked.connect(self.createaccfunction)
+        super(SignUpWindow, self).__init__()
+        loadUi("SignUpWindow.ui", self)
+        self.signupbutton.clicked.connect(self.create_new_user_button_function)
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.confirmpass.setEchoMode(QtWidgets.QLineEdit.Password)
 
@@ -55,14 +56,14 @@ class SignInWindow(QDialog):
         # TODO
         return "NO ERROR"
 
-    def createaccfunction(self):
+    def create_new_user_button_function(self):
         DataBase.DataBase.check_whether_data_bases_exist()
         login_text = self.email.text()
         if self.password.text() == self.confirmpass.text():
             password = self.password.text()
-            IsPasswordCorrect: str = self.correct_password(password)
-            if IsPasswordCorrect != "NO ERROR":
-                self.open_the_window("Error", IsPasswordCorrect)
+            is_password_correct: str = self.correct_password(password)
+            if is_password_correct != "NO ERROR":
+                self.open_the_window("Error", is_password_correct)
                 return None
             try:
                 DataBase.DataBase.create_user(login_text, password)
@@ -91,33 +92,44 @@ class SearchWindow(QMainWindow):
     def __init__(self):
         super(SearchWindow, self).__init__()
         loadUi('SearchWindow.ui', self)
+        self.searchbutton.clicked.connect(self.search_button_function)
 
-        self.vlayout = QVBoxLayout()
-        self.hlayout = QHBoxLayout()
 
-        self.vlayout.addWidget(self.searchfield)
-        self.vlayout.addWidget(self.searchbutton)
+        # self.vlayout = QVBoxLayout()
+        # self.hlayout = QHBoxLayout()
+        #
+        # self.vlayout.addWidget(self.searchfield)
+        # self.vlayout.addWidget(self.searchbutton)
+        #
+        # spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        # self.vlayout.addItem(spacer)
+        #
+        # self.hlayout.addLayout(self.vlayout)
+        # self.hlayout.addStretch()
+        # self.centralWidget = QtWidgets.QWidget()
+        # self.centralWidget.setLayout(self.hlayout)
+        # self.setCentralWidget(self.centralWidget)
+        #
+        # self.searchbutton.clicked.connect(self.search)
 
-        spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        self.vlayout.addItem(spacer)
-
-        self.hlayout.addLayout(self.vlayout)
-        self.hlayout.addStretch()
-        self.centralWidget = QtWidgets.QWidget()
-        self.centralWidget.setLayout(self.hlayout)
-        self.setCentralWidget(self.centralWidget)
-
-        self.searchbutton.clicked.connect(self.search)
-
-    def search(self):
+    def search_button_function(self):
+        self.definition.clear()
         search_text = self.searchfield.text()
-        msgBox = QMessageBox()
-        msgBox.setText(search_text)
-        msgBox.exec_()
+        self.definition.verticalScrollBar().setValue(0)
+        Word.Word.current_word = search_text
+        self.definition.setReadOnly(True)
+
+        for definition_of_the_word in Word.Word.get_the_meaning_of_a_word():
+            self.definition.append(definition_of_the_word)
+
+
+
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainwindow = SignUpWindow()
+    mainwindow = SignInWindow()
     widget = QtWidgets.QStackedWidget()
     widget.addWidget(mainwindow)
     widget.setFixedWidth(600)
