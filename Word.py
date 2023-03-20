@@ -1,6 +1,9 @@
 from gtts import gTTS
 from playsound import playsound
 import requests
+from reverso_context_api import Client
+from PyDictionary import PyDictionary
+
 
 class Word:
     api_key = "12371fe7-2adf-4ced-9985-1ce6bd6ba9b0"
@@ -17,12 +20,22 @@ class Word:
                 definitions = data[0].get('shortdef', [])
                 return definitions
         return []
-    
-    
+
     @classmethod
-    def get_the_usage_of_a_word(cls):
-        pass
+    def get_the_usage_of_a_word(cls, number_of_examples=10) -> list[str]:
+        client = Client('en', 'ru')
+        cnt = 0
+        examples = []
+        for example in client.get_translation_samples(cls.current_word, cleanup=True):
+            if cnt > number_of_examples:
+                break
+            examples.append(example[0])
+            cnt += 1
+        return examples
     
+    # def get_the_meaning_of_a_word(self) -> dict:
+    #     dict = PyDictionary()
+    #     return dict.meaning(self.word)
     
     @classmethod
     def get_the_pronunciation_of_a_word_with_American_accent(cls):

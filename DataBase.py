@@ -2,6 +2,7 @@ import sqlite3
 import os.path
 
 class DataBase:
+    current_user_id = None
     sqlite_connection = None
     cursor = None
 
@@ -46,6 +47,16 @@ class DataBase:
     def create_user(cls, new_login: str, new_password: str):
         cls.cursor.execute("INSERT INTO registration_info (login, password) VALUES(?, ?)", (new_login, new_password))
         cls.sqlite_connection.commit()
+
+
+    @classmethod
+    def check_if_user_exists(cls, login_text: str, password: str) -> int:
+        info = cls.cursor.execute("SELECT id FROM registration_info WHERE login=? and password=?", (login_text, password))
+        # cls.sqlite_connection.commit()
+        if info.fetchone() is None:
+            return -1
+        else:
+            return info.fetchone()
 
     @classmethod
     def close_connection(cls):
