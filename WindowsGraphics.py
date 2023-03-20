@@ -51,7 +51,7 @@ class CreateAcc(QDialog):
     @classmethod
     def correct_password(cls, password: str) -> str:
         # TODO
-        pass
+        return "NO ERROR"
 
     def createaccfunction(self):
         DataBase.DataBase.check_whether_data_bases_exist()
