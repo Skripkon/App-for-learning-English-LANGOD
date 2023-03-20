@@ -6,43 +6,50 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>620</height>
+    <width>600</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 36, 0)</string>
+   <string notr="true">background-color: rgb(0, 36, 0);
+border-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>50</y>
-     <width>121</width>
+     <x>60</x>
+     <y>30</y>
+     <width>471</width>
      <height>71</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(225, 225, 225); font-size:28pt;</string>
+    <string notr="true">color:rgb(225, 225, 225); 
+font: 75 italic 30pt &quot;Z003&quot;;</string>
    </property>
    <property name="text">
-    <string>Login</string>
+    <string>Welcome to LANGOD</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>160</y>
-     <width>101</width>
-     <height>31</height>
+     <y>150</y>
+     <width>81</width>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:15pt; color:rgb(255, 255, 0);</string>
+    <string notr="true">font-size:18pt; 
+color:rgb(255, 255, 0);
+border-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Login</string>
@@ -51,27 +58,41 @@
   <widget class="QLineEdit" name="email">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>210</x>
      <y>150</y>
-     <width>241</width>
-     <height>51</height>
+     <width>300</width>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:14pt; color:rgb(243, 243, 243)</string>
+    <string notr="true">border-color: rgb(255, 255, 255);
+font-size:14pt; color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+selection-color: rgb(46, 194, 126);
+background-color: rgb(3, 54, 22)</string>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+   <property name="clearButtonEnabled">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLineEdit" name="password">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>210</x>
      <y>260</y>
-     <width>241</width>
-     <height>51</height>
+     <width>300</width>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:14pt; color:rgb(243, 243, 243)</string>
+    <string notr="true">font-size:14pt; color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+border-color: rgb(255, 255, 255);
+selection-color: rgb(46, 194, 126);
+background-color: rgb(3, 54, 22)</string>
    </property>
    <property name="text">
     <string/>
@@ -81,13 +102,15 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>270</y>
-     <width>111</width>
-     <height>31</height>
+     <y>260</y>
+     <width>141</width>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:15pt; color:rgb(255, 0, 127)</string>
+    <string notr="true">font-size:18pt;
+ color:rgb(255, 0, 127);
+border-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Password</string>
@@ -96,14 +119,17 @@
   <widget class="QPushButton" name="loginbutton">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>390</y>
+     <x>280</x>
+     <y>340</y>
      <width>141</width>
      <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(167, 168, 167); font-size:14pt; color:rgb(255, 255, 255)</string>
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:14pt; 
+color:rgb(243, 243, 243);
+</string>
    </property>
    <property name="text">
     <string>Login</string>
@@ -112,35 +138,55 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>350</y>
-     <width>171</width>
-     <height>16</height>
+     <x>140</x>
+     <y>620</y>
+     <width>291</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(44, 2, 124)</string>
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:16pt; color:rgb(243, 243, 243);</string>
    </property>
    <property name="text">
     <string>Don't have an account?</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::MarkdownText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="margin">
+    <number>0</number>
    </property>
   </widget>
   <widget class="QPushButton" name="createaccbutton">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>340</y>
-     <width>93</width>
-     <height>28</height>
+     <x>200</x>
+     <y>690</y>
+     <width>181</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255)</string>
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:14pt; 
+color:rgb(243, 243, 243);</string>
    </property>
    <property name="text">
     <string>Create Account</string>
    </property>
   </widget>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>password</zorder>
+  <zorder>label_3</zorder>
+  <zorder>loginbutton</zorder>
+  <zorder>label_4</zorder>
+  <zorder>createaccbutton</zorder>
+  <zorder>email</zorder>
  </widget>
  <resources/>
  <connections/>

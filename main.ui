@@ -6,29 +6,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>600</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color:rgb(50, 50, 50)</string>
+   <string notr="true">background-color: rgb(0, 36, 0);
+border-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="searchbutton">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>90</y>
-      <width>75</width>
-      <height>24</height>
+      <x>380</x>
+      <y>20</y>
+      <width>111</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 0);
-background-color: rgb(255, 0, 255);</string>
+     <string notr="true">color:rgb(255, 0, 255);
+font-size:14pt; 
+color:rgb(243, 243, 243);
+</string>
     </property>
     <property name="text">
      <string>search</string>
@@ -37,15 +40,18 @@ background-color: rgb(255, 0, 255);</string>
    <widget class="QLineEdit" name="searchfield">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>90</y>
-      <width>291</width>
-      <height>21</height>
+      <x>20</x>
+      <y>20</y>
+      <width>331</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">
-color: rgb(85, 255, 255);</string>
+     <string notr="true">border-color: rgb(255, 255, 255);
+font-size:14pt; color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+selection-color: rgb(46, 194, 126);
+background-color: rgb(3, 54, 22)</string>
     </property>
    </widget>
   </widget>
@@ -54,8 +60,8 @@ color: rgb(85, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>22</height>
+     <width>600</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

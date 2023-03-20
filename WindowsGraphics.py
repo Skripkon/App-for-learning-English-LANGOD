@@ -1,9 +1,11 @@
 import sys
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QMessageBox, QVBoxLayout, QHBoxLayout, QSpacerItem, QSizePolicy
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QMessageBox, QVBoxLayout, QHBoxLayout, QSpacerItem, \
+    QSizePolicy
 from PyQt5.uic import loadUi
 import sqlite3
 import DataBase
+
 
 class Login(QDialog):
     def __init__(self):
@@ -18,12 +20,14 @@ class Login(QDialog):
         login_text = self.email.text()
         password = self.password.text()
         if DataBase.DataBase.check_if_user_exists(login_text, password) != -1:
-            self.accept()
-            self.window = MainWindow()
-            self.window.show()
+            search = MainWindow()
+            widget.addWidget(search)
+            widget.setCurrentIndex(widget.currentIndex() + 1)
+            # self.accept()
+            # self.window = MainWindow()
+            # self.window.show()
         else:
             self.open_the_window("ERROR", "Such user hasn't found")
-
 
     def gotocreate(self):
         createacc = CreateAcc()
@@ -46,7 +50,6 @@ class CreateAcc(QDialog):
         self.signupbutton.clicked.connect(self.createaccfunction)
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.confirmpass.setEchoMode(QtWidgets.QLineEdit.Password)
-
 
     @classmethod
     def correct_password(cls, password: str) -> str:
@@ -118,7 +121,7 @@ app = QApplication(sys.argv)
 mainwindow = Login()
 widget = QtWidgets.QStackedWidget()
 widget.addWidget(mainwindow)
-widget.setFixedWidth(1000)
-widget.setFixedHeight(1500)
+widget.setFixedWidth(600)
+widget.setFixedHeight(800)
 widget.show()
 sys.exit(app.exec_())
