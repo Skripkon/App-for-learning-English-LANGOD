@@ -7,34 +7,33 @@ import sqlite3
 import DataBase
 
 
-class Login(QDialog):
+class SignUpWindow(QDialog):
     def __init__(self):
-        super(Login, self).__init__()
-        loadUi("login.ui", self)
-        self.loginbutton.clicked.connect(self.loginfunction)
+        super(SignUpWindow, self).__init__()
+        loadUi("SignUpWindow.ui", self)
+        self.loginbutton.clicked.connect(self.login_button_function)
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.createaccbutton.clicked.connect(self.gotocreate)
+        self.createaccbutton.clicked.connect(self.sign_in_button_function)
 
-    def loginfunction(self):
+    def login_button_function(self):
         DataBase.DataBase.check_whether_data_bases_exist()
         login_text = self.email.text()
         password = self.password.text()
         if DataBase.DataBase.check_if_user_exists(login_text, password) != -1:
-            search = MainWindow()
+            search = SearchWindow()
             widget.addWidget(search)
             widget.setCurrentIndex(widget.currentIndex() + 1)
-            # self.accept()
-            # self.window = MainWindow()
-            # self.window.show()
         else:
             self.open_the_window("ERROR", "Such user hasn't found")
 
-    def gotocreate(self):
-        createacc = CreateAcc()
-        widget.addWidget(createacc)
+    @classmethod
+    def sign_in_button_function(cls):
+        sign_in = SignInWindow()
+        widget.addWidget(sign_in)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
-    def open_the_window(self, title_of_the_window: str, information: str):
+    @classmethod
+    def open_the_window(cls, title_of_the_window: str, information: str):
         msg_box = QtWidgets.QMessageBox()
         msg_box.setText(information)
         msg_box.setWindowTitle(title_of_the_window)
@@ -43,10 +42,10 @@ class Login(QDialog):
         msg_box.exec_()
 
 
-class CreateAcc(QDialog):
+class SignInWindow(QDialog):
     def __init__(self):
-        super(CreateAcc, self).__init__()
-        loadUi("createacc.ui", self)
+        super(SignInWindow, self).__init__()
+        loadUi("SignInWindow.ui", self)
         self.signupbutton.clicked.connect(self.createaccfunction)
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.confirmpass.setEchoMode(QtWidgets.QLineEdit.Password)
@@ -71,7 +70,7 @@ class CreateAcc(QDialog):
                 self.open_the_window("Error", "User with this login already exists")
                 return None
             self.open_the_window("OK", "Have fun using our app!")
-            login = Login()
+            login = SignUpWindow()
             widget.addWidget(login)
             widget.setCurrentIndex(widget.currentIndex() + 1)
         else:
@@ -88,10 +87,10 @@ class CreateAcc(QDialog):
         self.confirmpass.clear()
 
 
-class MainWindow(QMainWindow):
+class SearchWindow(QMainWindow):
     def __init__(self):
-        super(MainWindow, self).__init__()
-        loadUi('main.ui', self)
+        super(SearchWindow, self).__init__()
+        loadUi('SearchWindow.ui', self)
 
         self.vlayout = QVBoxLayout()
         self.hlayout = QHBoxLayout()
@@ -116,12 +115,12 @@ class MainWindow(QMainWindow):
         msgBox.setText(search_text)
         msgBox.exec_()
 
-
-app = QApplication(sys.argv)
-mainwindow = Login()
-widget = QtWidgets.QStackedWidget()
-widget.addWidget(mainwindow)
-widget.setFixedWidth(600)
-widget.setFixedHeight(800)
-widget.show()
-sys.exit(app.exec_())
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    mainwindow = SignUpWindow()
+    widget = QtWidgets.QStackedWidget()
+    widget.addWidget(mainwindow)
+    widget.setFixedWidth(600)
+    widget.setFixedHeight(800)
+    widget.show()
+    sys.exit(app.exec_())
