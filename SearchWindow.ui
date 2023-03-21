@@ -29,7 +29,7 @@ border-color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string notr="true">color:rgb(255, 0, 255);
-font-size:14pt; 
+font-size:15pt; 
 color:rgb(243, 243, 243);
 </string>
     </property>
@@ -58,7 +58,7 @@ background-color: rgb(3, 54, 22)</string>
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>130</y>
+      <y>160</y>
       <width>441</width>
       <height>81</height>
      </rect>
@@ -69,6 +69,103 @@ font-size:14pt; color:rgb(243, 243, 243);
 selection-background-color: rgb(255, 255, 255);
 selection-color: rgb(46, 194, 126);
 </string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pronunciationUSA">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>90</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normalon>.</normalon>
+      <activeon>:/voiceButtonIcon.png/voiceButtonIcon.png</activeon>
+     </iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pronunciationUK">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>90</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normalon>.</normalon>
+      <activeon>:/voiceButtonIcon.png/voiceButtonIcon.png</activeon>
+     </iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pronunciationUSAtext">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>100</y>
+      <width>51</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
+    </property>
+    <property name="text">
+     <string>US</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pronunciationUKtext">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>100</y>
+      <width>41</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
+    </property>
+    <property name="text">
+     <string>UK</string>
     </property>
    </widget>
   </widget>
@@ -84,6 +181,8 @@ selection-color: rgb(46, 194, 126);
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="icon.png"/>
+ </resources>
  <connections/>
 </ui>

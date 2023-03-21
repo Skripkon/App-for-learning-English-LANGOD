@@ -2,12 +2,14 @@ from gtts import gTTS
 from playsound import playsound
 import requests
 from reverso_context_api import Client
-from PyDictionary import PyDictionary
+import shutil
+import os
 
 
 class Word:
     api_key = "12371fe7-2adf-4ced-9985-1ce6bd6ba9b0"
     current_word: str = ""
+    name_of_folder_with_pronunciations: str = "sounds"
         
         
     @classmethod
@@ -39,20 +41,29 @@ class Word:
     
     @classmethod
     def get_the_pronunciation_of_a_word_with_American_accent(cls):
-        pronunciation_of_a_word_with_American_accent = gTTS(cls.current_word, tld="us")
-        file: str = cls.current_word + "US.mp3"
-        pronunciation_of_a_word_with_American_accent.save(file)
-        playsound(file)
+        target_path_of_the_file = cls.name_of_folder_with_pronunciations + '/' + cls.current_word + "US.mp3"
+        if not os.path.exists(target_path_of_the_file):
+            pronunciation_of_a_word_with_American_accent = gTTS(cls.current_word, tld="us")
+            file_source: str = cls.current_word + "US.mp3"
+            pronunciation_of_a_word_with_American_accent.save(file_source)
+            shutil.move(file_source, cls.name_of_folder_with_pronunciations)
+            playsound(target_path_of_the_file)
+        else:
+            playsound(target_path_of_the_file)
     
     
     @classmethod
     def get_the_pronunciation_of_a_word_with_British_accent(cls):
-        pronunciation_of_a_word_with_British_accent = gTTS(cls.current_word, tld="co.uk")
-        file: str = cls.current_word + "UK.mp3"
-        pronunciation_of_a_word_with_British_accent.save(file)
-        playsound(file)
-    
-    
+        target_path_of_the_file = cls.name_of_folder_with_pronunciations + '/' + cls.current_word + "UK.mp3"
+        if not os.path.exists(target_path_of_the_file):
+            pronunciation_of_a_word_with_British_accent = gTTS(cls.current_word, tld="us")
+            file_source: str = cls.current_word + "UK.mp3"
+            pronunciation_of_a_word_with_British_accent.save(file_source)
+            shutil.move(file_source, cls.name_of_folder_with_pronunciations)
+            playsound(target_path_of_the_file)
+        else:
+            playsound(target_path_of_the_file)
+
     @classmethod
     def get_the_video_with_a_word(cls):
         phraseEncoded = ""

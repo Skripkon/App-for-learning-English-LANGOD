@@ -1,6 +1,7 @@
 import sys
 
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QMessageBox, QVBoxLayout, QHBoxLayout, QSpacerItem, \
     QSizePolicy, QScrollArea
 from PyQt5.uic import loadUi
@@ -106,6 +107,16 @@ class SearchWindow(QMainWindow):
         super(SearchWindow, self).__init__()
         loadUi('SearchWindow.ui', self)
         self.searchbutton.clicked.connect(self.search_button_function)
+        self.pronunciationUSA.clicked.connect(Word.Word.get_the_pronunciation_of_a_word_with_American_accent)
+        self.pronunciationUK.clicked.connect(Word.Word.get_the_pronunciation_of_a_word_with_British_accent)
+        self.pronunciationUSA.hide()
+        self.pronunciationUK.hide()
+        self.pronunciationUSAtext.hide()
+        self.pronunciationUKtext.hide()
+        self.definition.setReadOnly(True)
+        self.pronunciationUSAtext.setReadOnly(True)
+        self.pronunciationUKtext.setReadOnly(True)
+
 
     def search_button_function(self):
         self.definition.clear()
@@ -116,6 +127,13 @@ class SearchWindow(QMainWindow):
 
         for definition_of_the_word in Word.Word.get_the_meaning_of_a_word():
             self.definition.append(definition_of_the_word)
+        self.pronunciationUSA.show()
+        self.pronunciationUK.show()
+        self.pronunciationUSAtext.show()
+        self.pronunciationUKtext.show()
+        self.pronunciationUSA.setIcon(QIcon("voiceButtonIcon.png"));
+        self.pronunciationUK.setIcon(QIcon("voiceButtonIcon.png"));
+
 
     def keyPressEvent(self, event):
         if event.Enter == 10:
