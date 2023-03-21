@@ -3,8 +3,10 @@ import os.path
 
 class DataBase:
     current_user_id = None
-    sqlite_connection = None
-    cursor = None
+    sqlite_connection_with_db_users_dara = None
+    cursor_for_users_data = None
+    sqlite_connection_with_db_registration_info= None
+    cursor_for_registration_info = None
 
     @classmethod
     def create_data_base(cls, name):
@@ -22,8 +24,8 @@ class DataBase:
             columns += "word500 TEXT"
 
             sqlite_create_table_query = f'''CREATE TABLE users_data (
-                                id INTEGER PRIMARY KEY,
-                                amount_of_words INTEGER,
+                                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                                amount_of_words INTEGER NOT NULL DEFAULT 1,
                                 {columns});'''
 
         sqlite_connection = sqlite3.connect(f'{name}.db')
@@ -40,19 +42,22 @@ class DataBase:
             cls.create_data_base("users_data")
         if not os.path.exists("registration_info.db"):
             cls.create_data_base("registration_info")
-        cls.sqlite_connection = sqlite3.connect('registration_info.db')
-        cls.cursor = cls.sqlite_connection.cursor()
+        cls.sqlite_connection_with_db_registration_info = sqlite3.connect('registration_info.db')
+        cls.cursor_for_registration_info = cls.sqlite_connection_with_db_registration_info.cursor()
+        cls.sqlite_connection_with_db_users_dara = sqlite3.connect('users_data.db')
+        cls.cursor_for_users_data = cls.sqlite_connection_with_db_users_dara.cursor()
 
     @classmethod
     def create_user(cls, new_login: str, new_password: str):
-        cls.cursor.execute("INSERT INTO registration_info (login, password) VALUES(?, ?)", (new_login, new_password))
-        cls.sqlite_connection.commit()
+        cls.cursor_for_registration_info.execute("INSERT INTO registration_info (login, password) VALUES(?, ?)", (new_login, new_password))
+        cls.sqlite_connection_with_db_registration_info.commit()
 
+        cls.cursor_for_users_data.execute("INSERT INTO users_data DEFAULT VALUES")
+        cls.sqlite_connection_with_db_users_dara.commit()
 
     @classmethod
     def check_if_user_exists(cls, login_text: str, password: str) -> int:
-        info = cls.cursor.execute("SELECT id FROM registration_info WHERE login=? and password=?", (login_text, password))
-        # cls.sqlite_connection.commit()
+        info = cls.cursor_for_registration_info.execute("SELECT id FROM registration_info WHERE login=? and password=?", (login_text, password))
         if info.fetchone() is None:
             return -1
         else:
@@ -60,5 +65,8 @@ class DataBase:
 
     @classmethod
     def close_connection(cls):
-        cls.cursor.close()
-        cls.sqlite_connection.close()
+        cls.cursor_for_registration_info.close()
+        cls.sqlite_connection_with_db_registration_info.close()
+        cls.cursor_for_users_data.close()
+        cls.sqlite_connection_with_db_users_dara.close()
+

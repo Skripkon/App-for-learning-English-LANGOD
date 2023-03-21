@@ -107,23 +107,6 @@ class SearchWindow(QMainWindow):
         loadUi('SearchWindow.ui', self)
         self.searchbutton.clicked.connect(self.search_button_function)
 
-        # self.vlayout = QVBoxLayout()
-        # self.hlayout = QHBoxLayout()
-        #
-        # self.vlayout.addWidget(self.searchfield)
-        # self.vlayout.addWidget(self.searchbutton)
-        #
-        # spacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-        # self.vlayout.addItem(spacer)
-        #
-        # self.hlayout.addLayout(self.vlayout)
-        # self.hlayout.addStretch()
-        # self.centralWidget = QtWidgets.QWidget()
-        # self.centralWidget.setLayout(self.hlayout)
-        # self.setCentralWidget(self.centralWidget)
-        #
-        # self.searchbutton.clicked.connect(self.search)
-
     def search_button_function(self):
         self.definition.clear()
         search_text = self.searchfield.text()
