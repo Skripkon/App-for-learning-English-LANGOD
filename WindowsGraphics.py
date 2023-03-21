@@ -23,7 +23,7 @@ class SignInWindow(QDialog):
         self.createaccbutton.clicked.connect(self.sign_up_button_function)
 
     def keyPressEvent(self, event):
-        if event.Enter == 10:
+        if event.nativeScanCode() == 36: # button Enter pressed
             self.login_button_function()
 
     def login_button_function(self):
@@ -67,7 +67,7 @@ class SignUpWindow(QDialog):
         return "NO ERROR"
 
     def keyPressEvent(self, event):
-        if event.Enter == 10:
+        if event.nativeScanCode() == 36: # button Enter pressed
             self.create_new_user_button_function()
 
     def create_new_user_button_function(self):
@@ -135,7 +135,7 @@ class SearchWindow(QMainWindow):
         self.pronunciationUK.setIcon(QIcon("voiceButtonIcon.png"));
 
     def keyPressEvent(self, event):
-        if event.Enter == 10:
+        if event.nativeScanCode() == 36: # button Enter pressed
             self.search_button_function()
 
 
