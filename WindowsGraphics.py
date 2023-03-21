@@ -1,9 +1,14 @@
 import sys
-from PyQt5 import QtWidgets
+
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QMessageBox, QVBoxLayout, QHBoxLayout, QSpacerItem, \
     QSizePolicy, QScrollArea
 from PyQt5.uic import loadUi
 import sqlite3
+from PyQt5 import QtCore, QtWidgets
+
+from PyQt5.uic.properties import QtCore
+
 import DataBase
 import Word
 
@@ -15,6 +20,10 @@ class SignInWindow(QDialog):
         self.loginbutton.clicked.connect(self.login_button_function)
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.createaccbutton.clicked.connect(self.sign_up_button_function)
+
+    def keyPressEvent(self, event):
+        if event.Enter == 10:
+            self.login_button_function()
 
     def login_button_function(self):
         DataBase.DataBase.check_whether_data_bases_exist()
@@ -56,6 +65,10 @@ class SignUpWindow(QDialog):
         # TODO
         return "NO ERROR"
 
+    def keyPressEvent(self, event):
+        if event.Enter == 10:
+            self.create_new_user_button_function()
+
     def create_new_user_button_function(self):
         DataBase.DataBase.check_whether_data_bases_exist()
         login_text = self.email.text()
@@ -71,7 +84,7 @@ class SignUpWindow(QDialog):
                 self.open_the_window("Error", "User with this login already exists")
                 return None
             self.open_the_window("OK", "Have fun using our app!")
-            login = SignUpWindow()
+            login = SignInWindow()
             widget.addWidget(login)
             widget.setCurrentIndex(widget.currentIndex() + 1)
         else:
@@ -93,7 +106,6 @@ class SearchWindow(QMainWindow):
         super(SearchWindow, self).__init__()
         loadUi('SearchWindow.ui', self)
         self.searchbutton.clicked.connect(self.search_button_function)
-
 
         # self.vlayout = QVBoxLayout()
         # self.hlayout = QHBoxLayout()
@@ -122,9 +134,9 @@ class SearchWindow(QMainWindow):
         for definition_of_the_word in Word.Word.get_the_meaning_of_a_word():
             self.definition.append(definition_of_the_word)
 
-
-
-
+    def keyPressEvent(self, event):
+        if event.Enter == 10:
+            self.search_button_function()
 
 
 if __name__ == "__main__":
