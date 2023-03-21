@@ -10,7 +10,7 @@ class Word:
     api_key = "12371fe7-2adf-4ced-9985-1ce6bd6ba9b0"
     current_word: str = ""
     name_of_folder_with_pronunciations: str = "sounds"
-        
+
     @classmethod
     def create_folder_to_store_mp4_files(cls):
         if not os.path.exists(cls.name_of_folder_with_pronunciations):
@@ -21,7 +21,10 @@ class Word:
         url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{cls.current_word}?key={cls.api_key}"
         response = requests.get(url)
         if response.status_code == 200:
-            data = response.json()
+            try:
+                data = response.json()
+            except requests.exceptions.JSONDecodeError as error:
+                return ["Your search terms did not match any entries"]
             if isinstance(data, list) and len(data) > 0:
                 definitions = data[0].get('shortdef', [])
                 return definitions
@@ -38,11 +41,11 @@ class Word:
             examples.append(example[0])
             cnt += 1
         return examples
-    
+
     # def get_the_meaning_of_a_word(self) -> dict:
     #     dict = PyDictionary()
     #     return dict.meaning(self.word)
-    
+
     @classmethod
     def get_the_pronunciation_of_a_word_with_American_accent(cls):
         target_path_of_the_file = cls.name_of_folder_with_pronunciations + '/' + cls.current_word + "US.mp3"
@@ -54,8 +57,7 @@ class Word:
             playsound(target_path_of_the_file)
         else:
             playsound(target_path_of_the_file)
-    
-    
+
     @classmethod
     def get_the_pronunciation_of_a_word_with_British_accent(cls):
         target_path_of_the_file = cls.name_of_folder_with_pronunciations + '/' + cls.current_word + "UK.mp3"
@@ -90,9 +92,9 @@ class Word:
         while (HTML[index] != '"'):
             video_url += HTML[index]
             index += 1
-        new_request_URL: str = "https://y.yarn.co/" + video_url + ".mp4"    
+        new_request_URL: str = "https://y.yarn.co/" + video_url + ".mp4"
         new_request = requests.get(new_request_URL)
         name: str = cls.current_word + ".mp4"
-        file=open(name,"wb")
+        file = open(name, "wb")
         file.write(new_request.content)
         file.close()

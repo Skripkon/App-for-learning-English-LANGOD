@@ -7,11 +7,22 @@ from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QMessageBox, QVB
 from PyQt5.uic import loadUi
 import sqlite3
 from PyQt5 import QtCore, QtWidgets
-
+from time import time
 from PyQt5.uic.properties import QtCore
-
 import DataBase
 import Word
+
+
+def time_required(f):
+    last = [time()]
+
+    def decorator():
+        if time() - last[0] < 1:
+            return None
+        last[0] = time()
+        return f()
+
+    return decorator
 
 
 class SignInWindow(QDialog):
@@ -23,7 +34,7 @@ class SignInWindow(QDialog):
         self.createaccbutton.clicked.connect(self.sign_up_button_function)
 
     def keyPressEvent(self, event):
-        if event.nativeScanCode() == 36: # button Enter pressed
+        if event.nativeScanCode() == 36:  # button Enter pressed
             self.login_button_function()
 
     def login_button_function(self):
@@ -67,7 +78,7 @@ class SignUpWindow(QDialog):
         return "NO ERROR"
 
     def keyPressEvent(self, event):
-        if event.nativeScanCode() == 36: # button Enter pressed
+        if event.nativeScanCode() == 36:  # button Enter pressed
             self.create_new_user_button_function()
 
     def create_new_user_button_function(self):
@@ -107,8 +118,10 @@ class SearchWindow(QMainWindow):
         super(SearchWindow, self).__init__()
         loadUi('SearchWindow.ui', self)
         self.searchbutton.clicked.connect(self.search_button_function)
-        self.pronunciationUSA.clicked.connect(Word.Word.get_the_pronunciation_of_a_word_with_American_accent)
-        self.pronunciationUK.clicked.connect(Word.Word.get_the_pronunciation_of_a_word_with_British_accent)
+        self.pronunciationUSA.clicked.connect(
+            time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent))
+        self.pronunciationUK.clicked.connect(
+            time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
         self.pronunciationUSA.hide()
         self.pronunciationUK.hide()
         self.pronunciationUSAtext.hide()
@@ -116,7 +129,7 @@ class SearchWindow(QMainWindow):
         self.definition.setReadOnly(True)
         self.pronunciationUSAtext.setReadOnly(True)
         self.pronunciationUKtext.setReadOnly(True)
-        Word.Word.create_folder_to_store_mp4_files() # check whether necessary folder exists
+        Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
 
     def search_button_function(self):
         self.definition.clear()
@@ -127,15 +140,17 @@ class SearchWindow(QMainWindow):
 
         for definition_of_the_word in Word.Word.get_the_meaning_of_a_word():
             self.definition.append(definition_of_the_word)
+            if definition_of_the_word == "Your search terms did not match any entries":
+                return None
         self.pronunciationUSA.show()
         self.pronunciationUK.show()
         self.pronunciationUSAtext.show()
         self.pronunciationUKtext.show()
-        self.pronunciationUSA.setIcon(QIcon("voiceButtonIcon.png"));
-        self.pronunciationUK.setIcon(QIcon("voiceButtonIcon.png"));
+        self.pronunciationUSA.setIcon(QIcon("voiceButtonIcon.png"))
+        self.pronunciationUK.setIcon(QIcon("voiceButtonIcon.png"))
 
     def keyPressEvent(self, event):
-        if event.nativeScanCode() == 36: # button Enter pressed
+        if event.nativeScanCode() == 36:  # button Enter pressed
             self.search_button_function()
 
 
