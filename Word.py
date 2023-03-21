@@ -11,7 +11,11 @@ class Word:
     current_word: str = ""
     name_of_folder_with_pronunciations: str = "sounds"
         
-        
+    @classmethod
+    def create_folder_to_store_mp4_files(cls):
+        if not os.path.exists(cls.name_of_folder_with_pronunciations):
+            os.mkdir(cls.name_of_folder_with_pronunciations)
+
     @classmethod
     def get_the_meaning_of_a_word(cls):
         url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{cls.current_word}?key={cls.api_key}"
@@ -56,7 +60,7 @@ class Word:
     def get_the_pronunciation_of_a_word_with_British_accent(cls):
         target_path_of_the_file = cls.name_of_folder_with_pronunciations + '/' + cls.current_word + "UK.mp3"
         if not os.path.exists(target_path_of_the_file):
-            pronunciation_of_a_word_with_British_accent = gTTS(cls.current_word, tld="us")
+            pronunciation_of_a_word_with_British_accent = gTTS(cls.current_word, tld="co.uk")
             file_source: str = cls.current_word + "UK.mp3"
             pronunciation_of_a_word_with_British_accent.save(file_source)
             shutil.move(file_source, cls.name_of_folder_with_pronunciations)

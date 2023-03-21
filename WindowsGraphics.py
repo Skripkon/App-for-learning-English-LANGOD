@@ -116,7 +116,7 @@ class SearchWindow(QMainWindow):
         self.definition.setReadOnly(True)
         self.pronunciationUSAtext.setReadOnly(True)
         self.pronunciationUKtext.setReadOnly(True)
-
+        Word.Word.create_folder_to_store_mp4_files() # check whether necessary folder exists
 
     def search_button_function(self):
         self.definition.clear()
@@ -133,7 +133,6 @@ class SearchWindow(QMainWindow):
         self.pronunciationUKtext.show()
         self.pronunciationUSA.setIcon(QIcon("voiceButtonIcon.png"));
         self.pronunciationUK.setIcon(QIcon("voiceButtonIcon.png"));
-
 
     def keyPressEvent(self, event):
         if event.Enter == 10:
