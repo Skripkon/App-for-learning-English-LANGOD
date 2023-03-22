@@ -4,10 +4,10 @@ import requests
 from reverso_context_api import Client
 import shutil
 import os
+import requests
 
 
 class Word:
-    api_key = "12371fe7-2adf-4ced-9985-1ce6bd6ba9b0"
     current_word: str = ""
     name_of_folder_with_pronunciations: str = "sounds"
 
@@ -18,17 +18,18 @@ class Word:
 
     @classmethod
     def get_the_meaning_of_a_word(cls):
-        url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{cls.current_word}?key={cls.api_key}"
+        url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{cls.current_word}"
         response = requests.get(url)
         if response.status_code == 200:
-            try:
-                data = response.json()
-            except requests.exceptions.JSONDecodeError as error:
-                return ["Your search terms did not match any entries"]
-            if isinstance(data, list) and len(data) > 0:
-                definitions = data[0].get('shortdef', [])
-                return definitions
-        return []
+            data = response.json()[0]
+            meanings = []
+            for meaning in data['meanings']:
+                part_of_speech = meaning['partOfSpeech']
+                definitions = [definition['definition'] for definition in meaning['definitions']]
+                meanings.append((part_of_speech, definitions))
+            return meanings
+        else:
+            return "Error"
 
     @classmethod
     def get_the_usage_of_a_word(cls, number_of_examples=10) -> list[str]:
