@@ -21,7 +21,7 @@ border-color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="searchbutton">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>420</x>
       <y>20</y>
       <width>141</width>
       <height>55</height>
@@ -42,7 +42,7 @@ color:rgb(243, 243, 243);
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>271</width>
+      <width>371</width>
       <height>55</height>
      </rect>
     </property>
