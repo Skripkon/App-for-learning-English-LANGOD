@@ -25,13 +25,20 @@ def time_required(f):
     return decorator
 
 
-class SignInWindow(QDialog):
+class Windows:
+    sign_in_window = None
+    sign_up_window = None
+    search_window = None
+
+
+class SignInWindow(QDialog, Windows):
     def __init__(self):
         super(SignInWindow, self).__init__()
         loadUi("SignInWindow.ui", self)
         self.loginbutton.clicked.connect(self.login_button_function)
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.createaccbutton.clicked.connect(self.sign_up_button_function)
+        Windows.sign_in_window = self
 
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed
@@ -42,16 +49,19 @@ class SignInWindow(QDialog):
         login_text = self.email.text()
         password = self.password.text()
         if DataBase.DataBase.check_if_user_exists(login_text, password) != -1:
-            search = SearchWindow()
-            widget.addWidget(search)
+            if Windows.search_window is None:
+                SearchWindow()
+            widget.addWidget(Windows.search_window)
             widget.setCurrentIndex(widget.currentIndex() + 1)
         else:
             self.open_the_window("ERROR", "Such user hasn't found")
 
     @classmethod
     def sign_up_button_function(cls):
-        sign_up = SignUpWindow()
-        widget.addWidget(sign_up)
+        Windows.sign_in_window.hide()
+        if Windows.sign_up_window is None:
+            SignUpWindow()
+        widget.addWidget(Windows.sign_up_window)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
     @classmethod
@@ -64,13 +74,14 @@ class SignInWindow(QDialog):
         msg_box.exec_()
 
 
-class SignUpWindow(QDialog):
+class SignUpWindow(QDialog, Windows):
     def __init__(self):
         super(SignUpWindow, self).__init__()
         loadUi("SignUpWindow.ui", self)
         self.signupbutton.clicked.connect(self.create_new_user_button_function)
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.confirmpass.setEchoMode(QtWidgets.QLineEdit.Password)
+        Windows.sign_up_window = self
 
     @classmethod
     def correct_password(cls, password: str) -> str:
@@ -96,9 +107,10 @@ class SignUpWindow(QDialog):
                 self.open_the_window("Error", "User with this login already exists")
                 return None
             self.open_the_window("OK", "Have fun using our app!")
-            login = SignInWindow()
-            widget.addWidget(login)
-            widget.setCurrentIndex(widget.currentIndex() + 1)
+            Windows.sign_in_window.show()
+            self.hide()
+
+
         else:
             self.open_the_window("Error", "Passwords aren't the same")
 
@@ -113,7 +125,7 @@ class SignUpWindow(QDialog):
         self.confirmpass.clear()
 
 
-class SearchWindow(QMainWindow):
+class SearchWindow(QMainWindow, Windows):
     def __init__(self):
         super(SearchWindow, self).__init__()
         loadUi('SearchWindow.ui', self)
@@ -123,6 +135,7 @@ class SearchWindow(QMainWindow):
         self.pronunciationUSA.setIcon(QIcon("voiceButtonIcon.png"))
         self.pronunciationUK.setIcon(QIcon("voiceButtonIcon.png"))
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
+        Windows.search_window = self
 
     def connect_interface_with_functions(self):
         self.searchbutton.clicked.connect(self.search_button_function)
