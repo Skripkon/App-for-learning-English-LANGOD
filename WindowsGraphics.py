@@ -161,6 +161,7 @@ class SearchWindow(QMainWindow):
 
     def search_button_function(self):
         self.definitionsText.clear()
+        self.usageText.clear()
         search_text = self.searchfield.text()
         Word.Word.current_word = search_text
         meanings = Word.Word.get_the_meaning_of_a_word()
@@ -185,13 +186,8 @@ class SearchWindow(QMainWindow):
         self.definitionsText.append(outputOfDefinitions)
         self.usageText.append(outputOfExamples)
         self.show_the_interface()
-
-
-
         self.definitionsText.verticalScrollBar().setValue(0)
         self.usageText.verticalScrollBar().setValue(0)
-
-
 
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed
