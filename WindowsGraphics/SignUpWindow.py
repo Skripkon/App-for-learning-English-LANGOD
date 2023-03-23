@@ -8,6 +8,7 @@ from WindowsGraphics import Windows
 
 class SignUpWindow(QDialog):
     __metaclass__ = Windows
+
     def __init__(self):
         super(SignUpWindow, self).__init__()
         loadUi("WindowsGraphics/SignUpWindow.ui", self)
@@ -15,6 +16,11 @@ class SignUpWindow(QDialog):
         self.password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.confirmpass.setEchoMode(QtWidgets.QLineEdit.Password)
         Windows.Windows.sign_up_window = self
+        self.back_to_sign_in_button.clicked.connect(self.back_to_sign_in_button_function)
+
+    def back_to_sign_in_button_function(self):
+        Windows.Windows.sign_up_window.hide()
+        Windows.Windows.sign_in_window.show()
 
     @classmethod
     def correct_password(cls, password: str) -> str:
