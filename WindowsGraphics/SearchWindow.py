@@ -25,14 +25,14 @@ class SearchWindow(QMainWindow):
         self.add_word_button.setIconSize(QtCore.QSize(50, 50))
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
         Windows.Windows.search_window = self
-        self.Back_button.clicked.connect(self.back_to_sign_in_button_function)
         
     @staticmethod
-    def back_to_sign_in_button_function(self):
+    def back_to_the_main_page_button_function(self):
         Windows.Windows.search_window.hide()
         Windows.Windows.sign_in_window.show()
 
     def connect_interface_with_functions(self):
+        self.back_to_the_main_page_button.clicked.connect(self.back_to_the_main_page_button_function)
         self.searchbutton.clicked.connect(self.search_button_function)
         self.pronunciationUSA.clicked.connect(
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent))

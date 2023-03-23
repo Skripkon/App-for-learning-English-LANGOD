@@ -32,7 +32,7 @@ class Word:
             return "Error"
 
     @classmethod
-    def get_the_usage_of_a_word(cls, number_of_examples=10) -> list[str]:
+    def get_the_usage_of_a_word(cls, number_of_examples=15) -> list[str]:
         client = Client('en', 'ru')
         cnt = 0
         # check whether such word exists
