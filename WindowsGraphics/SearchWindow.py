@@ -27,6 +27,7 @@ class SearchWindow(QMainWindow):
         Windows.Windows.search_window = self
         self.Back_button.clicked.connect(self.back_to_sign_in_button_function)
         
+    @staticmethod
     def back_to_sign_in_button_function(self):
         Windows.Windows.search_window.hide()
         Windows.Windows.sign_in_window.show()
@@ -69,6 +70,7 @@ class SearchWindow(QMainWindow):
         self.definitionsText.setReadOnly(True)
         self.usageText.setReadOnly(True)
         self.usageTitle.setReadOnly(True)
+        self.add_line.setReadOnly(True)
 
     @staticmethod
     def return_usage() -> str:
