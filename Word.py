@@ -35,6 +35,9 @@ class Word:
     def get_the_usage_of_a_word(cls, number_of_examples=10) -> list[str]:
         client = Client('en', 'ru')
         cnt = 0
+        # check whether such word exists
+        if len(list(client.get_translations(cls.current_word))) == 0:
+            return []
         examples = []
         for example in client.get_translation_samples(cls.current_word, cleanup=True):
             if cnt > number_of_examples:
@@ -42,10 +45,6 @@ class Word:
             examples.append(example[0])
             cnt += 1
         return examples
-
-    # def get_the_meaning_of_a_word(self) -> dict:
-    #     dict = PyDictionary()
-    #     return dict.meaning(self.word)
 
     @classmethod
     def get_the_pronunciation_of_a_word_with_American_accent(cls):
@@ -75,13 +74,13 @@ class Word:
     def get_the_video_with_a_word(cls):
         phraseEncoded = ""
         for char in cls.current_word:
-            if (char == ' '):
+            if char == ' ':
                 phraseEncoded += "%20"
-            elif (char == "'"):
+            elif char == "'":
                 phraseEncoded += "%27"
-            elif (char == "!"):
+            elif char == "!":
                 phraseEncoded += "%21"
-            elif (char == ":"):
+            elif char == ":":
                 phraseEncoded += "%3A"
             else:
                 phraseEncoded += char

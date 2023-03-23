@@ -4,22 +4,14 @@ from PyQt5.uic import loadUi
 from time import time
 import Word
 from WindowsGraphics import Windows
-
-
-def time_required(f):
-    last = [time()]
-
-    def decorator():
-        if time() - last[0] < 1:
-            return None
-        last[0] = time()
-        return f()
-
-    return decorator
+import threading
 
 
 class SearchWindow(QMainWindow):
     __metaclass__ = Windows
+    # this field indicates whether the search returns text or nothing.
+    # If the text was found, it contains it
+    output_of_definitions = "Error"
 
     def __init__(self):
         super(SearchWindow, self).__init__()
@@ -35,9 +27,9 @@ class SearchWindow(QMainWindow):
     def connect_interface_with_functions(self):
         self.searchbutton.clicked.connect(self.search_button_function)
         self.pronunciationUSA.clicked.connect(
-            time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent))
+            self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent))
         self.pronunciationUK.clicked.connect(
-            time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
+            self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
 
     def hide_the_interface(self):
         self.pronunciationUSA.hide()
@@ -67,36 +59,60 @@ class SearchWindow(QMainWindow):
         self.usageText.setReadOnly(True)
         self.usageTitle.setReadOnly(True)
 
+    @staticmethod
+    def return_usage() -> str:
+        output_of_examples: str = ""
+        examples = Word.Word.get_the_usage_of_a_word()
+        for example in examples:
+            output_of_examples += '- '
+            output_of_examples += example
+            output_of_examples += '\n'
+        return output_of_examples
+
+    def save_definitions_into_the_field_output_of_definitions(self) -> str:
+        meanings = Word.Word.get_the_meaning_of_a_word()
+        if isinstance(meanings, str):
+            return "Error"
+        output_of_definitions: str = ""
+        for part_of_speech, definitions in meanings:
+            output_of_definitions += part_of_speech
+            output_of_definitions += ":\n"
+            for definition in definitions:
+                output_of_definitions += "- "
+                output_of_definitions += definition
+                output_of_definitions += '\n'
+        self.output_of_definitions = output_of_definitions
+
     def search_button_function(self):
         self.definitionsText.clear()
         self.usageText.clear()
-        search_text = self.searchfield.text()
-        Word.Word.current_word = search_text
-        meanings = Word.Word.get_the_meaning_of_a_word()
-        if isinstance(meanings, str):
+        Word.Word.current_word = self.searchfield.text()
+        thread_to_get_definitions = \
+            threading.Thread(target=self.save_definitions_into_the_field_output_of_definitions)
+        thread_to_get_definitions.start()
+        output_of_examples = self.return_usage()
+        thread_to_get_definitions.join()
+        if self.output_of_definitions == "Error":
             self.definitionsText.append("Your search terms did not match any entries")
-            return None
-        outputOfDefinitions: str = ""
-        for part_of_speech, definitions in meanings:
-            outputOfDefinitions += part_of_speech
-            outputOfDefinitions += ":\n"
-            for definition in definitions:
-                outputOfDefinitions += "- "
-                outputOfDefinitions += definition
-                outputOfDefinitions += '\n'
-
-        outputOfExamples: str = ""
-        examples = Word.Word.get_the_usage_of_a_word()
-        for example in examples:
-            outputOfExamples += '- '
-            outputOfExamples += example
-            outputOfExamples += '\n'
-        self.definitionsText.append(outputOfDefinitions)
-        self.usageText.append(outputOfExamples)
-        self.show_the_interface()
-        self.definitionsText.verticalScrollBar().setValue(0)
-        self.usageText.verticalScrollBar().setValue(0)
+        else:
+            self.definitionsText.append(self.output_of_definitions)
+            self.usageText.append(output_of_examples)
+            self.show_the_interface()
+            self.definitionsText.verticalScrollBar().setValue(0)
+            self.usageText.verticalScrollBar().setValue(0)
 
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed
             self.search_button_function()
+
+    @staticmethod
+    def time_required(f):
+        last = [time()]
+
+        def decorator():
+            if time() - last[0] < 1:
+                return None
+            last[0] = time()
+            return f()
+
+        return decorator
