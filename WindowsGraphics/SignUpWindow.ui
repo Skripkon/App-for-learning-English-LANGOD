@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>1200</width>
     <height>800</height>
    </rect>
   </property>
@@ -20,9 +20,9 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>120</y>
-     <width>301</width>
+     <x>450</x>
+     <y>130</y>
+     <width>300</width>
      <height>101</height>
     </rect>
    </property>
@@ -39,8 +39,8 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>290</y>
+     <x>230</x>
+     <y>310</y>
      <width>190</width>
      <height>60</height>
     </rect>
@@ -57,8 +57,8 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QLineEdit" name="email">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>290</y>
+     <x>450</x>
+     <y>300</y>
      <width>300</width>
      <height>60</height>
     </rect>
@@ -80,8 +80,8 @@ background-color: rgb(3, 54, 22)</string>
   <widget class="QLineEdit" name="password">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>390</y>
+     <x>450</x>
+     <y>400</y>
      <width>300</width>
      <height>60</height>
     </rect>
@@ -100,8 +100,8 @@ background-color: rgb(3, 54, 22)</string>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>400</y>
+     <x>230</x>
+     <y>410</y>
      <width>190</width>
      <height>60</height>
     </rect>
@@ -118,9 +118,9 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="signupbutton">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>490</x>
      <y>600</y>
-     <width>221</width>
+     <width>220</width>
      <height>51</height>
     </rect>
    </property>
@@ -136,8 +136,8 @@ color:rgb(243, 243, 243);</string>
   <widget class="QLineEdit" name="confirmpass">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>490</y>
+     <x>450</x>
+     <y>500</y>
      <width>300</width>
      <height>60</height>
     </rect>
@@ -156,8 +156,8 @@ background-color: rgb(3, 54, 22)</string>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>490</y>
+     <x>230</x>
+     <y>510</y>
      <width>190</width>
      <height>60</height>
     </rect>
@@ -171,6 +171,24 @@ border-color: rgb(255, 255, 255);</string>
     <string>Confirm Pass</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="back_to_sign_in_button">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>670</y>
+     <width>220</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:14pt; 
+color:rgb(243, 243, 243);</string>
+   </property>
+   <property name="text">
+    <string>Back to sign in</string>
+   </property>
+  </widget>
   <zorder>label</zorder>
   <zorder>label_2</zorder>
   <zorder>password</zorder>
@@ -179,6 +197,7 @@ border-color: rgb(255, 255, 255);</string>
   <zorder>confirmpass</zorder>
   <zorder>label_4</zorder>
   <zorder>email</zorder>
+  <zorder>back_to_sign_in_button</zorder>
  </widget>
  <resources/>
  <connections/>
