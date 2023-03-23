@@ -6,7 +6,6 @@ from WindowsGraphics import Windows, SearchWindow, SignUpWindow
 
 
 class SignInWindow(QDialog):
-    __metaclass__ = Windows
 
     def __init__(self):
         super(SignInWindow, self).__init__()

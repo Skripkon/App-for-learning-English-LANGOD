@@ -7,7 +7,6 @@ from WindowsGraphics import Windows
 
 
 class SignUpWindow(QDialog):
-    __metaclass__ = Windows
 
     def __init__(self):
         super(SignUpWindow, self).__init__()

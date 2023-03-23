@@ -9,7 +9,6 @@ from PyQt5 import QtCore
 
 
 class SearchWindow(QDialog):
-    __metaclass__ = Windows
     # this field indicates whether the search returns text or nothing.
     # If the text was found, it contains it
     output_of_definitions = "Error"
