@@ -5,7 +5,7 @@ from time import time
 import Word
 from WindowsGraphics import Windows
 import threading
-
+from PyQt5 import QtCore
 
 class SearchWindow(QMainWindow):
     __metaclass__ = Windows
