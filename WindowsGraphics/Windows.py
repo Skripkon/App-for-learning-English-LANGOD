@@ -7,3 +7,4 @@ class Windows:
     sign_in_window = None
     sign_up_window = None
     search_window = None
+    exerciser_window = None

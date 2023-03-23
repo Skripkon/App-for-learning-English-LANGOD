@@ -37,8 +37,9 @@ class SignInWindow(QDialog):
         Windows.Windows.sign_in_window.hide()
         if Windows.Windows.sign_up_window is None:
             SignUpWindow.SignUpWindow()
-        Windows.Windows.widget.addWidget(Windows.Windows.sign_up_window)
-        Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+            Windows.Windows.widget.addWidget(Windows.Windows.sign_up_window)
+            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        Windows.Windows.sign_up_window.show()
 
     @classmethod
     def open_the_window(cls, title_of_the_window: str, information: str):

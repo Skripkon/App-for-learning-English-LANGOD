@@ -1,13 +1,14 @@
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QDialog
 from PyQt5.uic import loadUi
 from time import time
 import Word
-from WindowsGraphics import Windows
+from WindowsGraphics import Windows, ExerciserWindow
 import threading
 from PyQt5 import QtCore
 
-class SearchWindow(QMainWindow):
+
+class SearchWindow(QDialog):
     __metaclass__ = Windows
     # this field indicates whether the search returns text or nothing.
     # If the text was found, it contains it
@@ -25,11 +26,20 @@ class SearchWindow(QMainWindow):
         self.add_word_button.setIconSize(QtCore.QSize(50, 50))
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
         Windows.Windows.search_window = self
-        
+
     @staticmethod
     def back_to_the_main_page_button_function(self):
         Windows.Windows.search_window.hide()
         Windows.Windows.sign_in_window.show()
+
+    @staticmethod
+    def go_to_the_exerciser_button_function(self):
+        Windows.Windows.search_window.hide()
+        if Windows.Windows.exerciser_window is None:
+            ExerciserWindow.ExerciserWindow()
+            Windows.Windows.widget.addWidget(Windows.Windows.exerciser_window)
+            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        Windows.Windows.exerciser_window.show()
 
     def connect_interface_with_functions(self):
         self.back_to_the_main_page_button.clicked.connect(self.back_to_the_main_page_button_function)
@@ -38,6 +48,7 @@ class SearchWindow(QMainWindow):
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent))
         self.pronunciationUK.clicked.connect(
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
+        self.go_to_the_exerciser_button.clicked.connect(self.go_to_the_exerciser_button_function)
 
     def hide_the_interface(self):
         self.pronunciationUSA.hide()
