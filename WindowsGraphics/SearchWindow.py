@@ -21,8 +21,15 @@ class SearchWindow(QMainWindow):
         self.hide_the_interface()
         self.pronunciationUSA.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.pronunciationUK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
+        self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
+        self.add_word_button.setIconSize(QtCore.QSize(50, 50))
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
         Windows.Windows.search_window = self
+        self.Back_button.clicked.connect(self.back_to_sign_in_button_function)
+        
+    def back_to_sign_in_button_function(self):
+        Windows.Windows.search_window.hide()
+        Windows.Windows.sign_in_window.show()
 
     def connect_interface_with_functions(self):
         self.searchbutton.clicked.connect(self.search_button_function)
@@ -40,6 +47,8 @@ class SearchWindow(QMainWindow):
         self.definitionsText.hide()
         self.usageText.hide()
         self.usageTitle.hide()
+        self.add_word_button.hide()
+        self.add_line.hide()
 
     def show_the_interface(self):
         self.pronunciationUSA.show()
@@ -50,6 +59,8 @@ class SearchWindow(QMainWindow):
         self.definitionsText.show()
         self.usageText.show()
         self.usageTitle.show()
+        self.add_word_button.show()
+        self.add_line.show()
 
     def forbid_to_change_the_interface(self):
         self.definitionsTitle.setReadOnly(True)
