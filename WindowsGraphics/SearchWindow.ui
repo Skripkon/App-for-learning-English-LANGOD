@@ -49,43 +49,6 @@ border-color: rgb(255, 255, 255);</string>
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="pronunciationUKtext">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
-     <y>120</y>
-     <width>41</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-font: 15pt;</string>
-   </property>
-   <property name="text">
-    <string>UK</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="add_line">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>120</y>
-     <width>61</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-font: 15pt;</string>
-   </property>
-   <property name="text">
-    <string>ADD</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="back_to_the_main_page_button">
    <property name="geometry">
     <rect>
@@ -105,26 +68,6 @@ color:rgb(243, 243, 243);
     <string>Back to the main page</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="pronunciationUSAtext">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>120</y>
-     <width>41</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-font: 15pt;</string>
-   </property>
-   <property name="text">
-    <string>US</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QPushButton" name="add_word_button">
    <property name="geometry">
     <rect>
@@ -136,29 +79,6 @@ font: 15pt;</string>
    </property>
    <property name="text">
     <string/>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="definitionsTitle">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>180</y>
-     <width>151</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-font: 17pt;</string>
-   </property>
-   <property name="text">
-    <string>Definitions:</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="searchbutton">
@@ -178,29 +98,6 @@ color:rgb(243, 243, 243);
    </property>
    <property name="text">
     <string>search</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="usageTitle">
-   <property name="geometry">
-    <rect>
-     <x>620</x>
-     <y>180</y>
-     <width>251</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-font: 17pt;</string>
-   </property>
-   <property name="text">
-    <string>Examples of usage</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QLineEdit" name="searchfield">
@@ -240,7 +137,7 @@ selection-color: rgb(46, 194, 126);
 </string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pronunciationUSA">
+  <widget class="QPushButton" name="pronunciationUS">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -305,6 +202,91 @@ color:rgb(243, 243, 243);
    </property>
    <property name="text">
     <string>Go to the exerciser</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="addLine">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>120</y>
+     <width>51</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
+   </property>
+   <property name="text">
+    <string>ADD</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pronunciationUKtext">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>120</y>
+     <width>41</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
+   </property>
+   <property name="text">
+    <string>UK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pronunciationUStext">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>120</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
+   </property>
+   <property name="text">
+    <string>US</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="definitionsTitle">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>180</y>
+     <width>150</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
+   </property>
+   <property name="text">
+    <string>Definitions:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="usageTitle">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>180</y>
+     <width>150</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
+   </property>
+   <property name="text">
+    <string>Usage:</string>
    </property>
   </widget>
  </widget>

@@ -17,7 +17,8 @@ class SignUpWindow(QDialog):
         Windows.Windows.sign_up_window = self
         self.back_to_sign_in_button.clicked.connect(self.back_to_sign_in_button_function)
 
-    def back_to_sign_in_button_function(self):
+    @staticmethod
+    def back_to_sign_in_button_function():
         Windows.Windows.sign_up_window.hide()
         Windows.Windows.sign_in_window.show()
 

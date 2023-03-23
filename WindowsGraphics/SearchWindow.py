@@ -19,7 +19,7 @@ class SearchWindow(QDialog):
         self.connect_interface_with_functions()
         self.forbid_to_change_the_interface()
         self.hide_the_interface()
-        self.pronunciationUSA.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
+        self.pronunciationUS.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.pronunciationUK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
         self.add_word_button.setIconSize(QtCore.QSize(50, 50))
@@ -43,44 +43,39 @@ class SearchWindow(QDialog):
     def connect_interface_with_functions(self):
         self.back_to_the_main_page_button.clicked.connect(self.back_to_the_main_page_button_function)
         self.searchbutton.clicked.connect(self.search_button_function)
-        self.pronunciationUSA.clicked.connect(
+        self.pronunciationUS.clicked.connect(
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent))
         self.pronunciationUK.clicked.connect(
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
         self.go_to_the_exerciser_button.clicked.connect(self.go_to_the_exerciser_button_function)
 
     def hide_the_interface(self):
-        self.pronunciationUSA.hide()
+        self.pronunciationUS.hide()
         self.pronunciationUK.hide()
-        self.pronunciationUSAtext.hide()
+        self.pronunciationUStext.hide()
         self.pronunciationUKtext.hide()
         self.definitionsTitle.hide()
         self.definitionsText.hide()
         self.usageText.hide()
         self.usageTitle.hide()
         self.add_word_button.hide()
-        self.add_line.hide()
+        self.addLine.hide()
 
     def show_the_interface(self):
-        self.pronunciationUSA.show()
+        self.pronunciationUS.show()
         self.pronunciationUK.show()
-        self.pronunciationUSAtext.show()
+        self.pronunciationUStext.show()
         self.pronunciationUKtext.show()
         self.definitionsTitle.show()
         self.definitionsText.show()
         self.usageText.show()
         self.usageTitle.show()
         self.add_word_button.show()
-        self.add_line.show()
+        self.addLine.show()
 
     def forbid_to_change_the_interface(self):
-        self.definitionsTitle.setReadOnly(True)
-        self.pronunciationUSAtext.setReadOnly(True)
-        self.pronunciationUKtext.setReadOnly(True)
         self.definitionsText.setReadOnly(True)
         self.usageText.setReadOnly(True)
-        self.usageTitle.setReadOnly(True)
-        self.add_line.setReadOnly(True)
 
     @staticmethod
     def return_usage() -> str:
