@@ -8,7 +8,7 @@ if __name__ == "__main__":
     SignInWindow.SignInWindow()
     Windows.Windows.widget = QtWidgets.QStackedWidget()
     Windows.Windows.widget.addWidget(Windows.Windows.sign_in_window)
-    Windows.Windows.widget.setFixedWidth(600)
+    Windows.Windows.widget.setFixedWidth(1200)
     Windows.Windows.widget.setFixedHeight(800)
     Windows.Windows.widget.setWindowTitle("LaNGod")
     Windows.Windows.widget.show()
