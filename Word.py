@@ -30,7 +30,28 @@ class Word:
             definition = synset.definition()
             output += definition
             output += "\n"
-        return output
+        # the following algorithm works for some phrasal verbs
+        if output.replace(' ', '') == "":
+            url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{cls.current_word}"
+            response = requests.get(url)
+            if response.status_code == 200:
+                data = response.json()[0]
+                meanings = []
+                for meaning in data['meanings']:
+                    part_of_speech = meaning['partOfSpeech']
+                    definitions = [definition['definition'] for definition in meaning['definitions']]
+                    meanings.append((part_of_speech, definitions))
+                output_of_definitions: str = ""
+                for part_of_speech, definitions in meanings:
+                    output_of_definitions += part_of_speech
+                    output_of_definitions += ":\n"
+                    for definition in definitions:
+                        output_of_definitions += "- "
+                        output_of_definitions += definition
+                        output_of_definitions += '\n'
+                return output_of_definitions
+        else:
+            return output
 
     @classmethod
     def check_whether_the_word_is_valid(cls):
