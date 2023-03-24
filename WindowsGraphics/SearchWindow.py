@@ -64,7 +64,7 @@ class SearchWindow(QDialog):
         self.add_word_button.released.connect(self.add_word_button_released_function)
 
     def add_word_button_released_function(self):
-        self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_green.png"))
+        self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
 
     def hide_the_interface(self):
         self.pronunciation_US.hide()
@@ -109,7 +109,7 @@ class SearchWindow(QDialog):
         self.definitions_text.append(output_of_definitions)
         self.usage_text.append(output_of_examples)
         if Word.Word.current_word in Exerciser.Exerciser.current_list_of_added_words:
-            self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_green.png"))
+            self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
         else:
             self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
         self.show_the_interface()
