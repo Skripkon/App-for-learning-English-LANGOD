@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(0, 36, 0);
 border-color: rgb(255, 255, 255);</string>
   </property>
-  <widget class="QPushButton" name="pronunciationUK">
+  <widget class="QPushButton" name="pronunciation_UK">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -81,7 +81,7 @@ color:rgb(243, 243, 243);
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="searchbutton">
+  <widget class="QPushButton" name="search_button">
    <property name="geometry">
     <rect>
      <x>450</x>
@@ -100,7 +100,7 @@ color:rgb(243, 243, 243);
     <string>search</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="searchfield">
+  <widget class="QLineEdit" name="search_field">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -120,7 +120,7 @@ background-color: rgb(3, 54, 22)</string>
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QTextEdit" name="definitionsText">
+  <widget class="QTextEdit" name="definitions_text">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -137,7 +137,7 @@ selection-color: rgb(46, 194, 126);
 </string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pronunciationUS">
+  <widget class="QPushButton" name="pronunciation_US">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -168,7 +168,7 @@ selection-color: rgb(46, 194, 126);
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QTextEdit" name="usageText">
+  <widget class="QTextEdit" name="usage_text">
    <property name="geometry">
     <rect>
      <x>620</x>
@@ -204,7 +204,7 @@ color:rgb(243, 243, 243);
     <string>Go to the exerciser</string>
    </property>
   </widget>
-  <widget class="QLabel" name="addLine">
+  <widget class="QLabel" name="add_line">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -221,7 +221,7 @@ font: 15pt;</string>
     <string>ADD</string>
    </property>
   </widget>
-  <widget class="QLabel" name="pronunciationUKtext">
+  <widget class="QLabel" name="pronunciation_UK_text">
    <property name="geometry">
     <rect>
      <x>210</x>
@@ -238,7 +238,7 @@ font: 15pt;</string>
     <string>UK</string>
    </property>
   </widget>
-  <widget class="QLabel" name="pronunciationUStext">
+  <widget class="QLabel" name="pronunciation_US_text">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -255,7 +255,7 @@ font: 15pt;</string>
     <string>US</string>
    </property>
   </widget>
-  <widget class="QLabel" name="definitionsTitle">
+  <widget class="QLabel" name="definitions_title">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -272,7 +272,7 @@ font: 15pt;</string>
     <string>Definitions:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="usageTitle">
+  <widget class="QLabel" name="usage_title">
    <property name="geometry">
     <rect>
      <x>620</x>
@@ -289,6 +289,38 @@ font: 15pt;</string>
     <string>Usage:</string>
    </property>
   </widget>
+  <widget class="QLabel" name="nothing_found_error_line">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>110</y>
+     <width>541</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(224, 27, 36);
+font: 15pt;</string>
+   </property>
+   <property name="text">
+    <string>Your search terms did not match any entries</string>
+   </property>
+  </widget>
+  <zorder>nothing_found_error_line</zorder>
+  <zorder>pronunciation_UK</zorder>
+  <zorder>back_to_the_main_page_button</zorder>
+  <zorder>add_word_button</zorder>
+  <zorder>search_button</zorder>
+  <zorder>search_field</zorder>
+  <zorder>definitions_text</zorder>
+  <zorder>pronunciation_US</zorder>
+  <zorder>usage_text</zorder>
+  <zorder>go_to_the_exerciser_button</zorder>
+  <zorder>add_line</zorder>
+  <zorder>pronunciation_UK_text</zorder>
+  <zorder>pronunciation_US_text</zorder>
+  <zorder>definitions_title</zorder>
+  <zorder>usage_title</zorder>
  </widget>
  <resources/>
  <connections/>

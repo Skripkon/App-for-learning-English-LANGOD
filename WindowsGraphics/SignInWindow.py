@@ -24,19 +24,20 @@ class SignInWindow(QDialog):
         login_text = self.email.text()
         password = self.password.text()
         if (current_id := DataBase.DataBase.check_if_user_exists(login_text, password)) != -1:
+            DataBase.DataBase.current_user_id = current_id
             if Windows.Windows.search_window is None:
                 SearchWindow.SearchWindow()
                 Windows.Windows.widget.addWidget(Windows.Windows.search_window)
                 Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
             Windows.Windows.sign_in_window.hide()
             Windows.Windows.search_window.show()
-            DataBase.DataBase.current_user_id = current_id
         else:
             self.open_the_window("ERROR", "Such user hasn't found")
 
-    @classmethod
-    def sign_up_button_function(cls):
+    def sign_up_button_function(self):
         Windows.Windows.sign_in_window.hide()
+        self.email.clear()
+        self.password.clear()
         if Windows.Windows.sign_up_window is None:
             SignUpWindow.SignUpWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.sign_up_window)

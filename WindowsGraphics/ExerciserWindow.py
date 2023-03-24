@@ -2,8 +2,6 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from WindowsGraphics import Windows
-import Exerciser
-
 
 class ExerciserWindow(QDialog):
 
@@ -11,7 +9,6 @@ class ExerciserWindow(QDialog):
         super(ExerciserWindow, self).__init__()
         loadUi("WindowsGraphics/ExerciserWindow.ui", self)
         Windows.Windows.exerciser_window = self
-        Exerciser.Exerciser()
         self.back_to_the_search_button.clicked.connect(self.back_to_the_search_button_function)
 
     @staticmethod

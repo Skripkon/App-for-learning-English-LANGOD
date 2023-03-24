@@ -67,10 +67,8 @@ border-color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(255, 255, 255);
-font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">font-size:14pt; color:rgb(243, 243, 243);
 selection-background-color: rgb(255, 255, 255);
-selection-color: rgb(46, 194, 126);
 background-color: rgb(3, 54, 22)</string>
    </property>
    <property name="frame">
@@ -87,10 +85,8 @@ background-color: rgb(3, 54, 22)</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(255, 255, 255);
-font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">font-size:14pt; color:rgb(243, 243, 243);
 selection-background-color: rgb(255, 255, 255);
-selection-color: rgb(46, 194, 126);
 background-color: rgb(3, 54, 22)</string>
    </property>
    <property name="text">
@@ -143,10 +139,8 @@ color:rgb(243, 243, 243);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(255, 255, 255);
-font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">font-size:14pt; color:rgb(243, 243, 243);
 selection-background-color: rgb(255, 255, 255);
-selection-color: rgb(46, 194, 126);
 background-color: rgb(3, 54, 22)</string>
    </property>
    <property name="text">

@@ -5,11 +5,13 @@ from reverso_context_api import Client
 import shutil
 import os
 import requests
+from nltk.corpus import wordnet
 
 
 class Word:
     current_word: str = ""
     name_of_folder_with_pronunciations: str = "sounds"
+    client = Client('en', 'ru')
 
     @classmethod
     def create_folder_to_store_mp4_files(cls):
@@ -18,33 +20,36 @@ class Word:
 
     @classmethod
     def get_the_meaning_of_a_word(cls):
-        url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{cls.current_word}"
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()[0]
-            meanings = []
-            for meaning in data['meanings']:
-                part_of_speech = meaning['partOfSpeech']
-                definitions = [definition['definition'] for definition in meaning['definitions']]
-                meanings.append((part_of_speech, definitions))
-            return meanings
-        else:
-            return "Error"
+        output = ""
+        synsets = wordnet.synsets(cls.current_word)
+        for synset in synsets:
+            pos = synset.pos()
+            output += "["
+            output += pos
+            output += "] "
+            definition = synset.definition()
+            output += definition
+            output += "\n"
+        return output
 
     @classmethod
-    def get_the_usage_of_a_word(cls, number_of_examples=15) -> list[str]:
-        client = Client('en', 'ru')
+    def check_whether_the_word_is_valid(cls):
+        if len(list(cls.client.get_translations(cls.current_word))) == 0:
+            return False
+        return True
+
+    @classmethod
+    def get_the_usage_of_a_word(cls, number_of_examples=15) -> str:
         cnt = 0
-        # check whether such word exists
-        if len(list(client.get_translations(cls.current_word))) == 0:
-            return []
-        examples = []
-        for example in client.get_translation_samples(cls.current_word, cleanup=True):
+        output = ""
+        for example in cls.client.get_translation_samples(cls.current_word, cleanup=True):
             if cnt > number_of_examples:
                 break
-            examples.append(example[0])
+            output += '- '
+            output += example[0]
+            output += '\n'
             cnt += 1
-        return examples
+        return output
 
     @classmethod
     def get_the_pronunciation_of_a_word_with_American_accent(cls):

@@ -2,18 +2,23 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QDialog
 from PyQt5.uic import loadUi
 from time import time
-
+import Exerciser
 import DataBase
 import Word
 from WindowsGraphics import Windows, ExerciserWindow
-import threading
 from PyQt5 import QtCore
+
+
+def add_word_button_function():
+    if Word.Word.current_word not in Exerciser.Exerciser.current_list_of_added_words:
+        DataBase.DataBase.add_new_word()
+        Exerciser.Exerciser.current_list_of_added_words.append(Word.Word.current_word)
+
 
 
 class SearchWindow(QDialog):
     # this field indicates whether the search returns text or nothing.
     # If the text was found, it contains it
-    output_of_definitions = "Error"
 
     def __init__(self):
         super(SearchWindow, self).__init__()
@@ -21,19 +26,22 @@ class SearchWindow(QDialog):
         self.connect_interface_with_functions()
         self.forbid_to_change_the_interface()
         self.hide_the_interface()
-        self.pronunciationUS.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
-        self.pronunciationUK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
+        self.pronunciation_US.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
+        self.pronunciation_UK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
         self.add_word_button.setIconSize(QtCore.QSize(50, 50))
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
         Windows.Windows.search_window = self
+        Exerciser.Exerciser()
 
-
-    @staticmethod
-    def back_to_the_main_page_button_function():
+    def back_to_the_main_page_button_function(self):
         DataBase.DataBase.current_user_id = None
         Windows.Windows.search_window.hide()
         Windows.Windows.sign_in_window.show()
+        self.hide_the_interface()
+        self.search_field.clear()
+        self.definitions_text.clear()
+        self.usage_text.clear()
 
     @staticmethod
     def go_to_the_exerciser_button_function():
@@ -46,90 +54,67 @@ class SearchWindow(QDialog):
 
     def connect_interface_with_functions(self):
         self.back_to_the_main_page_button.clicked.connect(self.back_to_the_main_page_button_function)
-        self.searchbutton.clicked.connect(self.search_button_function)
-        self.pronunciationUS.clicked.connect(
+        self.search_button.clicked.connect(self.search_button_function)
+        self.pronunciation_US.clicked.connect(
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent))
-        self.pronunciationUK.clicked.connect(
+        self.pronunciation_UK.clicked.connect(
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
         self.go_to_the_exerciser_button.clicked.connect(self.go_to_the_exerciser_button_function)
-        self.add_word_button.clicked.connect(self.add_word_button_function)
+        self.add_word_button.clicked.connect(add_word_button_function)
         self.add_word_button.released.connect(self.add_word_button_released_function)
 
     def add_word_button_released_function(self):
-        print("added")
-
-    def add_word_button_function(self):
-        DataBase.DataBase.add_new_word()
+        self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_green.png"))
 
     def hide_the_interface(self):
-        self.pronunciationUS.hide()
-        self.pronunciationUK.hide()
-        self.pronunciationUStext.hide()
-        self.pronunciationUKtext.hide()
-        self.definitionsTitle.hide()
-        self.definitionsText.hide()
-        self.usageText.hide()
-        self.usageTitle.hide()
+        self.pronunciation_US.hide()
+        self.pronunciation_UK.hide()
+        self.pronunciation_US_text.hide()
+        self.pronunciation_UK_text.hide()
+        self.definitions_title.hide()
+        self.definitions_text.hide()
+        self.usage_text.hide()
+        self.usage_title.hide()
         self.add_word_button.hide()
-        self.addLine.hide()
+        self.add_line.hide()
+        self.nothing_found_error_line.hide()
 
     def show_the_interface(self):
-        self.pronunciationUS.show()
-        self.pronunciationUK.show()
-        self.pronunciationUStext.show()
-        self.pronunciationUKtext.show()
-        self.definitionsTitle.show()
-        self.definitionsText.show()
-        self.usageText.show()
-        self.usageTitle.show()
+        self.pronunciation_US.show()
+        self.pronunciation_UK.show()
+        self.pronunciation_US_text.show()
+        self.pronunciation_UK_text.show()
+        self.definitions_title.show()
+        self.definitions_text.show()
+        self.usage_text.show()
+        self.usage_title.show()
         self.add_word_button.show()
-        self.addLine.show()
+        self.add_line.show()
 
     def forbid_to_change_the_interface(self):
-        self.definitionsText.setReadOnly(True)
-        self.usageText.setReadOnly(True)
-
-    @staticmethod
-    def return_usage() -> str:
-        output_of_examples: str = ""
-        examples = Word.Word.get_the_usage_of_a_word()
-        for example in examples:
-            output_of_examples += '- '
-            output_of_examples += example
-            output_of_examples += '\n'
-        return output_of_examples
-
-    def save_definitions_into_the_field_output_of_definitions(self) -> str:
-        meanings = Word.Word.get_the_meaning_of_a_word()
-        if isinstance(meanings, str):
-            return "Error"
-        output_of_definitions: str = ""
-        for part_of_speech, definitions in meanings:
-            output_of_definitions += part_of_speech
-            output_of_definitions += ":\n"
-            for definition in definitions:
-                output_of_definitions += "- "
-                output_of_definitions += definition
-                output_of_definitions += '\n'
-        self.output_of_definitions = output_of_definitions
+        self.definitions_text.setReadOnly(True)
+        self.usage_text.setReadOnly(True)
 
     def search_button_function(self):
-        self.definitionsText.clear()
-        self.usageText.clear()
-        Word.Word.current_word = self.searchfield.text()
-        thread_to_get_definitions = \
-            threading.Thread(target=self.save_definitions_into_the_field_output_of_definitions)
-        thread_to_get_definitions.start()
-        output_of_examples = self.return_usage()
-        thread_to_get_definitions.join()
-        if self.output_of_definitions == "Error":
-            self.definitionsText.append("Your search terms did not match any entries")
+        self.definitions_text.clear()
+        self.usage_text.clear()
+        Word.Word.current_word = self.search_field.text()
+        if Word.Word.check_whether_the_word_is_valid() is False:
+            self.hide_the_interface()
+            self.nothing_found_error_line.show()
+            return None
+        self.nothing_found_error_line.hide()
+        output_of_examples = Word.Word.get_the_usage_of_a_word()
+        output_of_definitions = Word.Word.get_the_meaning_of_a_word()
+        self.definitions_text.append(output_of_definitions)
+        self.usage_text.append(output_of_examples)
+        if Word.Word.current_word in Exerciser.Exerciser.current_list_of_added_words:
+            self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_green.png"))
         else:
-            self.definitionsText.append(self.output_of_definitions)
-            self.usageText.append(output_of_examples)
-            self.show_the_interface()
-            self.definitionsText.verticalScrollBar().setValue(0)
-            self.usageText.verticalScrollBar().setValue(0)
+            self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
+        self.show_the_interface()
+        self.definitions_text.verticalScrollBar().setValue(0)
+        self.usage_text.verticalScrollBar().setValue(0)
 
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed

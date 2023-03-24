@@ -1,12 +1,18 @@
+import os
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtWidgets
-
-import DataBase
 from WindowsGraphics import SignInWindow, Windows, SignUpWindow
+import nltk
+
+
+def download_data():
+    nltk.download('wordnet')
 
 
 if __name__ == "__main__":
+    # first time you have to download this DataBase in order to use the App
+    download_data()
     app = QApplication(sys.argv)
     SignInWindow.SignInWindow()
     Windows.Windows.widget = QtWidgets.QStackedWidget()
