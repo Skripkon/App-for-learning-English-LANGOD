@@ -1,6 +1,6 @@
 import sqlite3
 import os.path
-
+import Exerciser
 import Word
 
 
@@ -8,7 +8,7 @@ class DataBase:
     current_user_id = None
     sqlite_connection_with_db_users_data = None
     cursor_for_users_data = None
-    sqlite_connection_with_db_registration_info= None
+    sqlite_connection_with_db_registration_info = None
     cursor_for_registration_info = None
 
     @classmethod
@@ -38,7 +38,6 @@ class DataBase:
         except sqlite3.Error as error:
             print("BD has already created")
 
-
     @classmethod
     def check_whether_data_bases_exist(cls):
         if not os.path.exists("users_data.db"):
@@ -52,7 +51,8 @@ class DataBase:
 
     @classmethod
     def create_user(cls, new_login: str, new_password: str):
-        cls.cursor_for_registration_info.execute("INSERT INTO registration_info (login, password) VALUES(?, ?)", (new_login, new_password))
+        cls.cursor_for_registration_info.execute("INSERT INTO registration_info (login, password) VALUES(?, ?)",
+                                                 (new_login, new_password))
         cls.sqlite_connection_with_db_registration_info.commit()
 
         cls.cursor_for_users_data.execute("INSERT INTO users_data DEFAULT VALUES")
@@ -60,7 +60,8 @@ class DataBase:
 
     @classmethod
     def check_if_user_exists(cls, login_text: str, password: str) -> int:
-        info = cls.cursor_for_registration_info.execute("SELECT id FROM registration_info WHERE login=? and password=?", (login_text, password))
+        info = cls.cursor_for_registration_info.execute("SELECT id FROM registration_info WHERE login=? and password=?",
+                                                        (login_text, password))
         response = info.fetchone()
         if response is None:
             return -1
@@ -77,7 +78,8 @@ class DataBase:
     @classmethod
     def add_new_word(cls):
         word: str = Word.Word.current_word
-        temp = cls.cursor_for_users_data.execute("SELECT amount_of_words FROM users_data WHERE id=?", (DataBase.current_user_id, ))
+        temp = cls.cursor_for_users_data.execute("SELECT amount_of_words FROM users_data WHERE id=?",
+                                                 (DataBase.current_user_id,))
         n: int = temp.fetchone()[0]
         number_of_new_word = "word" + str(n)
         sqlite_add_word_query = f"UPDATE users_data SET {number_of_new_word}=?, " \
@@ -85,4 +87,14 @@ class DataBase:
         DataBase.cursor_for_users_data.execute(sqlite_add_word_query, (word, DataBase.current_user_id))
         cls.sqlite_connection_with_db_users_data.commit()
 
-
+    @classmethod
+    def set_the_list_of_added_words(cls):
+        for i in range(1, 501):
+            current_word = 'word' + str(i)
+            sqlite_query = f'SELECT {current_word} FROM users_data WHERE id=?'
+            temp_word = DataBase.cursor_for_users_data.execute(sqlite_query,
+                                                               (DataBase.current_user_id, )).fetchone()
+            if temp_word[0] is not None:
+                Exerciser.Exerciser.current_list_of_added_words.append(temp_word[0])
+            else:
+                break
