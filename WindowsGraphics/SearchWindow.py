@@ -2,6 +2,8 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QDialog
 from PyQt5.uic import loadUi
 from time import time
+
+import DataBase
 import Word
 from WindowsGraphics import Windows, ExerciserWindow
 import threading
@@ -26,13 +28,15 @@ class SearchWindow(QDialog):
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
         Windows.Windows.search_window = self
 
+
     @staticmethod
-    def back_to_the_main_page_button_function(self):
+    def back_to_the_main_page_button_function():
+        DataBase.DataBase.current_user_id = None
         Windows.Windows.search_window.hide()
         Windows.Windows.sign_in_window.show()
 
     @staticmethod
-    def go_to_the_exerciser_button_function(self):
+    def go_to_the_exerciser_button_function():
         Windows.Windows.search_window.hide()
         if Windows.Windows.exerciser_window is None:
             ExerciserWindow.ExerciserWindow()
@@ -48,6 +52,14 @@ class SearchWindow(QDialog):
         self.pronunciationUK.clicked.connect(
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
         self.go_to_the_exerciser_button.clicked.connect(self.go_to_the_exerciser_button_function)
+        self.add_word_button.clicked.connect(self.add_word_button_function)
+        self.add_word_button.released.connect(self.add_word_button_released_function)
+
+    def add_word_button_released_function(self):
+        print("added")
+
+    def add_word_button_function(self):
+        DataBase.DataBase.add_new_word()
 
     def hide_the_interface(self):
         self.pronunciationUS.hide()

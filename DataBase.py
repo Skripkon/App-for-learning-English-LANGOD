@@ -1,9 +1,12 @@
 import sqlite3
 import os.path
 
+import Word
+
+
 class DataBase:
     current_user_id = None
-    sqlite_connection_with_db_users_dara = None
+    sqlite_connection_with_db_users_data = None
     cursor_for_users_data = None
     sqlite_connection_with_db_registration_info= None
     cursor_for_registration_info = None
@@ -19,7 +22,7 @@ class DataBase:
 
         elif name == "users_data":
             columns: str = ""
-            for i in range(500):
+            for i in range(1, 500):
                 columns += "word" + str(i) + ' TEXT, '
             columns += "word500 TEXT"
 
@@ -44,8 +47,8 @@ class DataBase:
             cls.create_data_base("registration_info")
         cls.sqlite_connection_with_db_registration_info = sqlite3.connect('registration_info.db')
         cls.cursor_for_registration_info = cls.sqlite_connection_with_db_registration_info.cursor()
-        cls.sqlite_connection_with_db_users_dara = sqlite3.connect('users_data.db')
-        cls.cursor_for_users_data = cls.sqlite_connection_with_db_users_dara.cursor()
+        cls.sqlite_connection_with_db_users_data = sqlite3.connect('users_data.db')
+        cls.cursor_for_users_data = cls.sqlite_connection_with_db_users_data.cursor()
 
     @classmethod
     def create_user(cls, new_login: str, new_password: str):
@@ -53,20 +56,33 @@ class DataBase:
         cls.sqlite_connection_with_db_registration_info.commit()
 
         cls.cursor_for_users_data.execute("INSERT INTO users_data DEFAULT VALUES")
-        cls.sqlite_connection_with_db_users_dara.commit()
+        cls.sqlite_connection_with_db_users_data.commit()
 
     @classmethod
     def check_if_user_exists(cls, login_text: str, password: str) -> int:
         info = cls.cursor_for_registration_info.execute("SELECT id FROM registration_info WHERE login=? and password=?", (login_text, password))
-        if info.fetchone() is None:
+        response = info.fetchone()
+        if response is None:
             return -1
         else:
-            return info.fetchone()
+            return response[0]
 
     @classmethod
     def close_connection(cls):
         cls.cursor_for_registration_info.close()
         cls.sqlite_connection_with_db_registration_info.close()
         cls.cursor_for_users_data.close()
-        cls.sqlite_connection_with_db_users_dara.close()
+        cls.sqlite_connection_with_db_users_data.close()
+
+    @classmethod
+    def add_new_word(cls):
+        word: str = Word.Word.current_word
+        temp = cls.cursor_for_users_data.execute("SELECT amount_of_words FROM users_data WHERE id=?", (DataBase.current_user_id, ))
+        n: int = temp.fetchone()[0]
+        number_of_new_word = "word" + str(n)
+        sqlite_add_word_query = f"UPDATE users_data SET {number_of_new_word}=?, " \
+                                f"amount_of_words = amount_of_words + 1 WHERE id=?"
+        DataBase.cursor_for_users_data.execute(sqlite_add_word_query, (word, DataBase.current_user_id))
+        cls.sqlite_connection_with_db_users_data.commit()
+
 

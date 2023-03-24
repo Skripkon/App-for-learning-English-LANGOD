@@ -1,7 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtWidgets
+
+import DataBase
 from WindowsGraphics import SignInWindow, Windows, SignUpWindow
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -13,3 +16,4 @@ if __name__ == "__main__":
     Windows.Windows.widget.setWindowTitle("LaNGod")
     Windows.Windows.widget.show()
     sys.exit(app.exec_())
+
