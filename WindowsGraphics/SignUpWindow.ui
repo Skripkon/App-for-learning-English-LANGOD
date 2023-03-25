@@ -122,8 +122,10 @@ border-color: rgb(255, 255, 255);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">color:rgb(255, 0, 255);
-font-size:14pt; 
-color:rgb(243, 243, 243);</string>
+font-size:15pt; 
+color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+</string>
    </property>
    <property name="text">
     <string>Sign up</string>
@@ -176,8 +178,10 @@ border-color: rgb(255, 255, 255);</string>
    </property>
    <property name="styleSheet">
     <string notr="true">color:rgb(255, 0, 255);
-font-size:14pt; 
-color:rgb(243, 243, 243);</string>
+font-size:15pt; 
+color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+</string>
    </property>
    <property name="text">
     <string>Back to sign in</string>

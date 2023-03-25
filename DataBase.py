@@ -95,6 +95,6 @@ class DataBase:
             temp_word = DataBase.cursor_for_users_data.execute(sqlite_query,
                                                                (DataBase.current_user_id, )).fetchone()
             if temp_word[0] is not None:
-                Exerciser.Exerciser.current_list_of_added_words.append(temp_word[0])
+                Exerciser.Exerciser.current_list_of_added_words[temp_word[0]] = i
             else:
                 break

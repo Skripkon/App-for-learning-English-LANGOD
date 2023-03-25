@@ -2,7 +2,7 @@ import DataBase
 
 
 class Exerciser:
-    current_list_of_added_words = []
+    current_list_of_added_words: dict = {}
 
     def __init__(self):
         DataBase.DataBase.set_the_list_of_added_words()

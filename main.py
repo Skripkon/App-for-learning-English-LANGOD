@@ -8,6 +8,7 @@ import nltk
 
 def download_data():
     nltk.download('wordnet')
+    nltk.download('words')
 
 
 if __name__ == "__main__":
@@ -22,4 +23,3 @@ if __name__ == "__main__":
     Windows.Windows.widget.setWindowTitle("LaNGod")
     Windows.Windows.widget.show()
     sys.exit(app.exec_())
-

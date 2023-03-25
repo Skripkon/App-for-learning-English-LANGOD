@@ -17,7 +17,7 @@
    <string notr="true">background-color: rgb(0, 36, 0);
 border-color: rgb(255, 255, 255);</string>
   </property>
-  <widget class="QPushButton" name="Back_button">
+  <widget class="QPushButton" name="revision_mode_button">
    <property name="geometry">
     <rect>
      <x>450</x>
@@ -30,13 +30,14 @@ border-color: rgb(255, 255, 255);</string>
     <string notr="true">color:rgb(255, 0, 255);
 font-size:15pt; 
 color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
     <string>Revision Mode</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Back_button_3">
+  <widget class="QPushButton" name="flashcards_mode_button">
    <property name="geometry">
     <rect>
      <x>450</x>
@@ -49,13 +50,14 @@ color:rgb(243, 243, 243);
     <string notr="true">color:rgb(255, 0, 255);
 font-size:15pt; 
 color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
     <string>Flashcards Mode</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Back_button_2">
+  <widget class="QPushButton" name="context_mode_button">
    <property name="geometry">
     <rect>
      <x>450</x>
@@ -68,6 +70,7 @@ color:rgb(243, 243, 243);
     <string notr="true">color:rgb(255, 0, 255);
 font-size:15pt; 
 color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
@@ -87,6 +90,7 @@ color:rgb(243, 243, 243);
     <string notr="true">color:rgb(255, 0, 255);
 font-size:15pt; 
 color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">

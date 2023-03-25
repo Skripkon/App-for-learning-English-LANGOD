@@ -8,3 +8,4 @@ class Windows:
     sign_up_window = None
     search_window = None
     exerciser_window = None
+    revision_mode_window = None

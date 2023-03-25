@@ -9,13 +9,6 @@ from WindowsGraphics import Windows, ExerciserWindow
 from PyQt5 import QtCore
 
 
-def add_word_button_function():
-    if Word.Word.current_word not in Exerciser.Exerciser.current_list_of_added_words:
-        DataBase.DataBase.add_new_word()
-        Exerciser.Exerciser.current_list_of_added_words.append(Word.Word.current_word)
-
-
-
 class SearchWindow(QDialog):
     # this field indicates whether the search returns text or nothing.
     # If the text was found, it contains it
@@ -60,8 +53,14 @@ class SearchWindow(QDialog):
         self.pronunciation_UK.clicked.connect(
             self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
         self.go_to_the_exerciser_button.clicked.connect(self.go_to_the_exerciser_button_function)
-        self.add_word_button.clicked.connect(add_word_button_function)
+        self.add_word_button.clicked.connect(self.add_word_button_function)
         self.add_word_button.released.connect(self.add_word_button_released_function)
+
+    @staticmethod
+    def add_word_button_function():
+        if Word.Word.current_word not in Exerciser.Exerciser.current_list_of_added_words:
+            DataBase.DataBase.add_new_word()
+            Exerciser.Exerciser.current_list_of_added_words.append(Word.Word.current_word)
 
     def add_word_button_released_function(self):
         self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))

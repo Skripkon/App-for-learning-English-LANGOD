@@ -1,11 +1,10 @@
 from gtts import gTTS
 from playsound import playsound
-import requests
 from reverso_context_api import Client
 import shutil
 import os
 import requests
-from nltk.corpus import wordnet
+from nltk.corpus import wordnet, words
 
 
 class Word:
@@ -32,6 +31,7 @@ class Word:
             output += "\n"
         # the following algorithm works for some phrasal verbs
         if output.replace(' ', '') == "":
+            print("crap")
             url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{cls.current_word}"
             response = requests.get(url)
             if response.status_code == 200:
@@ -55,12 +55,14 @@ class Word:
 
     @classmethod
     def check_whether_the_word_is_valid(cls):
+        if cls.current_word not in words.words():
+            return False
         if len(list(cls.client.get_translations(cls.current_word))) == 0:
             return False
         return True
 
     @classmethod
-    def get_the_usage_of_a_word(cls, number_of_examples=15) -> str:
+    def get_the_usage_of_a_word(cls, number_of_examples=10) -> str:
         cnt = 0
         output = ""
         for example in cls.client.get_translation_samples(cls.current_word, cleanup=True):

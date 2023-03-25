@@ -62,6 +62,7 @@ border-color: rgb(255, 255, 255);</string>
     <string notr="true">color:rgb(255, 0, 255);
 font-size:15pt; 
 color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
@@ -94,6 +95,7 @@ color:rgb(243, 243, 243);
     <string notr="true">color:rgb(255, 0, 255);
 font-size:15pt; 
 color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
@@ -198,6 +200,7 @@ selection-color: rgb(46, 194, 126);
     <string notr="true">color:rgb(255, 0, 255);
 font-size:15pt; 
 color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
