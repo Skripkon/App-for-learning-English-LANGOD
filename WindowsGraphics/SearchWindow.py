@@ -59,8 +59,8 @@ class SearchWindow(QDialog):
     @staticmethod
     def add_word_button_function():
         if Word.Word.current_word not in Exerciser.Exerciser.current_list_of_added_words:
-            DataBase.DataBase.add_new_word()
-            Exerciser.Exerciser.current_list_of_added_words.append(Word.Word.current_word)
+            n = DataBase.DataBase.add_new_word()
+            Exerciser.Exerciser.current_list_of_added_words[Word.Word.current_word] = n
 
     def add_word_button_released_function(self):
         self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))

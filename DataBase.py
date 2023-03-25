@@ -76,7 +76,7 @@ class DataBase:
         cls.sqlite_connection_with_db_users_data.close()
 
     @classmethod
-    def add_new_word(cls):
+    def add_new_word(cls) -> int:
         word: str = Word.Word.current_word
         temp = cls.cursor_for_users_data.execute("SELECT amount_of_words FROM users_data WHERE id=?",
                                                  (DataBase.current_user_id,))
@@ -86,6 +86,7 @@ class DataBase:
                                 f"amount_of_words = amount_of_words + 1 WHERE id=?"
         DataBase.cursor_for_users_data.execute(sqlite_add_word_query, (word, DataBase.current_user_id))
         cls.sqlite_connection_with_db_users_data.commit()
+        return n
 
     @classmethod
     def set_the_list_of_added_words(cls):
