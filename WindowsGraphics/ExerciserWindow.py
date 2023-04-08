@@ -9,14 +9,15 @@ class ExerciserWindow(QDialog):
     def __init__(self):
         super(ExerciserWindow, self).__init__()
         loadUi("WindowsGraphics/ExerciserWindow.ui", self)
-        Windows.Windows.exerciser_window = self
         self.back_to_the_search_button.clicked.connect(self.back_to_the_search_button_function)
         self.revision_mode_button.clicked.connect(self.revision_mode_button_function)
+        Windows.Windows.exerciser_window = self
 
     @staticmethod
     def back_to_the_search_button_function():
         Windows.Windows.exerciser_window.hide()
         Windows.Windows.search_window.show()
+        Windows.Windows.widget.setFocus()
 
     @staticmethod
     def revision_mode_button_function():
@@ -26,3 +27,4 @@ class ExerciserWindow(QDialog):
             Windows.Windows.widget.addWidget(Windows.Windows.revision_mode_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
         Windows.Windows.revision_mode_window.show()
+        Windows.Windows.widget.setFocus()

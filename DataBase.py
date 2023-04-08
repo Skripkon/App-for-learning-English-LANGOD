@@ -97,5 +97,7 @@ class DataBase:
                                                                (DataBase.current_user_id, )).fetchone()
             if temp_word[0] is not None:
                 Exerciser.Exerciser.current_list_of_added_words[temp_word[0]] = i
+                Exerciser.Exerciser.current_array_of_added_words.append(temp_word[0])
+                Exerciser.Exerciser.copy_array_of_added_words.append(temp_word[0])
             else:
                 break

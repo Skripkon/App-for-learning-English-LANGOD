@@ -55,14 +55,14 @@ class Word:
 
     @classmethod
     def check_whether_the_word_is_valid(cls):
-        if cls.current_word not in words.words():
-            return False
+        # if cls.current_word not in words.words():
+        #     return False
         if len(list(cls.client.get_translations(cls.current_word))) == 0:
             return False
         return True
 
     @classmethod
-    def get_the_usage_of_a_word(cls, number_of_examples=10) -> str:
+    def get_the_usage_of_a_word(cls, number_of_examples=20) -> str:
         cnt = 0
         output = ""
         for example in cls.client.get_translation_samples(cls.current_word, cleanup=True):

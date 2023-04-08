@@ -21,6 +21,7 @@ class SignUpWindow(QDialog):
     def back_to_sign_in_button_function():
         Windows.Windows.sign_up_window.hide()
         Windows.Windows.sign_in_window.show()
+        Windows.Windows.sign_up_window.setFocus()
 
     @classmethod
     def correct_password(cls, password: str) -> str:
@@ -50,6 +51,7 @@ class SignUpWindow(QDialog):
             self.hide()
         else:
             self.open_the_window("Error", "Passwords aren't the same")
+        Windows.Windows.sign_up_window.setFocus()
 
     def open_the_window(self, title_of_the_window: str, information: str):
         msg_box = QtWidgets.QMessageBox()
@@ -60,3 +62,4 @@ class SignUpWindow(QDialog):
         msg_box.exec_()
         self.password.clear()
         self.confirmpass.clear()
+        Windows.Windows.sign_up_window.setFocus()

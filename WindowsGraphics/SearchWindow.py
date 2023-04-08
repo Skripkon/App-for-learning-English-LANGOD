@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QDialog
+from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from time import time
 import Exerciser
@@ -10,9 +10,6 @@ from PyQt5 import QtCore
 
 
 class SearchWindow(QDialog):
-    # this field indicates whether the search returns text or nothing.
-    # If the text was found, it contains it
-
     def __init__(self):
         super(SearchWindow, self).__init__()
         loadUi('WindowsGraphics/SearchWindow.ui', self)
@@ -32,18 +29,24 @@ class SearchWindow(QDialog):
         Windows.Windows.search_window.hide()
         Windows.Windows.sign_in_window.show()
         self.hide_the_interface()
+        self.clear_fields()
+        Windows.Windows.widget.setFocus()
+
+    def clear_fields(self):
         self.search_field.clear()
         self.definitions_text.clear()
         self.usage_text.clear()
 
-    @staticmethod
-    def go_to_the_exerciser_button_function():
-        Windows.Windows.search_window.hide()
+    def go_to_the_exerciser_button_function(self):
         if Windows.Windows.exerciser_window is None:
             ExerciserWindow.ExerciserWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.exerciser_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        Windows.Windows.search_window.hide()
         Windows.Windows.exerciser_window.show()
+        self.hide_the_interface()
+        self.clear_fields()
+        Windows.Windows.widget.setFocus()
 
     def connect_interface_with_functions(self):
         self.back_to_the_main_page_button.clicked.connect(self.back_to_the_main_page_button_function)
@@ -61,6 +64,7 @@ class SearchWindow(QDialog):
         if Word.Word.current_word not in Exerciser.Exerciser.current_list_of_added_words:
             n = DataBase.DataBase.add_new_word()
             Exerciser.Exerciser.current_list_of_added_words[Word.Word.current_word] = n
+        Windows.Windows.search_window.setFocus()
 
     def add_word_button_released_function(self):
         self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
@@ -97,10 +101,11 @@ class SearchWindow(QDialog):
     def search_button_function(self):
         self.definitions_text.clear()
         self.usage_text.clear()
-        Word.Word.current_word = self.search_field.text()
+        Word.Word.current_word = self.search_field.text().lower().replace(" ", '')
         if Word.Word.check_whether_the_word_is_valid() is False:
             self.hide_the_interface()
             self.nothing_found_error_line.show()
+            Windows.Windows.search_window.setFocus()
             return None
         self.nothing_found_error_line.hide()
         output_of_examples = Word.Word.get_the_usage_of_a_word()
@@ -114,6 +119,7 @@ class SearchWindow(QDialog):
         self.show_the_interface()
         self.definitions_text.verticalScrollBar().setValue(0)
         self.usage_text.verticalScrollBar().setValue(0)
+        Windows.Windows.search_window.setFocus()
 
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed

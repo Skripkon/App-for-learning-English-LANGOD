@@ -13,7 +13,7 @@ def download_data():
 
 if __name__ == "__main__":
     # first time you have to download this DataBase in order to use the App
-    download_data()
+    # download_data()
     app = QApplication(sys.argv)
     SignInWindow.SignInWindow()
     Windows.Windows.widget = QtWidgets.QStackedWidget()
@@ -22,4 +22,5 @@ if __name__ == "__main__":
     Windows.Windows.widget.setFixedHeight(800)
     Windows.Windows.widget.setWindowTitle("LaNGod")
     Windows.Windows.widget.show()
+    Windows.Windows.widget.setFocus()
     sys.exit(app.exec_())

@@ -31,18 +31,21 @@ class SignInWindow(QDialog):
                 Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
             Windows.Windows.sign_in_window.hide()
             Windows.Windows.search_window.show()
+            Windows.Windows.widget.setFocus()
         else:
             self.open_the_window("ERROR", "Such user hasn't found")
+        Windows.Windows.sign_in_window.setFocus()
 
     def sign_up_button_function(self):
-        Windows.Windows.sign_in_window.hide()
-        self.email.clear()
-        self.password.clear()
         if Windows.Windows.sign_up_window is None:
             SignUpWindow.SignUpWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.sign_up_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
         Windows.Windows.sign_up_window.show()
+        Windows.Windows.sign_in_window.hide()
+        self.email.clear()
+        self.password.clear()
+        Windows.Windows.widget.setFocus()
 
     @classmethod
     def open_the_window(cls, title_of_the_window: str, information: str):
