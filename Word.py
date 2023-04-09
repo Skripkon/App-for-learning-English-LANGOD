@@ -61,12 +61,14 @@ class Word:
         return True
 
     @classmethod
-    def get_the_usage_of_a_word(cls, number_of_examples=13) -> str:
+    def get_the_usage_of_a_word(cls, number_of_examples=12) -> str:
         cnt = 0
         output = ""
         for example in cls.client.get_translation_samples(cls.current_word, cleanup=True):
             if cnt > number_of_examples:
                 break
+            if len(example[0]) > 100:
+                continue
             output += '- '
             output += example[0]
             output += '\n'
