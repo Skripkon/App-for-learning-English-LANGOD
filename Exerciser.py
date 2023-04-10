@@ -1,5 +1,4 @@
 import random
-
 import DataBase
 
 
@@ -9,11 +8,10 @@ class Exerciser:
 
     def __init__(self):
         DataBase.DataBase.set_the_list_of_added_words()
-
     # random shuffle algorithm
-    @classmethod
-    def random_shuffle(cls, words: list[int]):
-        for index in range (len(words)):
+    @staticmethod
+    def random_shuffle(words: list[int]):
+        for index in range(len(words)):
             random_index = random.randint(0, index)
             words[index], words[random_index] = \
                 words[random_index], words[index]

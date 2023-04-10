@@ -8,6 +8,8 @@ from WindowsGraphics import Windows
 
 
 class RevisionModeWindow(QDialog):
+    words: list[str] = []
+
     def __init__(self):
         super(RevisionModeWindow, self).__init__()
         loadUi("WindowsGraphics/RevisionModeWindow.ui", self)
@@ -16,7 +18,6 @@ class RevisionModeWindow(QDialog):
         self.pronunciation_UK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.definitions_text.setReadOnly(True)
         self.examples_text.setReadOnly(True)
-        self.words = Exerciser.Exerciser.array_of_added_words.copy()
         self.word_line.setText(self.words[-1])
         Word.Word.current_word = self.words[-1]
         self.connect_interface_with_functions()
@@ -61,6 +62,7 @@ class RevisionModeWindow(QDialog):
             self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
                                               'font-size:15pt; color: yellow;}')
             self.word_line.setText(self.words[-1])
+            Word.Word.current_word = self.words[-1]
         else:
             self.type_of_order = "straight"
             self.words = Exerciser.Exerciser.array_of_added_words.copy()
@@ -68,6 +70,7 @@ class RevisionModeWindow(QDialog):
             self.word_line.setText(self.words[-1])
             self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
                                               'font-size:15pt; color: white;}')
+            Word.Word.current_word = self.words[-1]
         self.clear_output()
         Windows.Windows.revision_mode_window.setFocus()
 

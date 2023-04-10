@@ -22,7 +22,6 @@ class SearchWindow(QDialog):
         self.add_word_button.setIconSize(QtCore.QSize(50, 50))
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
         Windows.Windows.search_window = self
-        Exerciser.Exerciser()
 
     def back_to_the_main_page_button_function(self):
         DataBase.DataBase.current_user_id = None
@@ -31,6 +30,9 @@ class SearchWindow(QDialog):
         self.hide_the_interface()
         self.clear_fields()
         Windows.Windows.widget.setFocus()
+        Windows.Windows.search_window = None
+        Windows.Windows.exerciser_window = None
+        Windows.Windows.revision_mode_window = None
 
     def clear_fields(self):
         self.search_field.clear()

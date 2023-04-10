@@ -22,10 +22,13 @@ class Word:
         output = ""
         synsets = wordnet.synsets(cls.current_word)
         for synset in synsets:
+            # pos = part of speech
             pos = synset.pos()
-            output += "["
+            if pos == "s":
+                pos = "adj"
+            output += "[ "
             output += pos
-            output += "] "
+            output += " ] "
             definition = synset.definition()
             output += definition
             output += "\n"

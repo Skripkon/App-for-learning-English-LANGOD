@@ -90,6 +90,8 @@ class DataBase:
 
     @classmethod
     def set_the_list_of_added_words(cls):
+        Exerciser.Exerciser.dict_of_added_words.clear()
+        Exerciser.Exerciser.array_of_added_words.clear()
         for i in range(1, 501):
             current_word = 'word' + str(i)
             sqlite_query = f'SELECT {current_word} FROM users_data WHERE id=?'

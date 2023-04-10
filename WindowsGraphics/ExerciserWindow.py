@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
+
+import Exerciser
 from WindowsGraphics import Windows, RevisionModeWindow
 
 
@@ -12,6 +14,7 @@ class ExerciserWindow(QDialog):
         self.back_to_the_search_button.clicked.connect(self.back_to_the_search_button_function)
         self.revision_mode_button.clicked.connect(self.revision_mode_button_function)
         Windows.Windows.exerciser_window = self
+        Exerciser.Exerciser()
 
     @staticmethod
     def back_to_the_search_button_function():
@@ -21,6 +24,7 @@ class ExerciserWindow(QDialog):
 
     @staticmethod
     def revision_mode_button_function():
+        RevisionModeWindow.RevisionModeWindow.words = Exerciser.Exerciser.array_of_added_words.copy()
         Windows.Windows.exerciser_window.hide()
         if Windows.Windows.revision_mode_window is None:
             RevisionModeWindow.RevisionModeWindow()
