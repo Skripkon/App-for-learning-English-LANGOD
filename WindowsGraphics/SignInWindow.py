@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 import DataBase
+import Exerciser
 from WindowsGraphics import Windows, SearchWindow, SignUpWindow
 
 
@@ -25,6 +26,7 @@ class SignInWindow(QDialog):
         password = self.password.text()
         if (current_id := DataBase.DataBase.check_if_user_exists(login_text, password)) != -1:
             DataBase.DataBase.current_user_id = current_id
+            Exerciser.Exerciser()
             if Windows.Windows.search_window is None:
                 SearchWindow.SearchWindow()
                 Windows.Windows.widget.addWidget(Windows.Windows.search_window)

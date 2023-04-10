@@ -14,7 +14,6 @@ class ExerciserWindow(QDialog):
         self.back_to_the_search_button.clicked.connect(self.back_to_the_search_button_function)
         self.revision_mode_button.clicked.connect(self.revision_mode_button_function)
         Windows.Windows.exerciser_window = self
-        Exerciser.Exerciser()
 
     @staticmethod
     def back_to_the_search_button_function():

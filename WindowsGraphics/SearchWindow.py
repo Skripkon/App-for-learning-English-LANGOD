@@ -34,6 +34,7 @@ class SearchWindow(QDialog):
         Windows.Windows.exerciser_window = None
         Windows.Windows.revision_mode_window = None
 
+
     def clear_fields(self):
         self.search_field.clear()
         self.definitions_text.clear()
