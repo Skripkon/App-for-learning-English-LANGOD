@@ -9,3 +9,4 @@ class Windows:
     search_window = None
     exerciser_window = None
     revision_mode_window = None
+    flashcards_mode_window = None
