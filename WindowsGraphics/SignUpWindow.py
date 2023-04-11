@@ -54,7 +54,7 @@ class SignUpWindow(QDialog):
         login_text = self.email.text()
         if self.password.text() == self.confirmpass.text():
             password = self.password.text()
-            is_password_correct: str = self.correct_password(password, login_text)
+            is_password_correct: str = self.correct_password_and_login(password, login_text)
             if is_password_correct != "NO ERROR":
                 self.open_the_window("Error", is_password_correct)
                 return None
