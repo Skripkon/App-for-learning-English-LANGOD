@@ -10,7 +10,7 @@ class Exerciser:
         DataBase.DataBase.set_the_list_of_added_words()
     # random shuffle algorithm
     @staticmethod
-    def random_shuffle(words: list[int]):
+    def random_shuffle(words: list[str]):
         for index in range(len(words)):
             random_index = random.randint(0, index)
             words[index], words[random_index] = \

@@ -141,7 +141,7 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QLabel" name="word_label">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>100</x>
      <y>40</y>
      <width>901</width>
      <height>201</height>
@@ -196,6 +196,26 @@ selection-background-color: rgb(255, 255, 255);
    </property>
    <property name="text">
     <string>Exit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="shuffle_button_2">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>30</y>
+     <width>171</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:15pt; 
+color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>Next</string>
    </property>
   </widget>
  </widget>
