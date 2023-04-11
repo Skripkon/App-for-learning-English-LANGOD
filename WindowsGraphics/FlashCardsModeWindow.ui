@@ -198,7 +198,7 @@ selection-background-color: rgb(255, 255, 255);
     <string>Exit</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="shuffle_button_2">
+  <widget class="QPushButton" name="next_button">
    <property name="geometry">
     <rect>
      <x>1010</x>
@@ -216,6 +216,26 @@ selection-background-color: rgb(255, 255, 255);
    </property>
    <property name="text">
     <string>Next</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="right_answer_button">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>140</y>
+     <width>171</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:15pt; 
+color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>Answer</string>
    </property>
   </widget>
  </widget>

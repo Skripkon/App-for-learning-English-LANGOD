@@ -42,6 +42,8 @@ class ExerciserWindow(QDialog):
             FlashCardsModeWindow.FlashCardsModeWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.flashcards_mode_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        else:
+            FlashCardsModeWindow.FlashCardsModeWindow.set_default_colors(Windows.Windows.flashcards_mode_window)
         Windows.Windows.flashcards_mode_window.show()
         Windows.Windows.widget.setFocus()
 
