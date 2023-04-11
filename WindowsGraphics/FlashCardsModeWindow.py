@@ -30,7 +30,7 @@ class FlashCardsModeWindow(QDialog):
     def exit_button_function():
         Windows.Windows.flashcards_mode_window.hide()
         Windows.Windows.exerciser_window.show()
-        Windows.Windows.revision_mode_window.setFocus()
+        Windows.Windows.flashcards_mode_window.setFocus()
 
     def connect_interface_with_functions(self):
         self.exit_button.clicked.connect(self.exit_button_function)
@@ -54,6 +54,7 @@ class FlashCardsModeWindow(QDialog):
         Word.Word.current_word = self.words[randint(0, len(self.words) - 1)]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
         self.set_variants_function()
+        self.set_default_colors()
 
     def answer_button_function(self, name_of_clicked_button):
         if getattr(self, name_of_clicked_button).text() == Word.Word.current_word:
