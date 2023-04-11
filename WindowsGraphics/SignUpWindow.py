@@ -23,24 +23,24 @@ class SignUpWindow(QDialog):
         Windows.Windows.sign_in_window.show()
         Windows.Windows.sign_up_window.setFocus()
 
-    @classmethod
-    def correct_password_and_login(cls, password: str, login: str) -> str:
+    @staticmethod
+    def correct_password_and_login(password: str, login: str) -> str:
         if len(password) < 6:
-            return "Too short password(You need to use 6 or more symbols)"
+            return "Too short password (You have to use 6 or more symbols)"
         if len(password) > 20:
-            return "Too long password(You need to use no more than 20 characters)"
+            return "Too long password (You have to use no more than 20 characters)"
         if len(login) == 0:
             return "Login field cannot be empty"
         if len(login) > 20:
-            return "Too long login(You need to use no more than 20 characters)"
+            return "Too long login (You need to use no more than 20 characters)"
         for i in range(len(login)):
             ord_login = ord(login[i])
-            if not(47 < ord_login < 58 or 64 < ord_login < 91 or 96 < ord_login < 123):
+            if not (47 < ord_login < 58 or 64 < ord_login < 91 or 96 < ord_login < 123):
                 return "Login contains incorrect symbol"
         for i in range(len(password)):
             ord_pass = ord(password[i])
-            if not(47 < ord_pass < 58 or 64 < ord_pass < 91 or 96 < ord_pass < 123):
-                return "Password contains incorrect symbol"
+            if not (47 < ord_pass < 58 or 64 < ord_pass < 91 or 96 < ord_pass < 123):
+                return "Password contains unacceptable symbol"
         if login == password:
             return "Password and login are the same"
         return "NO ERROR"
