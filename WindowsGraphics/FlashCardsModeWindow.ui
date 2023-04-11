@@ -20,10 +20,10 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="var2_button">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>290</y>
-     <width>251</width>
-     <height>121</height>
+     <x>80</x>
+     <y>310</y>
+     <width>250</width>
+     <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -41,10 +41,10 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var6_button">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>290</y>
-     <width>251</width>
-     <height>121</height>
+     <x>355</x>
+     <y>310</y>
+     <width>250</width>
+     <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -61,10 +61,10 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var5_button">
    <property name="geometry">
     <rect>
-     <x>880</x>
-     <y>300</y>
-     <width>251</width>
-     <height>121</height>
+     <x>630</x>
+     <y>310</y>
+     <width>250</width>
+     <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -72,6 +72,7 @@ selection-background-color: rgb(255, 255, 255);
 font-size:15pt; 
 color:rgb(243, 243, 243);
 selection-background-color: rgb(255, 255, 255);
+
 </string>
    </property>
    <property name="text">
@@ -81,10 +82,10 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var3_button">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>490</y>
-     <width>251</width>
-     <height>121</height>
+     <x>80</x>
+     <y>460</y>
+     <width>250</width>
+     <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -101,10 +102,10 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var1_button">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>490</y>
-     <width>251</width>
-     <height>121</height>
+     <x>355</x>
+     <y>460</y>
+     <width>250</width>
+     <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -121,10 +122,10 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var4_button">
    <property name="geometry">
     <rect>
-     <x>880</x>
-     <y>500</y>
-     <width>251</width>
-     <height>121</height>
+     <x>630</x>
+     <y>460</y>
+     <width>250</width>
+     <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -138,33 +139,13 @@ selection-background-color: rgb(255, 255, 255);
     <string>PushButton</string>
    </property>
   </widget>
-  <widget class="QLabel" name="word_label">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>40</y>
-     <width>901</width>
-     <height>201</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
-selection-background-color: rgb(255, 255, 255);
-</string>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="shuffle_button">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>690</y>
-     <width>171</width>
-     <height>71</height>
+     <x>195</x>
+     <y>720</y>
+     <width>141</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -175,16 +156,16 @@ selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>Shuffle</string>
+    <string>shuffle</string>
    </property>
   </widget>
   <widget class="QPushButton" name="exit_button">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>690</y>
-     <width>171</width>
-     <height>71</height>
+     <x>80</x>
+     <y>720</y>
+     <width>91</width>
+     <height>55</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -195,15 +176,15 @@ selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>Exit</string>
+    <string>exit</string>
    </property>
   </widget>
   <widget class="QPushButton" name="next_button">
    <property name="geometry">
     <rect>
-     <x>1010</x>
-     <y>30</y>
-     <width>171</width>
+     <x>945</x>
+     <y>140</y>
+     <width>151</width>
      <height>71</height>
     </rect>
    </property>
@@ -215,15 +196,15 @@ selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>Next</string>
+    <string>next</string>
    </property>
   </widget>
   <widget class="QPushButton" name="right_answer_button">
    <property name="geometry">
     <rect>
-     <x>1010</x>
-     <y>140</y>
-     <width>171</width>
+     <x>945</x>
+     <y>40</y>
+     <width>151</width>
      <height>71</height>
     </rect>
    </property>
@@ -235,7 +216,24 @@ selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>Answer</string>
+    <string>answer</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="word_label">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>40</y>
+     <width>800</width>
+     <height>200</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 255);
+font-size:14pt; color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+selection-color: rgb(46, 194, 126);
+</string>
    </property>
   </widget>
  </widget>

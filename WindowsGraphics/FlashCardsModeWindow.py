@@ -21,10 +21,11 @@ class FlashCardsModeWindow(QDialog):
             self.list_of_buttons.append("var" + str(i) + "_button")
         Word.Word.current_word = self.words[-1]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
-        self.index_of_current_word = len(self.words) - 1
+        self.index_of_the_current_word = len(self.words) - 1
         self.connect_interface_with_functions()
         self.set_variants_function()
-
+        self.type_of_order = "straight"
+        self.word_label.setReadOnly(True)
 
     @staticmethod
     def exit_button_function():
@@ -40,7 +41,6 @@ class FlashCardsModeWindow(QDialog):
         for button in self.list_of_buttons:
             getattr(self, button).clicked.connect(partial(self.answer_button_function, button))
 
-
     def set_variants_function(self):
         set_of_words = {Word.Word.current_word}
         while len(set_of_words) < 6:
@@ -50,32 +50,57 @@ class FlashCardsModeWindow(QDialog):
             getattr(self, self.list_of_buttons[i]).setText(set_of_words[i])
 
     def shuffle_button_function(self):
-        Exerciser.Exerciser.random_shuffle(self.words)
-        Word.Word.current_word = self.words[randint(0, len(self.words) - 1)]
-        self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
-        self.set_variants_function()
+        self.index_of_the_current_word = len(self.words) - 1
         self.set_default_colors()
+        if self.type_of_order == "straight":
+            self.type_of_order = "shuffled"
+            Exerciser.Exerciser.random_shuffle(self.words)
+            self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
+                                              'font-size:15pt; color: yellow;}')
+        else:
+            self.type_of_order = "straight"
+            self.words = Exerciser.Exerciser.array_of_added_words.copy()
+            self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
+                                              'font-size:15pt; color: white;}')
+
+        Word.Word.current_word = self.words[-1]
+        self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
+        self.word_label.verticalScrollBar().setValue(0)
+        self.set_variants_function()
+        Windows.Windows.flashcards_mode_window.setFocus()
 
     def answer_button_function(self, name_of_clicked_button):
         if getattr(self, name_of_clicked_button).text() == Word.Word.current_word:
-            getattr(self, name_of_clicked_button).setStyleSheet('QPushButton {background-color: #008000}')
+            getattr(self, name_of_clicked_button).setStyleSheet('QPushButton {selection-background-color: rgb(255, '
+                                                                '255, 255);background-color: #008000}')
         else:
-            getattr(self, name_of_clicked_button).setStyleSheet('QPushButton {background-color: #800000}')
+            getattr(self, name_of_clicked_button).setStyleSheet('QPushButton {selection-background-color: rgb(255, '
+                                                                '255, 255); background-color: #800000}')
+        Windows.Windows.flashcards_mode_window.setFocus()
 
     def next_button_function(self):
-        self.index_of_current_word -= 1
-        Word.Word.current_word = self.words[self.index_of_current_word]
+        self.index_of_the_current_word -= 1
+        Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
+        self.word_label.verticalScrollBar().setValue(0)
         self.set_variants_function()
         self.set_default_colors()
+        Windows.Windows.flashcards_mode_window.setFocus()
+
+    def keyPressEvent(self, event):
+        if event.nativeScanCode() == 36:  # button ESC pressed
+            self.next_button_function()
 
     def set_default_colors(self):
         for i in range(6):
-            getattr(self, self.list_of_buttons[i]).setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
-                                              'font-size:15pt; color: white;}')
+            getattr(self, self.list_of_buttons[i]).setStyleSheet(
+                'QPushButton {selection-background-color: rgb(255, 255, 255); '
+                'font-size:15pt; color: white;}')
 
     def right_answer_button_function(self):
         for button in self.list_of_buttons:
             if getattr(self, button).text() == Word.Word.current_word:
-                getattr(self, button).setStyleSheet('QPushButton {background-color: #008000}')
+                getattr(self, button).setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255);'
+                                                    'background-color: #008000}')
                 break
+        Windows.Windows.flashcards_mode_window.setFocus()

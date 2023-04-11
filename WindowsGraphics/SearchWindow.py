@@ -33,7 +33,7 @@ class SearchWindow(QDialog):
         Windows.Windows.search_window = None
         Windows.Windows.exerciser_window = None
         Windows.Windows.revision_mode_window = None
-
+        Windows.Windows.flashcards_mode_window = None
 
     def clear_fields(self):
         self.search_field.clear()

@@ -33,7 +33,6 @@ class ExerciserWindow(QDialog):
         Windows.Windows.revision_mode_window.show()
         Windows.Windows.widget.setFocus()
 
-
     @staticmethod
     def flashcards_mode_button_function():
         FlashCardsModeWindow.FlashCardsModeWindow.words = Exerciser.Exerciser.array_of_added_words.copy()
@@ -46,4 +45,3 @@ class ExerciserWindow(QDialog):
             FlashCardsModeWindow.FlashCardsModeWindow.set_default_colors(Windows.Windows.flashcards_mode_window)
         Windows.Windows.flashcards_mode_window.show()
         Windows.Windows.widget.setFocus()
-
