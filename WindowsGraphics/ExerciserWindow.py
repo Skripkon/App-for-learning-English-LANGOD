@@ -3,7 +3,7 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 
 import Exerciser
-from WindowsGraphics import Windows, RevisionModeWindow, FlashCardsModeWindow
+from WindowsGraphics import Windows, RevisionModeWindow, FlashCardsModeWindow, ContextModeWindow
 
 
 class ExerciserWindow(QDialog):
@@ -14,6 +14,7 @@ class ExerciserWindow(QDialog):
         self.back_to_the_search_button.clicked.connect(self.back_to_the_search_button_function)
         self.revision_mode_button.clicked.connect(self.revision_mode_button_function)
         self.flashcards_mode_button.clicked.connect(self.flashcards_mode_button_function)
+        self.context_mode_button.clicked.connect(self.context_mode_window_button_function)
         Windows.Windows.exerciser_window = self
 
     @staticmethod
@@ -44,4 +45,15 @@ class ExerciserWindow(QDialog):
         else:
             FlashCardsModeWindow.FlashCardsModeWindow.set_default_colors(Windows.Windows.flashcards_mode_window)
         Windows.Windows.flashcards_mode_window.show()
+        Windows.Windows.widget.setFocus()
+
+    @staticmethod
+    def context_mode_window_button_function():
+        ContextModeWindow.ContextModeWindow.words = Exerciser.Exerciser.array_of_added_words.copy()
+        Windows.Windows.exerciser_window.hide()
+        if Windows.Windows.context_mode_window is None:
+            ContextModeWindow.ContextModeWindow()
+            Windows.Windows.widget.addWidget(Windows.Windows.context_mode_window)
+            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        Windows.Windows.context_mode_window.show()
         Windows.Windows.widget.setFocus()

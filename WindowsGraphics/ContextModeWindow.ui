@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1150</width>
-    <height>862</height>
+    <width>1200</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,52 +17,12 @@
    <string notr="true">background-color: rgb(0, 36, 0);
 border-color: rgb(255, 255, 255);</string>
   </property>
-  <widget class="QLabel" name="word_line">
+  <widget class="QPushButton" name="submit_button">
    <property name="geometry">
     <rect>
-     <x>800</x>
-     <y>130</y>
-     <width>91</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:20pt; 
-color:rgb(243, 243, 243);
-</string>
-   </property>
-   <property name="text">
-    <string>WORD</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="definitions_text">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>120</y>
-     <width>581</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">border-color:rgb(255, 255, 255);
-font-size:14pt;
-color:rgb(243, 243, 243);
-selection-background-color: rgb(255, 255, 255);
-selection-color: rgb(46, 194, 126);
-</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="next_button">
-   <property name="geometry">
-    <rect>
-     <x>720</x>
-     <y>260</y>
-     <width>200</width>
+     <x>530</x>
+     <y>490</y>
+     <width>121</width>
      <height>55</height>
     </rect>
    </property>
@@ -77,35 +37,13 @@ selection-background-color: rgb(255, 255, 255);
     <string>Submit</string>
    </property>
   </widget>
-  <widget class="QLabel" name="play_sound_line">
-   <property name="geometry">
-    <rect>
-     <x>580</x>
-     <y>749</y>
-     <width>51</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color:rgb(255, 255, 255);
-font-size:15pt; 
-
-</string>
-   </property>
-   <property name="text">
-    <string>UK</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QPushButton" name="exit_button">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>754</y>
-     <width>91</width>
-     <height>41</height>
+     <x>240</x>
+     <y>690</y>
+     <width>151</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -120,28 +58,12 @@ selection-background-color: rgb(255, 255, 255);
     <string>exit</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QPushButton" name="answer_button">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>270</y>
-     <width>581</width>
-     <height>371</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color:rgb(255, 255, 255)</string>
-   </property>
-   <property name="text">
-    <string>text karoche here kakoyto generation</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="next_button_2">
-   <property name="geometry">
-    <rect>
-     <x>729</x>
-     <y>590</y>
-     <width>191</width>
+     <x>750</x>
+     <y>570</y>
+     <width>201</width>
      <height>51</height>
     </rect>
    </property>
@@ -154,14 +76,14 @@ selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>Skip</string>
+    <string>answer</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="next_button_3">
+  <widget class="QPushButton" name="hint_button">
    <property name="geometry">
     <rect>
-     <x>720</x>
-     <y>360</y>
+     <x>750</x>
+     <y>490</y>
      <width>200</width>
      <height>55</height>
     </rect>
@@ -173,70 +95,186 @@ color:rgb(243, 243, 243);
 selection-background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Hint</string>
+    <string>hint</string>
    </property>
   </widget>
-  <widget class="QLabel" name="word_line_2">
+  <widget class="QLineEdit" name="input_text">
    <property name="geometry">
     <rect>
-     <x>730</x>
-     <y>140</y>
-     <width>51</width>
-     <height>31</height>
+     <x>240</x>
+     <y>490</y>
+     <width>261</width>
+     <height>55</height>
     </rect>
    </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 255);
+font-size:14pt; color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+selection-color: rgb(46, 194, 126);
+background-color: rgb(3, 54, 22)</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="next_button">
+   <property name="geometry">
+    <rect>
+     <x>750</x>
+     <y>650</y>
+     <width>201</width>
+     <height>51</height>
+    </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(95, 255, 50);
-font: 239 14pt &quot;MV Boli&quot;;
-
-
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:15pt; 
+color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
 
 </string>
    </property>
    <property name="text">
-    <string>word</string>
+    <string>next</string>
    </property>
   </widget>
-  <widget class="QLabel" name="play_sound_line_3">
+  <widget class="QLabel" name="pronunciation_UK_text">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>749</y>
-     <width>51</width>
-     <height>41</height>
+     <x>400</x>
+     <y>590</y>
+     <width>41</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 255, 255);
-font-size:15pt; 
-
-</string>
+    <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
+   </property>
+   <property name="text">
+    <string>UK</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pronunciation_US_text">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>590</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 15pt;</string>
    </property>
    <property name="text">
     <string>US</string>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QPushButton" name="pronunciation_UK">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>760</y>
-     <width>81</width>
-     <height>21</height>
+     <x>350</x>
+     <y>580</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 255, 255);
-font-size:12pt;</string>
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
    </property>
    <property name="text">
-    <string>Play sound</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>WindowsGraphics</normalon>
+     <activeon>:/voiceButtonIcon.png/voiceButtonIcon.png</activeon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pronunciation_US">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>580</y>
+     <width>41</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>WindowsGraphics</normalon>
+     <activeon>:/voiceButtonIcon.png/voiceButtonIcon.png</activeon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="shuffle_button">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>690</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:15pt; 
+color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+
+</string>
+   </property>
+   <property name="text">
+    <string>shuffle</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="usage_text">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>40</y>
+     <width>711</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-color: rgb(255, 255, 255);
+font-size:14pt; color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+selection-color: rgb(46, 194, 126);
+</string>
    </property>
   </widget>
  </widget>

@@ -10,3 +10,4 @@ class Windows:
     exerciser_window = None
     revision_mode_window = None
     flashcards_mode_window = None
+    context_mode_window = None
