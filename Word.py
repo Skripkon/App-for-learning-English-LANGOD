@@ -70,7 +70,7 @@ class Word:
         for example in cls.client.get_translation_samples(cls.current_word, cleanup=True):
             if cnt > number_of_examples:
                 break
-            if len(example[0]) > 100:
+            if len(example[0]) > 90:
                 continue
             output += '- '
             output += example[0]
