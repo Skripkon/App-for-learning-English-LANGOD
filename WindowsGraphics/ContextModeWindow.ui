@@ -145,8 +145,8 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QLabel" name="pronunciation_UK_text">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>590</y>
+     <x>410</x>
+     <y>630</y>
      <width>41</width>
      <height>31</height>
     </rect>
@@ -162,8 +162,8 @@ font: 15pt;</string>
   <widget class="QLabel" name="pronunciation_US_text">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>590</y>
+     <x>300</x>
+     <y>630</y>
      <width>31</width>
      <height>31</height>
     </rect>
@@ -179,8 +179,8 @@ font: 15pt;</string>
   <widget class="QPushButton" name="pronunciation_UK">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>580</y>
+     <x>360</x>
+     <y>620</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -211,8 +211,8 @@ font: 15pt;</string>
   <widget class="QPushButton" name="pronunciation_US">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>580</y>
+     <x>250</x>
+     <y>620</y>
      <width>41</width>
      <height>41</height>
     </rect>
@@ -275,6 +275,23 @@ font-size:14pt; color:rgb(243, 243, 243);
 selection-background-color: rgb(255, 255, 255);
 selection-color: rgb(46, 194, 126);
 </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="wrong_answer_line">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>560</y>
+     <width>451</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(224, 27, 36);
+font: 15pt;</string>
+   </property>
+   <property name="text">
+    <string>Wrong answer</string>
    </property>
   </widget>
  </widget>

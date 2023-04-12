@@ -5,6 +5,7 @@ from time import time
 import Exerciser
 import Word
 from WindowsGraphics import Windows
+import time
 
 
 class ContextModeWindow(QDialog):
@@ -14,6 +15,7 @@ class ContextModeWindow(QDialog):
         super(ContextModeWindow, self).__init__()
         loadUi("WindowsGraphics/ContextModeWindow.ui", self)
         Windows.Windows.context_mode_window = self
+        self.wrong_answer_line.hide()
         self.pronunciation_US.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.pronunciation_UK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.usage_text.setReadOnly(True)
@@ -34,7 +36,17 @@ class ContextModeWindow(QDialog):
         self.hint_button.clicked.connect(self.hint_button_function)
 
     def submit_button_function(self):
-        pass
+        answer: str = self.input_text.text()
+        if answer == Word.Word.current_word:
+            self.wrong_answer_line.hide()
+            self.input_text.setStyleSheet('QLineEdit {selection-background-color: rgb(255, '
+                                                                '255, 255);'
+                                           'font-size:15pt'
+                                          'background-color: #008000}')
+        else:
+            self.wrong_answer_line.show()
+
+
 
     def hint_button_function(self):
         pass
