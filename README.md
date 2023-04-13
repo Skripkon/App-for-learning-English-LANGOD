@@ -7,8 +7,12 @@
 - `get_the_pronunciation_of_a_word_with_British_accent`
 - `get_the_video_with_a_word`
 
-## Class `Windows` is a base class and the following classes are inherited from it:
-- `MainWindow`
-- `LoginWindow`
+## Class `Windows` contains pointers to all created windows as his attributes
+- `SighInWindow`
 - `SignUpWindow`
 - `SearchWindow`
+- `ExerciserWindow`
+- `RevisionModeWindow`
+- `FlashcardsModeWindow`
+- `ContextModeWindow`
+- `PronunciationModeWindow` (TODO)
