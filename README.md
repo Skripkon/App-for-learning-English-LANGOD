@@ -15,4 +15,4 @@
 - `RevisionModeWindow`
 - `FlashcardsModeWindow`
 - `ContextModeWindow`
-- `PronunciationModeWindow` (TODO)
+- `AuditionModeWindow` 'TODO'
