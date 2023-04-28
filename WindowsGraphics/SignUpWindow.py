@@ -62,11 +62,9 @@ class SignUpWindow(QDialog):
             if is_password_correct != "NO ERROR":
                 self.open_the_window("Error", is_password_correct)
                 return None
-            try:
-                # DataBase.DataBase.create_user(login_text, password)
-                URL: str = "http://" + connection.IP.ip + ":12345/SignUp"
-                response = requests.get(URL, headers={"Login":login_text, "Password":password})
-            except sqlite3.Error:
+            URL: str = "http://" + connection.IP.ip + ":12345/SignUp"
+            response = requests.get(URL, headers={"Login":login_text, "Password":password})
+            if response.text == "error":
                 self.open_the_window("Error", "User with this login already exists")
                 return None
             self.open_the_window("OK", "Have fun using our app!")
