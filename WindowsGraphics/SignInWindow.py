@@ -22,7 +22,6 @@ class SignInWindow(QDialog):
             self.login_button_function()
 
     def login_button_function(self):
-        # DataBase.DataBase.check_whether_data_bases_exist()
         url: str = "http://" + connection.IP.ip + ":12345/CreateDB"
         requests.get(url)
         login_text = self.email.text()
@@ -30,8 +29,7 @@ class SignInWindow(QDialog):
 
         URL: str = "http://" + connection.IP.ip + ":12345/CheckIfUserExists"
         response = requests.get(URL, headers={"Login": login_text, "Password": password})
-        if (current_id := response.text) != "-1":
-            # DataBase.DataBase.current_user_id = current_id
+        if response.text != "-1":
             connection.IP.user_id = int(response.text)
             Exerciser.Exerciser()
             if Windows.Windows.search_window is None:
