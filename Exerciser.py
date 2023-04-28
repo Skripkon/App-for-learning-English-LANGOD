@@ -1,5 +1,6 @@
 import random
-import DataBase
+import requests
+import connection
 
 
 class Exerciser:
@@ -7,7 +8,14 @@ class Exerciser:
     array_of_added_words = []
 
     def __init__(self):
-        DataBase.DataBase.set_the_list_of_added_words()
+        # DataBase.DataBase.set_the_list_of_added_words()
+        Exerciser.dict_of_added_words.clear()
+        Exerciser.array_of_added_words.clear()
+        URL: str = "http://" + connection.IP.ip + ":12345/GetTheListOfAddedWords"
+        response = requests.get(URL)
+        Exerciser.array_of_added_words = response.text.split()
+        for i in range(0, len(Exerciser.array_of_added_words)):
+            Exerciser.dict_of_added_words[Exerciser.array_of_added_words[i]] = i + 1
 
     # random shuffle algorithm
     @staticmethod

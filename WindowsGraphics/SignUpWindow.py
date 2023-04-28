@@ -2,8 +2,10 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 import sqlite3
 from PyQt5 import QtWidgets
-import DataBase
+import connection
 from WindowsGraphics import Windows
+import requests
+import connection
 
 
 class SignUpWindow(QDialog):
@@ -50,7 +52,9 @@ class SignUpWindow(QDialog):
             self.create_new_user_button_function()
 
     def create_new_user_button_function(self):
-        DataBase.DataBase.check_whether_data_bases_exist()
+        # DataBase.DataBase.check_whether_data_bases_exist()
+        URL: str = "http://" + connection.IP.ip + ":12345/CreateDB"
+        response = requests.get(URL)
         login_text = self.email.text()
         if self.password.text() == self.confirmpass.text():
             password = self.password.text()
@@ -59,7 +63,9 @@ class SignUpWindow(QDialog):
                 self.open_the_window("Error", is_password_correct)
                 return None
             try:
-                DataBase.DataBase.create_user(login_text, password)
+                # DataBase.DataBase.create_user(login_text, password)
+                URL: str = "http://" + connection.IP.ip + ":12345/SignUp"
+                response = requests.get(URL, headers={"Login":login_text, "Password":password})
             except sqlite3.Error:
                 self.open_the_window("Error", "User with this login already exists")
                 return None

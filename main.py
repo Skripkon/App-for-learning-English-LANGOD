@@ -3,6 +3,7 @@ import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtWidgets
 from nltk.corpus import wordnet
+import connection
 
 from WindowsGraphics import SignInWindow, Windows, SignUpWindow
 import nltk
@@ -14,13 +15,14 @@ def download_data():
 
 
 def set_connection():
-    wordnet.synsets("hello")
+    wordnet.synsets("connect")
 
 
 if __name__ == "__main__":
     # first time you have to download this DataBase in order to use the App
     # download_data()
     # set_connection()
+    connection.IP.set_ip()
     app = QApplication(sys.argv)
     SignInWindow.SignInWindow()
     Windows.Windows.widget = QtWidgets.QStackedWidget()

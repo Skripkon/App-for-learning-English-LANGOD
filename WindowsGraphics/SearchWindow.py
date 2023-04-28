@@ -1,10 +1,11 @@
+import requests
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from time import time
 import Exerciser
-import DataBase
 import Word
+import connection
 from WindowsGraphics import Windows, ExerciserWindow
 from PyQt5 import QtCore
 
@@ -24,7 +25,7 @@ class SearchWindow(QDialog):
         Windows.Windows.search_window = self
 
     def back_to_the_main_page_button_function(self):
-        DataBase.DataBase.current_user_id = None
+        connection.IP.user_id = None
         Windows.Windows.search_window.hide()
         Windows.Windows.sign_in_window.show()
         self.hide_the_interface()
@@ -34,6 +35,7 @@ class SearchWindow(QDialog):
         Windows.Windows.exerciser_window = None
         Windows.Windows.revision_mode_window = None
         Windows.Windows.flashcards_mode_window = None
+        Windows.Windows.context_mode_window = None
 
     def clear_fields(self):
         self.search_field.clear()
@@ -65,7 +67,9 @@ class SearchWindow(QDialog):
     @staticmethod
     def add_word_button_function():
         if Word.Word.current_word not in Exerciser.Exerciser.dict_of_added_words:
-            n = DataBase.DataBase.add_new_word()
+            url: str = "http://" + connection.IP.ip + ":12345/AddNewWord"
+            response = requests.get(url, headers={'Word': Word.Word.current_word})
+            n = int(response.text)
             Exerciser.Exerciser.dict_of_added_words[Word.Word.current_word] = n
             Exerciser.Exerciser.array_of_added_words.append(Word.Word.current_word)
         Windows.Windows.search_window.setFocus()

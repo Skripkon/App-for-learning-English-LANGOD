@@ -24,8 +24,7 @@ class ContextModeWindow(QDialog):
         self.connect_interface_with_functions()
         self.index_of_the_current_word = len(self.words) - 1
         self.type_of_order = "straight"
-        self.display_the_usage()
-
+        # self.display_the_usage()
 
     def connect_interface_with_functions(self):
         self.pronunciation_US.clicked.connect(self.play_sound_with_us_accent)

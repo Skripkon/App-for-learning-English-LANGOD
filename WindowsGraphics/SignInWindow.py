@@ -1,9 +1,10 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
-import DataBase
 import Exerciser
+import connection
 from WindowsGraphics import Windows, SearchWindow, SignUpWindow
+import requests
 
 
 class SignInWindow(QDialog):
@@ -21,11 +22,17 @@ class SignInWindow(QDialog):
             self.login_button_function()
 
     def login_button_function(self):
-        DataBase.DataBase.check_whether_data_bases_exist()
+        # DataBase.DataBase.check_whether_data_bases_exist()
+        url: str = "http://" + connection.IP.ip + ":12345/CreateDB"
+        requests.get(url)
         login_text = self.email.text()
         password = self.password.text()
-        if (current_id := DataBase.DataBase.check_if_user_exists(login_text, password)) != -1:
-            DataBase.DataBase.current_user_id = current_id
+
+        URL: str = "http://" + connection.IP.ip + ":12345/CheckIfUserExists"
+        response = requests.get(URL, headers={"Login": login_text, "Password": password})
+        if (current_id := response.text) != "-1":
+            # DataBase.DataBase.current_user_id = current_id
+            connection.IP.user_id = int(response.text)
             Exerciser.Exerciser()
             if Windows.Windows.search_window is None:
                 SearchWindow.SearchWindow()
