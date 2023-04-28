@@ -22,14 +22,15 @@ class DataBase:
 
 class AddNewWordHandler(tornado.web.RequestHandler):
     @classmethod
-    def add_new_word(cls, word: str, user_id: int) -> int:
-        temp = DataBase.cursor_for_users_data.execute("SELECT amount_of_words FROM users_data WHERE UserId=?",
+    def add_new_word(cls, word: str, user_id: str) -> int:
+        user_id = int(user_id)
+        temp = DataBase.cursor_for_users_data.execute("SELECT amount_of_words FROM users_data WHERE id=?",
                                                  (user_id,))
         n: int = temp.fetchone()[0]
         number_of_new_word = "word" + str(n)
         sqlite_add_word_query = f"UPDATE users_data SET {number_of_new_word}=?, " \
                                 f"amount_of_words = amount_of_words + 1 WHERE id=?"
-        DataBase.cursor_for_users_data.execute(sqlite_add_word_query, (word, DataBase.current_user_id))
+        DataBase.cursor_for_users_data.execute(sqlite_add_word_query, (word, user_id))
         DataBase.sqlite_connection_with_db_users_data.commit()
         return n
 
@@ -45,6 +46,7 @@ class GetTheListOfAddedWordsHandler(tornado.web.RequestHandler):
 
     @classmethod
     def get_the_list_of_added_words(cls, user_id: int):
+        user_id = int(user_id)
         cls.words_str = ""
         for i in range(1, 501):
             current_word = 'word' + str(i)
@@ -84,32 +86,35 @@ class CheckIfUserExistsHandler(tornado.web.RequestHandler):
 
 class SignUpHandler(tornado.web.RequestHandler):
     @classmethod
-    def create_user(cls, new_login: str, new_password: str):
-        DataBase.cursor_for_registration_info.execute("INSERT INTO registration_info (login, password) VALUES(?, ?)",
-                                                      (new_login, new_password))
-        DataBase.sqlite_connection_with_db_registration_info.commit()
-
-        DataBase.cursor_for_users_data.execute("INSERT INTO users_data DEFAULT VALUES")
-        DataBase.sqlite_connection_with_db_users_data.commit()
+    def create_user(cls, new_login: str, new_password: str) -> str:
+        try:
+            DataBase.cursor_for_registration_info.execute("INSERT INTO registration_info (login, password) VALUES(?, ?)",
+                                                          (new_login, new_password))
+            DataBase.sqlite_connection_with_db_registration_info.commit()
+            DataBase.cursor_for_users_data.execute("INSERT INTO users_data DEFAULT VALUES")
+            DataBase.sqlite_connection_with_db_users_data.commit()
+        except sqlite3.Error:
+            return "error"
+        return "okay"
 
     def get(self):
         login = self.request.headers["Login"]
         password = self.request.headers["Password"]
-        self.create_user(login, password)
-        self.write("null")
+        response: str = self.create_user(login, password)
+        self.write(response)
 
 
 class CreateDataBasesHandler(tornado.web.RequestHandler):
 
     @classmethod
     def check_whether_data_bases_exist(cls):
-        if not os.path.exists("users_data.db"):
+        if not os.path.exists("Server/users_data.db"):
             cls.create_data_base("users_data")
-        if not os.path.exists("registration_info.db"):
+        if not os.path.exists("Server/registration_info.db"):
             cls.create_data_base("registration_info")
-        DataBase.sqlite_connection_with_db_registration_info = sqlite3.connect('registration_info.db')
+        DataBase.sqlite_connection_with_db_registration_info = sqlite3.connect('Server/registration_info.db')
         DataBase.cursor_for_registration_info = DataBase.sqlite_connection_with_db_registration_info.cursor()
-        DataBase.sqlite_connection_with_db_users_data = sqlite3.connect('users_data.db')
+        DataBase.sqlite_connection_with_db_users_data = sqlite3.connect('Server/users_data.db')
         DataBase.cursor_for_users_data = DataBase.sqlite_connection_with_db_users_data.cursor()
 
     @classmethod
@@ -132,7 +137,7 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
                                 amount_of_words INTEGER NOT NULL DEFAULT 1,
                                 {columns});'''
 
-        sqlite_connection = sqlite3.connect(f'{name}.db')
+        sqlite_connection = sqlite3.connect(f'Server/{name}.db')
         cursor = sqlite_connection.cursor()
         try:
             cursor.execute(sqlite_create_table_query)
@@ -141,7 +146,6 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
 
     def get(self):
         self.check_whether_data_bases_exist()
-        self.write("F!")
 
 
 def make_app():
