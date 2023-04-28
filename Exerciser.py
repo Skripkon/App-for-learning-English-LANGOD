@@ -12,7 +12,7 @@ class Exerciser:
         Exerciser.dict_of_added_words.clear()
         Exerciser.array_of_added_words.clear()
         URL: str = "http://" + connection.IP.ip + ":12345/GetTheListOfAddedWords"
-        response = requests.get(URL)
+        response = requests.get(URL, headers={'UserId': str(connection.IP.user_id)})
         Exerciser.array_of_added_words = response.text.split()
         for i in range(0, len(Exerciser.array_of_added_words)):
             Exerciser.dict_of_added_words[Exerciser.array_of_added_words[i]] = i + 1
