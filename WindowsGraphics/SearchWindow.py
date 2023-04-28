@@ -68,7 +68,7 @@ class SearchWindow(QDialog):
     def add_word_button_function():
         if Word.Word.current_word not in Exerciser.Exerciser.dict_of_added_words:
             url: str = "http://" + connection.IP.ip + ":12345/AddNewWord"
-            response = requests.get(url, headers={'Word': Word.Word.current_word})
+            response = requests.get(url, headers={'Word': Word.Word.current_word, 'UserId': str(connection.IP.user_id)})
             n = int(response.text)
             Exerciser.Exerciser.dict_of_added_words[Word.Word.current_word] = n
             Exerciser.Exerciser.array_of_added_words.append(Word.Word.current_word)
