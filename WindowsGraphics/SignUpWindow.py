@@ -53,7 +53,7 @@ class SignUpWindow(QDialog):
 
     def create_new_user_button_function(self):
         # DataBase.DataBase.check_whether_data_bases_exist()
-        URL: str = "http://" + connection.IP.ip + ":12345/CreateDB"
+        URL: str = "http://" + connection.IP.ip + f":{connection.IP.port}/CreateDB"
         response = requests.get(URL)
         login_text = self.email.text()
         if self.password.text() == self.confirmpass.text():
@@ -62,7 +62,7 @@ class SignUpWindow(QDialog):
             if is_password_correct != "NO ERROR":
                 self.open_the_window("Error", is_password_correct)
                 return None
-            URL: str = "http://" + connection.IP.ip + ":12345/SignUp"
+            URL: str = "http://" + connection.IP.ip + f":{connection.IP.port}/SignUp"
             response = requests.get(URL, headers={"Login":login_text, "Password":password})
             if response.text == "error":
                 self.open_the_window("Error", "User with this login already exists")

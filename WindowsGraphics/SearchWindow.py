@@ -67,14 +67,15 @@ class SearchWindow(QDialog):
 
     def create_new_wordlist_button_function(self):
         name: str = self.create_new_wordlist_input.text().lower().replace(" ", '')
-        url: str = "http://" + connection.IP.ip + ":12345/AddNewWordlist"
+        url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWordlist"
         requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})
     #    Add a new value into QComboBox
+        self.choose_wordlist.addItem(name)
 
     @staticmethod
     def add_word_button_function():
         if Word.Word.current_word not in Exerciser.Exerciser.dict_of_added_words:
-            url: str = "http://" + connection.IP.ip + ":12345/AddNewWord"
+            url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWord"
             response = requests.get(url, headers={'Word': Word.Word.current_word, 'UserId': str(connection.IP.user_id)})
             n = int(response.text)
             Exerciser.Exerciser.dict_of_added_words[Word.Word.current_word] = n

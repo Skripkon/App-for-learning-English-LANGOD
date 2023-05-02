@@ -22,12 +22,12 @@ class SignInWindow(QDialog):
             self.login_button_function()
 
     def login_button_function(self):
-        url: str = "http://" + connection.IP.ip + ":12345/CreateDB"
+        url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/CreateDB"
         requests.get(url)
         login_text = self.email.text()
         password = self.password.text()
 
-        URL: str = "http://" + connection.IP.ip + ":12345/CheckIfUserExists"
+        URL: str = "http://" + connection.IP.ip + f":{connection.IP.port}/CheckIfUserExists"
         response = requests.get(URL, headers={"Login": login_text, "Password": password})
         if response.text != "-1":
             connection.IP.user_id = int(response.text)

@@ -11,7 +11,7 @@ class Exerciser:
         # DataBase.DataBase.set_the_list_of_added_words()
         Exerciser.dict_of_added_words.clear()
         Exerciser.array_of_added_words.clear()
-        URL: str = "http://" + connection.IP.ip + ":12345/GetTheListOfAddedWords"
+        URL: str = "http://" + connection.IP.ip + f":{connection.IP.port}/GetTheListOfAddedWords"
         response = requests.get(URL, headers={'UserId': str(connection.IP.user_id)})
         Exerciser.array_of_added_words = response.text.split()
         for i in range(0, len(Exerciser.array_of_added_words)):
