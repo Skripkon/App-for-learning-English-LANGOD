@@ -63,6 +63,13 @@ class SearchWindow(QDialog):
         self.go_to_the_exerciser_button.clicked.connect(self.go_to_the_exerciser_button_function)
         self.add_word_button.clicked.connect(self.add_word_button_function)
         self.add_word_button.released.connect(self.add_word_button_released_function)
+        self.create_new_wordlist_button.clicked.connect(self.create_new_wordlist_button_function)
+
+    def create_new_wordlist_button_function(self):
+        name: str = self.create_new_wordlist_input.text().lower().replace(" ", '')
+        url: str = "http://" + connection.IP.ip + ":12345/AddNewWordlist"
+        requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})
+    #    Add a new value into QComboBox
 
     @staticmethod
     def add_word_button_function():
@@ -87,8 +94,11 @@ class SearchWindow(QDialog):
         self.usage_text.hide()
         self.usage_title.hide()
         self.add_word_button.hide()
-        self.add_line.hide()
         self.nothing_found_error_line.hide()
+        self.choose_wordlist.hide()
+        self.add_button.hide()
+        self.create_new_wordlist_input.hide()
+        self.create_new_wordlist_button.hide()
 
     def show_the_interface(self):
         self.pronunciation_US.show()
@@ -100,7 +110,10 @@ class SearchWindow(QDialog):
         self.usage_text.show()
         self.usage_title.show()
         self.add_word_button.show()
-        self.add_line.show()
+        self.choose_wordlist.show()
+        self.add_button.show()
+        self.create_new_wordlist_input.show()
+        self.create_new_wordlist_button.show()
 
     def forbid_to_change_the_interface(self):
         self.definitions_text.setReadOnly(True)
