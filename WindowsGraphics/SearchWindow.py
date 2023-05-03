@@ -2,6 +2,8 @@ import requests
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt
 from time import time
 import Exerciser
 import Word
@@ -65,20 +67,32 @@ class SearchWindow(QDialog):
         self.add_word_button.released.connect(self.add_word_button_released_function)
         self.create_new_wordlist_button.clicked.connect(self.create_new_wordlist_button_function)
 
+    @classmethod
+    def check_whether_wordlist_with_such_name_already_exists(cls, name: str) -> bool:
+        if name in Exerciser.Exerciser.array_of_created_wordlists:
+            return True
+        else:
+            return False
+
     def create_new_wordlist_button_function(self):
         name: str = self.create_new_wordlist_input.text().lower().replace(" ", '')
+        if self.check_whether_wordlist_with_such_name_already_exists(name):
+            self.open_the_window("Error", f"Wordlist with name '{name}' already exists")
+            return None
         url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWordlist"
         requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})
-    #    Add a new value into QComboBox
         self.choose_wordlist.addItem(name)
+        Exerciser.Exerciser.array_of_created_wordlists.append(name)
 
-    @staticmethod
-    def add_word_button_function():
+    def add_word_button_function(self):
         if Word.Word.current_word not in Exerciser.Exerciser.dict_of_added_words:
+            wordlist: str = self.choose_wordlist.currentText()
             url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWord"
-            response = requests.get(url, headers={'Word': Word.Word.current_word, 'UserId': str(connection.IP.user_id)})
-            n = int(response.text)
-            Exerciser.Exerciser.dict_of_added_words[Word.Word.current_word] = n
+            response = requests.get(url, headers={'Word': Word.Word.current_word,
+                                                  'UserId': str(connection.IP.user_id),
+                                                  'Wordlist': wordlist})
+            # n = int(response.text)
+            Exerciser.Exerciser.dict_of_added_words[Word.Word.current_word] = wordlist
             Exerciser.Exerciser.array_of_added_words.append(Word.Word.current_word)
         Windows.Windows.search_window.setFocus()
 
@@ -138,7 +152,10 @@ class SearchWindow(QDialog):
             self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
         else:
             self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
+        for wordlist in Exerciser.Exerciser.array_of_created_wordlists:
+            self.choose_wordlist.addItem(wordlist)
         self.show_the_interface()
+        self.choose_wordlist.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.definitions_text.verticalScrollBar().setValue(0)
         self.usage_text.verticalScrollBar().setValue(0)
         Windows.Windows.search_window.setFocus()
@@ -146,6 +163,15 @@ class SearchWindow(QDialog):
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed
             self.search_button_function()
+
+    @classmethod
+    def open_the_window(cls, title_of_the_window: str, information: str):
+        msg_box = QtWidgets.QMessageBox()
+        msg_box.setText(information)
+        msg_box.setWindowTitle(title_of_the_window)
+        msg_box.setIcon(QtWidgets.QMessageBox.Information)
+        msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        msg_box.exec_()
 
     @staticmethod
     def time_required(f):

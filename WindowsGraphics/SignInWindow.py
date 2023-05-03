@@ -32,6 +32,7 @@ class SignInWindow(QDialog):
         if response.text != "-1":
             connection.IP.user_id = int(response.text)
             Exerciser.Exerciser()
+
             if Windows.Windows.search_window is None:
                 SearchWindow.SearchWindow()
                 Windows.Windows.widget.addWidget(Windows.Windows.search_window)

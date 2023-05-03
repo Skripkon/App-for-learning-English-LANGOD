@@ -4,7 +4,7 @@ import socket
 class IP:
     ip = None
     user_id = None
-    port = 12347
+    port = 12346
 
     @classmethod
     def set_ip(cls):

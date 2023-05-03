@@ -306,6 +306,7 @@ font: 15pt;</string>
 font-size:15pt; 
 color:rgb(243, 243, 243);
 selection-background-color: rgb(0,179,60);
+combobox-popup: 0;
 </string>
    </property>
   </widget>
