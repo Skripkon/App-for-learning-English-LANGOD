@@ -25,6 +25,8 @@ class SearchWindow(QDialog):
         self.add_word_button.setIconSize(QtCore.QSize(50, 50))
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
         Windows.Windows.search_window = self
+        for wordlist in Exerciser.Exerciser.array_of_created_wordlists:
+            self.choose_wordlist.addItem(wordlist)
 
     def back_to_the_main_page_button_function(self):
         connection.IP.user_id = None
@@ -83,6 +85,8 @@ class SearchWindow(QDialog):
         requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})
         self.choose_wordlist.addItem(name)
         Exerciser.Exerciser.array_of_created_wordlists.append(name)
+        self.create_new_wordlist_input.clear()
+        Windows.Windows.search_window.setFocus()
 
     def add_word_button_function(self):
         if Word.Word.current_word not in Exerciser.Exerciser.dict_of_added_words:
@@ -152,8 +156,6 @@ class SearchWindow(QDialog):
             self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
         else:
             self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
-        for wordlist in Exerciser.Exerciser.array_of_created_wordlists:
-            self.choose_wordlist.addItem(wordlist)
         self.show_the_interface()
         self.choose_wordlist.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.definitions_text.verticalScrollBar().setValue(0)

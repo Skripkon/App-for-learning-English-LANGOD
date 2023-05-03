@@ -126,9 +126,9 @@ background-color: rgb(3, 54, 22)</string>
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>280</y>
+     <y>340</y>
      <width>540</width>
-     <height>491</height>
+     <height>431</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -174,9 +174,9 @@ selection-color: rgb(46, 194, 126);
    <property name="geometry">
     <rect>
      <x>620</x>
-     <y>280</y>
+     <y>340</y>
      <width>540</width>
-     <height>491</height>
+     <height>431</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -245,7 +245,7 @@ font: 15pt;</string>
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>230</y>
+     <y>290</y>
      <width>150</width>
      <height>40</height>
     </rect>
@@ -261,8 +261,8 @@ font: 15pt;</string>
   <widget class="QLabel" name="usage_title">
    <property name="geometry">
     <rect>
-     <x>1080</x>
-     <y>220</y>
+     <x>630</x>
+     <y>290</y>
      <width>81</width>
      <height>40</height>
     </rect>
@@ -302,11 +302,10 @@ font: 15pt;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">font-size:15pt; 
 selection-background-color: rgb(0,179,60);
 combobox-popup: 0;
+color: rgb(255, 255, 255);
 </string>
    </property>
   </widget>
