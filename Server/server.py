@@ -3,7 +3,7 @@ import os
 import sqlite3
 import tornado
 from tornado import web
-
+import json
 import socket
 
 
@@ -48,25 +48,34 @@ class AddNewWordHandler(tornado.web.RequestHandler):
 
 
 class GetTheListOfAddedWordsHandler(tornado.web.RequestHandler):
-    words_str: str = ""
+    words_str: str = ''
 
     @classmethod
-    def get_the_list_of_added_words(cls, user_id: int):
-        user_id = int(user_id)
-        cls.words_str = ""
-        for i in range(1, 501):
-            current_word = 'word' + str(i)
-            sqlite_query = f'SELECT {current_word} FROM users_data WHERE id=?'
-            temp_word = DataBase.cursor_for_users_data.execute(sqlite_query,
-                                                               (user_id,)).fetchone()
-            if temp_word[0] is not None:
-                cls.words_str += temp_word[0]
-                cls.words_str += ' '
-            else:
-                break
+    def get_the_list_of_added_words(cls, user_id):
+        query = 'SELECT id_wordlist FROM words_in_wordlists WHERE id_wordlist LIKE \'' + user_id + '%\''
+        list_of_wordlists = DataBase.cursor_for_words_in_wordlists.execute(query).fetchall()
+        print(list_of_wordlists)
+        cls.words_str = ''
+        dict_of_wordlists = {}
+        for id_wordlists in list_of_wordlists:
+            id_wordlists = id_wordlists[0]
+            for i in range(1, 301):
+                current_word = 'word' + str(i)
+                sqlite_query = f'SELECT {current_word} FROM words_in_wordlists WHERE id_wordlist=?'
+                temp_word = DataBase.cursor_for_words_in_wordlists.execute(sqlite_query,
+                                                                           (id_wordlists,)).fetchone()
+                if temp_word[0] is not None:
+                    if temp_word[0] not in dict_of_wordlists:
+                        dict_of_wordlists[temp_word[0]] = [id_wordlists]
+                    else:
+                        dict_of_wordlists[temp_word[0]].append(id_wordlists)
+                else:
+                    break
+        cls.words_str = json.dumps(dict_of_wordlists)
+        print(cls.words_str)
 
     def get(self):
-        user_id: int = self.request.headers["UserId"]
+        user_id = self.request.headers["UserId"]
         self.get_the_list_of_added_words(user_id)
         self.write(self.words_str)
 
@@ -234,6 +243,17 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
         self.check_whether_data_bases_exist()
 
 
+# class DeleteWordHandler(tornado.web.RequestHandler):
+#     def delete_word_function(self, ):
+#         pass
+#         word = Word.Word.current_word
+#         last_word = DataBase.cursor_for_words_in_wordlists.execute('SELECT amount_of_words FROM words_in_wordlists WHERE ')
+#         query = f'UPDATE words_in_wordlists SET '
+#
+#     def get(self):
+#         self.delete_word_function()
+
+
 def make_app():
     return tornado.web.Application([
         (r"/SignUp", SignUpHandler),
@@ -243,12 +263,13 @@ def make_app():
         (r"/AddNewWord", AddNewWordHandler),
         (r"/AddNewWordlist", AddNewWordlistHandler),
         (r"/GetTheListOfAddedWordlists", GetTheListOfAddedWordlistsHandler),
+        (r"/DeleteWord", DeleteWordHandler)
     ])
 
 
 async def main():
     app = make_app()
-    app.listen(port=12346, address=ip_address)
+    app.listen(port=23904, address=ip_address)
     await asyncio.Event().wait()
 
 

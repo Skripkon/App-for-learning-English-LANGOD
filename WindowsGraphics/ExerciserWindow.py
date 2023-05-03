@@ -55,6 +55,6 @@ class ExerciserWindow(QDialog):
             ContextModeWindow.ContextModeWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.context_mode_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
-            Windows.Windows.context_mode_window.display_the_usage() # that's OK, I'm smarter
+            Windows.Windows.context_mode_window.display_the_usage()  # that's OK, I'm smarter
         Windows.Windows.context_mode_window.show()
         Windows.Windows.widget.setFocus()
