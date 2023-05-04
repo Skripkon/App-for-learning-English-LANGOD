@@ -140,6 +140,14 @@ class SignUpHandler(tornado.web.RequestHandler):
             DataBase.sqlite_connection_with_db_users_data.commit()
             DataBase.cursor_for_list_of_wordlists.execute("INSERT INTO list_of_wordlists DEFAULT VALUES")
             DataBase.sqlite_connection_with_db_list_of_wordlists.commit()
+            user_id = DataBase.cursor_for_registration_info.execute(
+                "SELECT id FROM registration_info WHERE login=? AND password=?", (new_login, new_password)).fetchone()[0]
+            wordlist = 'My words'
+            name: str = str(user_id) + '_' + wordlist
+            DataBase.cursor_for_words_in_wordlists.execute(
+                "INSERT INTO words_in_wordlists (id_wordlist) VALUES(?)", (name,))
+            DataBase.sqlite_connection_with_db_words_in_wordlists.commit()
+
         except sqlite3.Error:
             return "error"
         return "okay"
@@ -165,7 +173,7 @@ class GetTheListOfAddedWordlistsHandler(tornado.web.RequestHandler):
                                                                           (user_id,)).fetchone()
             if temp_wordlist[0] is not None:
                 cls.words_str += temp_wordlist[0]
-                cls.words_str += ' '
+                cls.words_str += ';'
             else:
                 break
 
@@ -201,9 +209,9 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
         global sqlite_create_table_query
         if name == "registration_info":
             sqlite_create_table_query = '''CREATE TABLE registration_info (
-                                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                login TEXT UNIQUE NOT NULL,
-                                password TEXT NOT NULL);'''
+                                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                    login TEXT UNIQUE NOT NULL,
+                                    password TEXT NOT NULL);'''
 
         elif name == "users_data":
             columns: str = ""
@@ -211,28 +219,28 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
                 columns += "word" + str(i) + ' TEXT, '
             columns += "word500 TEXT"
             sqlite_create_table_query = f'''CREATE TABLE users_data (
-                                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                                amount_of_words INTEGER NOT NULL DEFAULT 1,
-                                {columns});'''
+                                    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                                    amount_of_words INTEGER NOT NULL DEFAULT 1,
+                                    {columns});'''
         elif name == 'words_in_wordlists':
             columns: str = ""
             for i in range(1, 300):
                 columns += "word" + str(i) + ' TEXT, '
             columns += "word300 TEXT"
             sqlite_create_table_query = f'''CREATE TABLE words_in_wordlists (
-                                id_wordlist TEXT NOT NULL PRIMARY KEY,
-                                amount_of_words INTEGER NOT NULL DEFAULT 1,
-                                {columns});'''
+                                    id_wordlist TEXT NOT NULL PRIMARY KEY,
+                                    amount_of_words INTEGER NOT NULL DEFAULT 1,
+                                    {columns});'''
 
         elif name == 'list_of_wordlists':
-            columns: str = ""
-            for i in range(1, 100):
+            columns: str = "wordlist1 TEXT DEFAULT \'My words\', "
+            for i in range(2, 100):
                 columns += "wordlist" + str(i) + ' TEXT, '
             columns += "wordlist100 TEXT"
             sqlite_create_table_query = sqlite_create_table_query = f'''CREATE TABLE list_of_wordlists (
-                                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                                amount_of_wordlists INTEGER NOT NULL DEFAULT 1,
-                                {columns});'''
+                                    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                                    amount_of_wordlists INTEGER NOT NULL DEFAULT 2,
+                                    {columns});'''
         sqlite_connection = sqlite3.connect(f'Server/{name}.db')
         cursor = sqlite_connection.cursor()
         try:

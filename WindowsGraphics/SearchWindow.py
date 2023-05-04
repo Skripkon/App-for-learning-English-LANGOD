@@ -25,7 +25,7 @@ class SearchWindow(QDialog):
         self.add_word_button.setIconSize(QtCore.QSize(50, 50))
         Word.Word.create_folder_to_store_mp4_files()  # check whether necessary folder exists
         Windows.Windows.search_window = self
-        for wordlist in Exerciser.Exerciser.array_of_created_wordlists:
+        for wordlist in Exerciser.Exerciser.dict_of_added_words:
             self.choose_wordlist.addItem(wordlist)
         self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
 
@@ -78,21 +78,21 @@ class SearchWindow(QDialog):
 
     @classmethod
     def check_whether_wordlist_with_such_name_already_exists(cls, name: str) -> bool:
-        if name in Exerciser.Exerciser.array_of_created_wordlists:
+        if name in Exerciser.Exerciser.dict_of_added_words:
             return True
         else:
             return False
 
     def create_new_wordlist_button_function(self):
-        name: str = self.create_new_wordlist_input.text().lower().replace(" ", '')
+        name: str = self.create_new_wordlist_input.text()
         if self.check_whether_wordlist_with_such_name_already_exists(name):
             self.open_the_window("Error", f"Wordlist with name '{name}' already exists")
             return None
         url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWordlist"
         requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})
         self.choose_wordlist.addItem(name)
-        Exerciser.Exerciser.array_of_created_wordlists.append(name)
         self.create_new_wordlist_input.clear()
+        Exerciser.Exerciser.dict_of_added_words[name] = []
         Windows.Windows.search_window.setFocus()
 
     def add_word_button_function(self):
@@ -144,7 +144,7 @@ class SearchWindow(QDialog):
     def search_button_function(self):
         self.definitions_text.clear()
         self.usage_text.clear()
-        Word.Word.current_word = self.search_field.text().lower().replace(" ", '')
+        Word.Word.current_word = self.search_field.text().lower()
         if Word.Word.check_whether_the_word_is_valid() is False:
             self.hide_the_interface()
             self.nothing_found_error_line.show()
