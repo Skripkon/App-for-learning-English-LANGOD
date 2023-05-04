@@ -16,10 +16,7 @@ class ExerciserWindow(QDialog):
         self.flashcards_mode_button.clicked.connect(self.flashcards_mode_button_function)
         self.context_mode_button.clicked.connect(self.context_mode_window_button_function)
         Windows.Windows.exerciser_window = self
-        for wordlist in Exerciser.Exerciser.dict_of_added_words:
-            self.choose_wordlist.addItem(wordlist)
         self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
-
 
     def currentTextChangedFunction(self):
         new_wordlist: str = self.choose_wordlist.currentText()
@@ -62,7 +59,6 @@ class ExerciserWindow(QDialog):
     @staticmethod
     def context_mode_window_button_function():
         ContextModeWindow.ContextModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
-        print(ContextModeWindow.ContextModeWindow.words)
         Windows.Windows.exerciser_window.hide()
         if Windows.Windows.context_mode_window is None:
             ContextModeWindow.ContextModeWindow()
