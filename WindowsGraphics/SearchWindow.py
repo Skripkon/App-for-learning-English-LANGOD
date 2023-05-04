@@ -27,6 +27,10 @@ class SearchWindow(QDialog):
         Windows.Windows.search_window = self
         for wordlist in Exerciser.Exerciser.array_of_created_wordlists:
             self.choose_wordlist.addItem(wordlist)
+        self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
+
+    def currentTextChangedFunction(self):
+        pass
 
     def back_to_the_main_page_button_function(self):
         connection.IP.user_id = None
@@ -115,7 +119,6 @@ class SearchWindow(QDialog):
         self.add_word_button.hide()
         self.nothing_found_error_line.hide()
         self.choose_wordlist.hide()
-        self.add_button.hide()
         self.create_new_wordlist_input.hide()
         self.create_new_wordlist_button.hide()
 
@@ -130,7 +133,6 @@ class SearchWindow(QDialog):
         self.usage_title.show()
         self.add_word_button.show()
         self.choose_wordlist.show()
-        self.add_button.show()
         self.create_new_wordlist_input.show()
         self.create_new_wordlist_button.show()
 

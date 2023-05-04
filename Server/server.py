@@ -54,25 +54,28 @@ class GetTheListOfAddedWordsHandler(tornado.web.RequestHandler):
     def get_the_list_of_added_words(cls, user_id):
         query = 'SELECT id_wordlist FROM words_in_wordlists WHERE id_wordlist LIKE \'' + user_id + '%\''
         list_of_wordlists = DataBase.cursor_for_words_in_wordlists.execute(query).fetchall()
-        print(list_of_wordlists)
         cls.words_str = ''
         dict_of_wordlists = {}
         for id_wordlists in list_of_wordlists:
             id_wordlists = id_wordlists[0]
+            start_index: int = len(user_id) + 1
+            wordlist = id_wordlists[start_index::]
             for i in range(1, 301):
                 current_word = 'word' + str(i)
                 sqlite_query = f'SELECT {current_word} FROM words_in_wordlists WHERE id_wordlist=?'
                 temp_word = DataBase.cursor_for_words_in_wordlists.execute(sqlite_query,
                                                                            (id_wordlists,)).fetchone()
                 if temp_word[0] is not None:
-                    if temp_word[0] not in dict_of_wordlists:
-                        dict_of_wordlists[temp_word[0]] = [id_wordlists]
+                    if wordlist not in dict_of_wordlists:
+                        dict_of_wordlists[wordlist] = [temp_word[0]]
                     else:
-                        dict_of_wordlists[temp_word[0]].append(id_wordlists)
+                        dict_of_wordlists[wordlist].append(temp_word[0])
+                elif wordlist not in dict_of_wordlists:
+                    dict_of_wordlists[wordlist] = []
+                    break
                 else:
                     break
         cls.words_str = json.dumps(dict_of_wordlists)
-        print(cls.words_str)
 
     def get(self):
         user_id = self.request.headers["UserId"]
@@ -188,10 +191,8 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
         DataBase.cursor_for_registration_info = DataBase.sqlite_connection_with_db_registration_info.cursor()
         DataBase.sqlite_connection_with_db_users_data = sqlite3.connect('Server/users_data.db')
         DataBase.cursor_for_users_data = DataBase.sqlite_connection_with_db_users_data.cursor()
-
         DataBase.sqlite_connection_with_db_words_in_wordlists = sqlite3.connect('Server/words_in_wordlists.db')
         DataBase.cursor_for_words_in_wordlists = DataBase.sqlite_connection_with_db_words_in_wordlists.cursor()
-
         DataBase.sqlite_connection_with_db_list_of_wordlists = sqlite3.connect('Server/list_of_wordlists.db')
         DataBase.cursor_for_list_of_wordlists = DataBase.sqlite_connection_with_db_list_of_wordlists.cursor()
 
@@ -263,7 +264,7 @@ def make_app():
         (r"/AddNewWord", AddNewWordHandler),
         (r"/AddNewWordlist", AddNewWordlistHandler),
         (r"/GetTheListOfAddedWordlists", GetTheListOfAddedWordlistsHandler),
-        (r"/DeleteWord", DeleteWordHandler)
+        # (r"/DeleteWord", DeleteWordHandler)
     ])
 
 
