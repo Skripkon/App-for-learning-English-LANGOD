@@ -19,8 +19,7 @@ class ExerciserWindow(QDialog):
         for wordlist in Exerciser.Exerciser.dict_of_added_words:
             self.choose_wordlist.addItem(wordlist)
         self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
-        Exerciser.Exerciser.array_of_words_for_exercise = \
-            Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]
+
 
     def currentTextChangedFunction(self):
         new_wordlist: str = self.choose_wordlist.currentText()
@@ -38,7 +37,7 @@ class ExerciserWindow(QDialog):
 
     @staticmethod
     def revision_mode_button_function():
-        RevisionModeWindow.RevisionModeWindow.words = Exerciser.Exerciser.array_of_added_words.copy()
+        RevisionModeWindow.RevisionModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
         Windows.Windows.exerciser_window.hide()
         if Windows.Windows.revision_mode_window is None:
             RevisionModeWindow.RevisionModeWindow()
@@ -49,7 +48,7 @@ class ExerciserWindow(QDialog):
 
     @staticmethod
     def flashcards_mode_button_function():
-        FlashCardsModeWindow.FlashCardsModeWindow.words = Exerciser.Exerciser.array_of_added_words.copy()
+        FlashCardsModeWindow.FlashCardsModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
         Windows.Windows.exerciser_window.hide()
         if Windows.Windows.flashcards_mode_window is None:
             FlashCardsModeWindow.FlashCardsModeWindow()
@@ -62,7 +61,8 @@ class ExerciserWindow(QDialog):
 
     @staticmethod
     def context_mode_window_button_function():
-        ContextModeWindow.ContextModeWindow.words = Exerciser.Exerciser.array_of_added_words.copy()
+        ContextModeWindow.ContextModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
+        print(ContextModeWindow.ContextModeWindow.words)
         Windows.Windows.exerciser_window.hide()
         if Windows.Windows.context_mode_window is None:
             ContextModeWindow.ContextModeWindow()

@@ -61,12 +61,20 @@ class SearchWindow(QDialog):
         else:
             Windows.Windows.exerciser_window.choose_wordlist.clear()
             for item in Exerciser.Exerciser.dict_of_added_words.keys():
-                Windows.Windows.exerciser_window.choose_wordlist.addItem(item)
-        Windows.Windows.search_window.hide()
-        Windows.Windows.exerciser_window.show()
-        self.hide_the_interface()
-        self.clear_fields()
-        Windows.Windows.widget.setFocus()
+                if len(Exerciser.Exerciser.dict_of_added_words[item]) >= 6:
+                    Windows.Windows.exerciser_window.choose_wordlist.addItem(item)
+        if self.choose_wordlist.count() > 0:
+            Exerciser.Exerciser.array_of_words_for_exercise = \
+                     Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]
+            Windows.Windows.exerciser_window.show()
+            Windows.Windows.search_window.hide()
+            self.hide_the_interface()
+            self.clear_fields()
+            Windows.Windows.widget.setFocus()
+        else:
+            self.open_the_window("error", "to start exercising you have to have at least one wordlist with at least 6 words")
+
+
 
     def connect_interface_with_functions(self):
         self.back_to_the_main_page_button.clicked.connect(self.back_to_the_main_page_button_function)

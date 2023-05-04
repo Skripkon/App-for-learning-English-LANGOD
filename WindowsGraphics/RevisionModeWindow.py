@@ -76,6 +76,7 @@ class RevisionModeWindow(QDialog):
 
     @staticmethod
     def exit_button_function():
+        # Exerciser.Exerciser.array_of_words_for_exercise.clear()
         Windows.Windows.revision_mode_window.hide()
         Windows.Windows.exerciser_window.show()
         Windows.Windows.revision_mode_window.setFocus()
@@ -89,6 +90,7 @@ class RevisionModeWindow(QDialog):
         if self.index_of_the_current_word < 0:
             self.index_of_the_current_word = len(self.words) - 1
         self.clear_output()
+        print(self.index_of_the_current_word)
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.word_line.setText(Word.Word.current_word)
         Windows.Windows.revision_mode_window.setFocus()

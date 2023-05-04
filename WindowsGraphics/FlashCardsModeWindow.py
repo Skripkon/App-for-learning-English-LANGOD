@@ -29,6 +29,7 @@ class FlashCardsModeWindow(QDialog):
 
     @staticmethod
     def exit_button_function():
+        # Exerciser.Exerciser.array_of_words_for_exercise.clear()
         Windows.Windows.flashcards_mode_window.hide()
         Windows.Windows.exerciser_window.show()
         Windows.Windows.flashcards_mode_window.setFocus()
