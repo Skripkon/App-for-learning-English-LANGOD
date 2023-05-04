@@ -5,6 +5,7 @@ import connection
 
 class Exerciser:
     dict_of_added_words: dict = {}
+    array_of_words_for_exercise: list[str] = []
 
     def __init__(self):
         Exerciser.dict_of_added_words.clear()

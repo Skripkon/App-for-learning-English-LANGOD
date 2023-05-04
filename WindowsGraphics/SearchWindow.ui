@@ -85,9 +85,9 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="search_button">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>380</x>
      <y>40</y>
-     <width>211</width>
+     <width>251</width>
      <height>55</height>
     </rect>
    </property>
@@ -295,9 +295,9 @@ font: 15pt;</string>
   <widget class="QComboBox" name="choose_wordlist">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>290</x>
      <y>110</y>
-     <width>211</width>
+     <width>271</width>
      <height>51</height>
     </rect>
    </property>
@@ -311,9 +311,9 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLineEdit" name="create_new_wordlist_input">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>290</x>
      <y>170</y>
-     <width>211</width>
+     <width>271</width>
      <height>51</height>
     </rect>
    </property>

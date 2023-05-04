@@ -58,6 +58,10 @@ class SearchWindow(QDialog):
             ExerciserWindow.ExerciserWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.exerciser_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        else:
+            Windows.Windows.exerciser_window.choose_wordlist.clear()
+            for item in Exerciser.Exerciser.dict_of_added_words.keys():
+                Windows.Windows.exerciser_window.choose_wordlist.addItem(item)
         Windows.Windows.search_window.hide()
         Windows.Windows.exerciser_window.show()
         self.hide_the_interface()

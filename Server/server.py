@@ -276,9 +276,6 @@ class DeleteWordHandler(tornado.web.RequestHandler):
                                                                    f'WHERE id_wordlist=?', (id_wordlist,)).fetchone()[0]
 
 
-        print("wanr to delete:", delete_word_index)
-        print("the last word", temp_word)
-        print("wordlist:", id_wordlist)
         DataBase.cursor_for_words_in_wordlists.execute(f'UPDATE words_in_wordlists '
                                                        f'SET {delete_word_index}=?, '
                                                        f'amount_of_words = amount_of_words - 1, '

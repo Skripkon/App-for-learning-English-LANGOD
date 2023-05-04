@@ -20,8 +20,8 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="revision_mode_button">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>240</y>
+     <x>440</x>
+     <y>30</y>
      <width>300</width>
      <height>55</height>
     </rect>
@@ -40,8 +40,8 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="flashcards_mode_button">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>340</y>
+     <x>440</x>
+     <y>130</y>
      <width>300</width>
      <height>55</height>
     </rect>
@@ -60,8 +60,8 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="context_mode_button">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>440</y>
+     <x>440</x>
+     <y>230</y>
      <width>300</width>
      <height>55</height>
     </rect>
@@ -80,8 +80,8 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="back_to_the_search_button">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>40</y>
+     <x>440</x>
+     <y>710</y>
      <width>300</width>
      <height>55</height>
     </rect>
@@ -95,6 +95,42 @@ selection-background-color: rgb(255, 255, 255);
    </property>
    <property name="text">
     <string>Back to the search</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="choose_wordlist">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>410</y>
+     <width>300</width>
+     <height>55</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size:15pt; 
+selection-background-color: rgb(0,179,60);
+combobox-popup: 0;
+color: rgb(255, 255, 255);</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="info_text">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>310</y>
+     <width>481</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:19pt; 
+color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>choose which wordlist you prefer to learn</string>
    </property>
   </widget>
  </widget>

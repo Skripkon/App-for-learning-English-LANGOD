@@ -16,6 +16,19 @@ class ExerciserWindow(QDialog):
         self.flashcards_mode_button.clicked.connect(self.flashcards_mode_button_function)
         self.context_mode_button.clicked.connect(self.context_mode_window_button_function)
         Windows.Windows.exerciser_window = self
+        for wordlist in Exerciser.Exerciser.dict_of_added_words:
+            self.choose_wordlist.addItem(wordlist)
+        self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
+        Exerciser.Exerciser.array_of_words_for_exercise = \
+            Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]
+
+    def currentTextChangedFunction(self):
+        new_wordlist: str = self.choose_wordlist.currentText()
+        if new_wordlist == "":
+            return None
+        Exerciser.Exerciser.array_of_words_for_exercise = Exerciser.Exerciser.dict_of_added_words[new_wordlist]
+
+
 
     @staticmethod
     def back_to_the_search_button_function():
