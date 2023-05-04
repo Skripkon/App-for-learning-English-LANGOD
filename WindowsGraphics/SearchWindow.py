@@ -103,10 +103,20 @@ class SearchWindow(QDialog):
                                        'UserId': str(connection.IP.user_id),
                                        'Wordlist': wordlist})
             Exerciser.Exerciser.dict_of_added_words[wordlist].append(Word.Word.current_word)
+            self.add_word_button_released_function()
+        else:
+            word: str = self.search_field.text().lower()
+            url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/DeleteWord"
+            id_wordlist = str(connection.IP.user_id) + '_' + self.choose_wordlist.currentText()
+            requests.get(url, headers={'Word': word, "id_wordlist": id_wordlist})
+            self.add_word_button_released_function()
+            self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
+            Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()].remove(Word.Word.current_word)
         Windows.Windows.search_window.setFocus()
 
     def add_word_button_released_function(self):
-        self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
+        if Word.Word.current_word in Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]:
+            self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
 
     def hide_the_interface(self):
         self.pronunciation_US.hide()

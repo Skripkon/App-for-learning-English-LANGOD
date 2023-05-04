@@ -252,15 +252,44 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
         self.check_whether_data_bases_exist()
 
 
-# class DeleteWordHandler(tornado.web.RequestHandler):
-#     def delete_word_function(self, ):
-#         pass
-#         word = Word.Word.current_word
-#         last_word = DataBase.cursor_for_words_in_wordlists.execute('SELECT amount_of_words FROM words_in_wordlists WHERE ')
-#         query = f'UPDATE words_in_wordlists SET '
-#
-#     def get(self):
-#         self.delete_word_function()
+class DeleteWordHandler(tornado.web.RequestHandler):
+    def delete_word_function(self, word, id_wordlist):
+        index_of_removable_word = 1
+        while True:
+            now_word = "word" + str(index_of_removable_word)
+            cur_word = DataBase.cursor_for_words_in_wordlists.execute(f'SELECT {now_word}'
+                                                                      f' FROM words_in_wordlists '
+                                                                      f'WHERE id_wordlist=?', (id_wordlist,))
+            responce = cur_word.fetchone()
+            if responce[0] == word:
+                break
+            else:
+                index_of_removable_word += 1
+        delete_word_index = "word" + str(index_of_removable_word)
+        amount_or_words = DataBase.cursor_for_words_in_wordlists.execute('SELECT amount_of_words'
+                                                                         ' FROM words_in_wordlists '
+                                                                         'WHERE id_wordlist=?', (id_wordlist,)).fetchone()[0]
+        amount_or_words -= 1
+        temp_word = "word" + str(amount_or_words)
+        last_word = DataBase.cursor_for_words_in_wordlists.execute(f'SELECT {"word" + str(amount_or_words)} '
+                                                                   f'FROM words_in_wordlists '
+                                                                   f'WHERE id_wordlist=?', (id_wordlist,)).fetchone()[0]
+
+
+        print("wanr to delete:", delete_word_index)
+        print("the last word", temp_word)
+        print("wordlist:", id_wordlist)
+        DataBase.cursor_for_words_in_wordlists.execute(f'UPDATE words_in_wordlists '
+                                                       f'SET {delete_word_index}=?, '
+                                                       f'amount_of_words = amount_of_words - 1, '
+                                                       f'{temp_word}=NULL '
+                                                       f'WHERE id_wordlist=?', (last_word, id_wordlist))
+        DataBase.sqlite_connection_with_db_words_in_wordlists.commit()
+
+    def get(self):
+        word = self.request.headers["Word"]
+        id_wordlist = self.request.headers["id_wordlist"]
+        self.delete_word_function(word, id_wordlist)
 
 
 def make_app():
@@ -272,13 +301,13 @@ def make_app():
         (r"/AddNewWord", AddNewWordHandler),
         (r"/AddNewWordlist", AddNewWordlistHandler),
         (r"/GetTheListOfAddedWordlists", GetTheListOfAddedWordlistsHandler),
-        # (r"/DeleteWord", DeleteWordHandler)
+        (r"/DeleteWord", DeleteWordHandler)
     ])
 
 
 async def main():
     app = make_app()
-    app.listen(port=23904, address=ip_address)
+    app.listen(port=23905, address=ip_address)
     await asyncio.Event().wait()
 
 
