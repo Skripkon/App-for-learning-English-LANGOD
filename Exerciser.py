@@ -12,7 +12,7 @@ class Exerciser:
         Exerciser.dict_of_added_words.clear()
         url1: str = "http://" + connection.IP.ip + f":{connection.IP.port}/GetTheListOfAddedWords"
         response = requests.get(url1, headers={'UserId': str(connection.IP.user_id)})
-        self.dict_of_added_words = response.json()
+        Exerciser.dict_of_added_words = response.json()
         url2: str = "http://" + connection.IP.ip + f":{connection.IP.port}/GetTheListOfAddedWordlists"
         response = requests.get(url2, headers={'UserId': str(connection.IP.user_id)})
         Exerciser.array_of_created_wordlists = response.text.split()

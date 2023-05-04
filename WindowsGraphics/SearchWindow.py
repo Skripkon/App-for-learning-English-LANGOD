@@ -30,7 +30,10 @@ class SearchWindow(QDialog):
         self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
 
     def currentTextChangedFunction(self):
-        pass
+        if Word.Word.current_word in Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]:
+            self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
+        else:
+            self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
 
     def back_to_the_main_page_button_function(self):
         connection.IP.user_id = None
@@ -93,15 +96,13 @@ class SearchWindow(QDialog):
         Windows.Windows.search_window.setFocus()
 
     def add_word_button_function(self):
-        if Word.Word.current_word not in Exerciser.Exerciser.dict_of_added_words:
+        if Word.Word.current_word not in Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]:
             wordlist: str = self.choose_wordlist.currentText()
             url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWord"
-            response = requests.get(url, headers={'Word': Word.Word.current_word,
-                                                  'UserId': str(connection.IP.user_id),
-                                                  'Wordlist': wordlist})
-            # n = int(response.text)
-            Exerciser.Exerciser.dict_of_added_words[Word.Word.current_word] = wordlist
-            Exerciser.Exerciser.array_of_added_words.append(Word.Word.current_word)
+            requests.get(url, headers={'Word': Word.Word.current_word,
+                                       'UserId': str(connection.IP.user_id),
+                                       'Wordlist': wordlist})
+            Exerciser.Exerciser.dict_of_added_words[wordlist].append(Word.Word.current_word)
         Windows.Windows.search_window.setFocus()
 
     def add_word_button_released_function(self):
@@ -154,7 +155,7 @@ class SearchWindow(QDialog):
         output_of_definitions = Word.Word.get_the_meaning_of_a_word()
         self.definitions_text.append(output_of_definitions)
         self.usage_text.append(output_of_examples)
-        if Word.Word.current_word in Exerciser.Exerciser.dict_of_added_words:
+        if Word.Word.current_word in Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]:
             self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
         else:
             self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button.png"))
