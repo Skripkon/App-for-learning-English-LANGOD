@@ -90,7 +90,6 @@ class RevisionModeWindow(QDialog):
         if self.index_of_the_current_word < 0:
             self.index_of_the_current_word = len(self.words) - 1
         self.clear_output()
-        print(self.index_of_the_current_word)
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.word_line.setText(Word.Word.current_word)
         Windows.Windows.revision_mode_window.setFocus()

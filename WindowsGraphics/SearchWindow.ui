@@ -66,7 +66,7 @@ selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>Back to the main page</string>
+    <string>Main page</string>
    </property>
   </widget>
   <widget class="QPushButton" name="add_word_button">
@@ -204,7 +204,7 @@ selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>Go to the exerciser</string>
+    <string>Exerciser</string>
    </property>
   </widget>
   <widget class="QLabel" name="pronunciation_UK_text">
@@ -348,6 +348,26 @@ selection-background-color: rgb(255, 255, 255);
     <string>create</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="go_to_my_wordlists_button">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>180</y>
+     <width>270</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 0, 255);
+font-size:15pt; 
+color:rgb(243, 243, 243);
+selection-background-color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string>My wordlists</string>
+   </property>
+  </widget>
   <zorder>nothing_found_error_line</zorder>
   <zorder>pronunciation_UK</zorder>
   <zorder>back_to_the_main_page_button</zorder>
@@ -365,6 +385,7 @@ selection-background-color: rgb(255, 255, 255);
   <zorder>choose_wordlist</zorder>
   <zorder>create_new_wordlist_input</zorder>
   <zorder>create_new_wordlist_button</zorder>
+  <zorder>go_to_my_wordlists_button</zorder>
  </widget>
  <resources/>
  <connections/>

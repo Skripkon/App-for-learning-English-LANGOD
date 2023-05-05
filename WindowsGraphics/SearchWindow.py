@@ -8,7 +8,7 @@ from time import time
 import Exerciser
 import Word
 import connection
-from WindowsGraphics import Windows, ExerciserWindow
+from WindowsGraphics import Windows, ExerciserWindow, MyWordlistsWindow
 from PyQt5 import QtCore
 
 
@@ -27,7 +27,6 @@ class SearchWindow(QDialog):
         Windows.Windows.search_window = self
         for wordlist in Exerciser.Exerciser.dict_of_added_words:
             self.choose_wordlist.addItem(wordlist)
-        self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
 
     def currentTextChangedFunction(self):
         if Word.Word.current_word in Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]:
@@ -71,12 +70,11 @@ class SearchWindow(QDialog):
             Windows.Windows.exerciser_window.show()
             Windows.Windows.search_window.hide()
             self.hide_the_interface()
-            self.clear_fields()
         else:
             Windows.Windows.exerciser_window.hide()
             Windows.Windows.search_window.show()
-            self.open_the_window("error",
-                                 "to start exercising you have to have at least one wordlist with at least 6 words")
+            self.Windows.Windows("error",
+                                 "to start exercising you must have at least one wordlist with at least 6 words")
         Windows.Windows.widget.setFocus()
 
     def connect_interface_with_functions(self):
@@ -90,6 +88,21 @@ class SearchWindow(QDialog):
         self.add_word_button.clicked.connect(self.add_word_button_function)
         self.add_word_button.released.connect(self.add_word_button_released_function)
         self.create_new_wordlist_button.clicked.connect(self.create_new_wordlist_button_function)
+        self.go_to_my_wordlists_button.clicked.connect(self.go_to_my_wordlists_button_function)
+        self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
+
+    @staticmethod
+    def go_to_my_wordlists_button_function():
+        if Windows.Windows.my_wordlists_window is None:
+            MyWordlistsWindow.MyWordlistsWindow()
+            Windows.Windows.widget.addWidget(Windows.Windows.my_wordlists_window)
+            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        else:
+            Windows.Windows.my_wordlists_window.change_displayed_text\
+                (Windows.Windows.my_wordlists_window.choose_wordlist.currentText())
+        Windows.Windows.search_window.hide()
+        Windows.Windows.my_wordlists_window.show()
+        Windows.Windows.widget.setFocus()
 
     @classmethod
     def check_whether_wordlist_with_such_name_already_exists(cls, name: str) -> bool:
@@ -101,7 +114,7 @@ class SearchWindow(QDialog):
     def create_new_wordlist_button_function(self):
         name: str = self.create_new_wordlist_input.text()
         if self.check_whether_wordlist_with_such_name_already_exists(name):
-            self.open_the_window("Error", f"Wordlist with name '{name}' already exists")
+            Windows.Windows.open_the_window("Error", f"Wordlist with name '{name}' already exists")
             return None
         url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWordlist"
         requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})
@@ -193,15 +206,6 @@ class SearchWindow(QDialog):
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed
             self.search_button_function()
-
-    @classmethod
-    def open_the_window(cls, title_of_the_window: str, information: str):
-        msg_box = QtWidgets.QMessageBox()
-        msg_box.setText(information)
-        msg_box.setWindowTitle(title_of_the_window)
-        msg_box.setIcon(QtWidgets.QMessageBox.Information)
-        msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        msg_box.exec_()
 
     @staticmethod
     def time_required(f):

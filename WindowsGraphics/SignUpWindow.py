@@ -60,27 +60,16 @@ class SignUpWindow(QDialog):
             password = self.password.text()
             is_password_correct: str = self.correct_password_and_login(password, login_text)
             if is_password_correct != "NO ERROR":
-                self.open_the_window("Error", is_password_correct)
+                Windows.Windows.open_the_window("Error", is_password_correct)
                 return None
             URL: str = "http://" + connection.IP.ip + f":{connection.IP.port}/SignUp"
             response = requests.get(URL, headers={"Login":login_text, "Password":password})
             if response.text == "error":
-                self.open_the_window("Error", "User with this login already exists")
+                Windows.Windows.open_the_window("Error", "User with this login already exists")
                 return None
-            self.open_the_window("OK", "Have fun using our app!")
+            Windows.Windows.open_the_window("OK", "Have fun using our app!")
             Windows.Windows.sign_in_window.show()
             self.hide()
         else:
-            self.open_the_window("Error", "Passwords aren't the same")
-        Windows.Windows.sign_up_window.setFocus()
-
-    def open_the_window(self, title_of_the_window: str, information: str):
-        msg_box = QtWidgets.QMessageBox()
-        msg_box.setText(information)
-        msg_box.setWindowTitle(title_of_the_window)
-        msg_box.setIcon(QtWidgets.QMessageBox.Information)
-        msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        msg_box.exec_()
-        self.password.clear()
-        self.confirmpass.clear()
+            Windows.Windows.open_the_window("Error", "Passwords aren't the same")
         Windows.Windows.sign_up_window.setFocus()

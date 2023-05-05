@@ -41,7 +41,7 @@ class SignInWindow(QDialog):
             Windows.Windows.search_window.show()
             Windows.Windows.widget.setFocus()
         else:
-            self.open_the_window("ERROR", "Such user hasn't found")
+            Windows.Windows.open_the_window("ERROR", "Such user hasn't found")
         Windows.Windows.sign_in_window.setFocus()
 
     def sign_up_button_function(self):
@@ -54,12 +54,3 @@ class SignInWindow(QDialog):
         self.email.clear()
         self.password.clear()
         Windows.Windows.widget.setFocus()
-
-    @classmethod
-    def open_the_window(cls, title_of_the_window: str, information: str):
-        msg_box = QtWidgets.QMessageBox()
-        msg_box.setText(information)
-        msg_box.setWindowTitle(title_of_the_window)
-        msg_box.setIcon(QtWidgets.QMessageBox.Information)
-        msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        msg_box.exec_()
