@@ -42,7 +42,7 @@ selection-background-color: rgb(255, 255, 255);
     <rect>
      <x>40</x>
      <y>30</y>
-     <width>271</width>
+     <width>341</width>
      <height>50</height>
     </rect>
    </property>
@@ -103,9 +103,9 @@ color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="delete_word_button">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>400</x>
      <y>30</y>
-     <width>181</width>
+     <width>111</width>
      <height>50</height>
     </rect>
    </property>
@@ -117,7 +117,7 @@ selection-background-color: rgb(255, 255, 255);
 </string>
    </property>
    <property name="text">
-    <string>delete word</string>
+    <string>delete</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="word2_text">

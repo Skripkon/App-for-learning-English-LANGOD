@@ -21,7 +21,7 @@ def set_connection():
 if __name__ == "__main__":
     # first time you have to download this DataBase in order to use the App
     # download_data()
-    # set_connection()
+    set_connection()
     connection.IP.set_ip()
     app = QApplication(sys.argv)
     SignInWindow.SignInWindow()

@@ -94,7 +94,8 @@ class ContextModeWindow(QDialog):
 
         else:
             self.type_of_order = "straight"
-            self.words = Exerciser.Exerciser.array_of_added_words.copy()
+            wordlist: str = Windows.Windows.exerciser_window.choose_wordlist.currentText()
+            self.words = Exerciser.Exerciser.dict_of_added_words[wordlist].copy()
             Word.Word.current_word = self.words[-1]
             self.display_the_usage()
             self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
