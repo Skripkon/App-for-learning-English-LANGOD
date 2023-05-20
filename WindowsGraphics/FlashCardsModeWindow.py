@@ -33,9 +33,6 @@ class FlashCardsModeWindow(QDialog):
         Windows.Windows.flashcards_mode_window = self
         for i in range(1, 7):
             self.list_of_buttons.append("var" + str(i) + "_button")
-        # Word.Word.current_word = self.words[-1]
-        # self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
-        # self.index_of_the_current_word = len(self.words) - 1
         self.connect_interface_with_functions()
         self.type_of_order = "straight"
         self.word_label.setReadOnly(True)
