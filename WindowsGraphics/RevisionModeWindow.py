@@ -89,6 +89,9 @@ class RevisionModeWindow(QDialog):
     def next_button_function(self):
         self.index_of_the_current_word -= 1
         if self.index_of_the_current_word < 0:
+            Windows.Windows.open_the_window("A study completed!",
+                                            "You went over all of your words!\nCongratulations!\n"
+                                            "You might review your words one more time or try other mods!")
             self.index_of_the_current_word = len(self.words) - 1
         self.clear_output()
         Word.Word.current_word = self.words[self.index_of_the_current_word]

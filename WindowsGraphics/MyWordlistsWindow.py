@@ -17,6 +17,7 @@ class MyWordlistsWindow(QDialog):
         self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
         self.back_to_the_search_button.clicked.connect(self.back_to_the_search_button_function)
         self.delete_word_button.clicked.connect(self.delete_word_button_function)
+        self.change_privacy_button.clicked.connect(self.change_privacy_button_function)
         Windows.Windows.my_wordlists_window = self
         for wordlist in Exerciser.Exerciser.dict_of_added_words:
             self.choose_wordlist.addItem(wordlist)
@@ -24,6 +25,19 @@ class MyWordlistsWindow(QDialog):
         self.word2_text.setReadOnly(True)
         self.word3_text.setReadOnly(True)
         self.word4_text.setReadOnly(True)
+
+    def change_privacy_button_function(self):
+        wordlist = self.choose_wordlist.currentText()
+        if wordlist == "":
+            return None
+        new_privacy: str = "private" if \
+            Exerciser.Exerciser.privacy_settings_for_wordlists[wordlist] == "public" else "public"
+        self.change_privacy_button.setText(new_privacy)
+        Exerciser.Exerciser.privacy_settings_for_wordlists[wordlist] = new_privacy
+        id_wordlist: str = str(connection.IP.user_id) + "_" + wordlist
+        url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/ChangePrivacySettingsHandler"
+        requests.get(url, headers={'IdWordlist': id_wordlist, 'PrivacyType': new_privacy})
+        Windows.Windows.my_wordlists_window.setFocus()
 
     def delete_word_button_function(self):
         current_wordlist: str = self.choose_wordlist.currentText()
@@ -52,6 +66,10 @@ class MyWordlistsWindow(QDialog):
         self.word3_text.clear()
         self.word4_text.clear()
         index: int = 1
+        if Exerciser.Exerciser.privacy_settings_for_wordlists[wordlist] == "public":
+            self.change_privacy_button.setText("public")
+        elif Exerciser.Exerciser.privacy_settings_for_wordlists[wordlist] == "private":
+            self.change_privacy_button.setText("private")
         for word in Exerciser.Exerciser.dict_of_added_words[wordlist]:
             field: str = "word" + str(index) + "_text"
             getattr(self, field).append(word)

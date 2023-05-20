@@ -14,8 +14,6 @@ def get_ip_address():
 
 
 class DataBase:
-    sqlite_connection_with_db_users_data = None
-    cursor_for_users_data = None
     sqlite_connection_with_db_registration_info = None
     cursor_for_registration_info = None
     cursor_for_list_of_wordlists = None
@@ -48,34 +46,38 @@ class AddNewWordHandler(tornado.web.RequestHandler):
 
 
 class GetTheListOfAddedWordsHandler(tornado.web.RequestHandler):
-    words_str: str = ''
+    words_str: str = ""
+    privacy_types_str: str = ""
 
     @classmethod
     def get_the_list_of_added_words(cls, user_id):
-        query = 'SELECT id_wordlist FROM words_in_wordlists WHERE id_wordlist LIKE \'' + user_id + '%\''
+        query = 'SELECT id_wordlist, privacy FROM words_in_wordlists WHERE id_wordlist LIKE \'' + user_id + '%\''
         list_of_wordlists = DataBase.cursor_for_words_in_wordlists.execute(query).fetchall()
-        cls.words_str = ''
         dict_of_wordlists = {}
-        for id_wordlists in list_of_wordlists:
-            id_wordlists = id_wordlists[0]
+        dict_of_privacies = {}
+        for wordlist in list_of_wordlists:
+            name_of_wordlist_with_index = wordlist[0]
+            type_of_privacy: str = wordlist[1]
             start_index: int = len(user_id) + 1
-            wordlist = id_wordlists[start_index::]
+            name_of_wordlist = name_of_wordlist_with_index[start_index::]
             for i in range(1, 301):
                 current_word = 'word' + str(i)
                 sqlite_query = f'SELECT {current_word} FROM words_in_wordlists WHERE id_wordlist=?'
                 temp_word = DataBase.cursor_for_words_in_wordlists.execute(sqlite_query,
-                                                                           (id_wordlists,)).fetchone()
+                                                                           (name_of_wordlist_with_index,)).fetchone()
                 if temp_word[0] is not None:
-                    if wordlist not in dict_of_wordlists:
-                        dict_of_wordlists[wordlist] = [temp_word[0]]
+                    if name_of_wordlist not in dict_of_wordlists:
+                        dict_of_wordlists[name_of_wordlist] = [temp_word[0]]
+                        dict_of_privacies[name_of_wordlist] = type_of_privacy
                     else:
-                        dict_of_wordlists[wordlist].append(temp_word[0])
-                elif wordlist not in dict_of_wordlists:
-                    dict_of_wordlists[wordlist] = []
+                        dict_of_wordlists[name_of_wordlist].append(temp_word[0])
+                elif name_of_wordlist not in dict_of_wordlists:
+                    dict_of_wordlists[name_of_wordlist] = []
+                    dict_of_privacies[name_of_wordlist] = type_of_privacy
                     break
                 else:
                     break
-        cls.words_str = json.dumps(dict_of_wordlists)
+        cls.words_str = json.dumps([dict_of_wordlists, dict_of_privacies])
 
     def get(self):
         user_id = self.request.headers["UserId"]
@@ -136,12 +138,11 @@ class SignUpHandler(tornado.web.RequestHandler):
                 "INSERT INTO registration_info (login, password) VALUES(?, ?)",
                 (new_login, new_password))
             DataBase.sqlite_connection_with_db_registration_info.commit()
-            DataBase.cursor_for_users_data.execute("INSERT INTO users_data DEFAULT VALUES")
-            DataBase.sqlite_connection_with_db_users_data.commit()
             DataBase.cursor_for_list_of_wordlists.execute("INSERT INTO list_of_wordlists DEFAULT VALUES")
             DataBase.sqlite_connection_with_db_list_of_wordlists.commit()
             user_id = DataBase.cursor_for_registration_info.execute(
-                "SELECT id FROM registration_info WHERE login=? AND password=?", (new_login, new_password)).fetchone()[0]
+                "SELECT id FROM registration_info WHERE login=? AND password=?", (new_login, new_password)).fetchone()[
+                0]
             wordlist = 'My words'
             name: str = str(user_id) + '_' + wordlist
             DataBase.cursor_for_words_in_wordlists.execute(
@@ -189,16 +190,12 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
     def check_whether_data_bases_exist(cls):
         if not os.path.exists("Server/list_of_wordlists.db"):
             cls.create_data_base("list_of_wordlists")
-        if not os.path.exists("Server/users_data.db"):
-            cls.create_data_base("users_data")
         if not os.path.exists("Server/registration_info.db"):
             cls.create_data_base("registration_info")
         if not os.path.exists("Server/words_in_wordlists.db"):
             cls.create_data_base("words_in_wordlists")
         DataBase.sqlite_connection_with_db_registration_info = sqlite3.connect('Server/registration_info.db')
         DataBase.cursor_for_registration_info = DataBase.sqlite_connection_with_db_registration_info.cursor()
-        DataBase.sqlite_connection_with_db_users_data = sqlite3.connect('Server/users_data.db')
-        DataBase.cursor_for_users_data = DataBase.sqlite_connection_with_db_users_data.cursor()
         DataBase.sqlite_connection_with_db_words_in_wordlists = sqlite3.connect('Server/words_in_wordlists.db')
         DataBase.cursor_for_words_in_wordlists = DataBase.sqlite_connection_with_db_words_in_wordlists.cursor()
         DataBase.sqlite_connection_with_db_list_of_wordlists = sqlite3.connect('Server/list_of_wordlists.db')
@@ -212,16 +209,6 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
                                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                                     login TEXT UNIQUE NOT NULL,
                                     password TEXT NOT NULL);'''
-
-        elif name == "users_data":
-            columns: str = ""
-            for i in range(1, 500):
-                columns += "word" + str(i) + ' TEXT, '
-            columns += "word500 TEXT"
-            sqlite_create_table_query = f'''CREATE TABLE users_data (
-                                    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                                    amount_of_words INTEGER NOT NULL DEFAULT 1,
-                                    {columns});'''
         elif name == 'words_in_wordlists':
             columns: str = ""
             for i in range(1, 300):
@@ -229,9 +216,9 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
             columns += "word300 TEXT"
             sqlite_create_table_query = f'''CREATE TABLE words_in_wordlists (
                                     id_wordlist TEXT NOT NULL PRIMARY KEY,
+                                    privacy TEXT DEFAULT 'public',
                                     amount_of_words INTEGER NOT NULL DEFAULT 1,
                                     {columns});'''
-
         elif name == 'list_of_wordlists':
             columns: str = "wordlist1 TEXT DEFAULT \'My words\', "
             for i in range(2, 100):
@@ -252,6 +239,19 @@ class CreateDataBasesHandler(tornado.web.RequestHandler):
         self.check_whether_data_bases_exist()
 
 
+class ChangePrivacySettingsHandler(tornado.web.RequestHandler):
+
+    @staticmethod
+    def change_privacy_settings(privacy_type: str, id_wordlist: str):
+        sqlite_change_privacy_query = f"UPDATE words_in_wordlists SET privacy=? WHERE id_wordlist=?"
+        DataBase.cursor_for_words_in_wordlists.execute(sqlite_change_privacy_query, (privacy_type, id_wordlist))
+
+    def get(self):
+        privacy_type: str = self.request.headers["PrivacyType"]
+        id_wordlist: str = self.request.headers["IdWordlist"]
+        self.change_privacy_settings(privacy_type=privacy_type, id_wordlist=id_wordlist)
+
+
 class DeleteWordHandler(tornado.web.RequestHandler):
     def delete_word_function(self, word, id_wordlist):
         index_of_removable_word = 1
@@ -268,13 +268,13 @@ class DeleteWordHandler(tornado.web.RequestHandler):
         delete_word_index = "word" + str(index_of_removable_word)
         amount_or_words = DataBase.cursor_for_words_in_wordlists.execute('SELECT amount_of_words'
                                                                          ' FROM words_in_wordlists '
-                                                                         'WHERE id_wordlist=?', (id_wordlist,)).fetchone()[0]
+                                                                         'WHERE id_wordlist=?',
+                                                                         (id_wordlist,)).fetchone()[0]
         amount_or_words -= 1
         temp_word = "word" + str(amount_or_words)
         last_word = DataBase.cursor_for_words_in_wordlists.execute(f'SELECT {"word" + str(amount_or_words)} '
                                                                    f'FROM words_in_wordlists '
                                                                    f'WHERE id_wordlist=?', (id_wordlist,)).fetchone()[0]
-
 
         DataBase.cursor_for_words_in_wordlists.execute(f'UPDATE words_in_wordlists '
                                                        f'SET {delete_word_index}=?, '
@@ -298,7 +298,8 @@ def make_app():
         (r"/AddNewWord", AddNewWordHandler),
         (r"/AddNewWordlist", AddNewWordlistHandler),
         (r"/GetTheListOfAddedWordlists", GetTheListOfAddedWordlistsHandler),
-        (r"/DeleteWord", DeleteWordHandler)
+        (r"/DeleteWord", DeleteWordHandler),
+        (r"/ChangePrivacySettings", ChangePrivacySettingsHandler)
     ])
 
 

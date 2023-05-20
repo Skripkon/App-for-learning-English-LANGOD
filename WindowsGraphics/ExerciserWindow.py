@@ -24,8 +24,6 @@ class ExerciserWindow(QDialog):
             return None
         Exerciser.Exerciser.array_of_words_for_exercise = Exerciser.Exerciser.dict_of_added_words[new_wordlist]
 
-
-
     @staticmethod
     def back_to_the_search_button_function():
         Windows.Windows.exerciser_window.hide()

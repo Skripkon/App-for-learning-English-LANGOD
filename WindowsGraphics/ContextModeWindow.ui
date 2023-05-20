@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 36, 0);
+   <string notr="true">background-color: rgb(32, 71, 105);
 border-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QPushButton" name="submit_button">
@@ -27,11 +27,15 @@ border-color: rgb(255, 255, 255);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>Submit</string>
@@ -47,12 +51,15 @@ selection-background-color: rgb(255, 255, 255);
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>exit</string>
@@ -68,12 +75,15 @@ selection-background-color: rgb(255, 255, 255);
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>answer</string>
@@ -89,10 +99,15 @@ selection-background-color: rgb(255, 255, 255);
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
-selection-background-color: rgb(255, 255, 255);</string>
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>hint</string>
@@ -108,11 +123,16 @@ selection-background-color: rgb(255, 255, 255);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(255, 255, 255);
-font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(200, 211, 223);
+font: 19pt &quot;Yrsa&quot;;
+color:black;
 selection-background-color: rgb(255, 255, 255);
-selection-color: rgb(46, 194, 126);
-background-color: rgb(3, 54, 22)</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;
+selection-color: rgb(101, 145, 232);</string>
    </property>
    <property name="text">
     <string/>
@@ -131,12 +151,15 @@ background-color: rgb(3, 54, 22)</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>next</string>
@@ -147,13 +170,13 @@ selection-background-color: rgb(255, 255, 255);
     <rect>
      <x>410</x>
      <y>630</y>
-     <width>41</width>
+     <width>51</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);
-font: 15pt;</string>
+font: 19pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
     <string>UK</string>
@@ -164,13 +187,13 @@ font: 15pt;</string>
     <rect>
      <x>300</x>
      <y>630</y>
-     <width>31</width>
+     <width>41</width>
      <height>31</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);
-font: 15pt;</string>
+font: 19pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
     <string>US</string>
@@ -249,12 +272,15 @@ font: 15pt;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>shuffle</string>
@@ -270,11 +296,16 @@ selection-background-color: rgb(255, 255, 255);
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(255, 255, 255);
-font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(200, 211, 223);
+font: 17pt &quot;Yrsa&quot;;
+color:black;
 selection-background-color: rgb(255, 255, 255);
-selection-color: rgb(46, 194, 126);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;
+selection-color: rgb(101, 145, 232);</string>
    </property>
   </widget>
   <widget class="QLabel" name="wrong_answer_line">
@@ -287,8 +318,8 @@ selection-color: rgb(46, 194, 126);
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(224, 27, 36);
-font: 15pt;</string>
+    <string notr="true">color: rgb(255, 255, 255);
+font: 21pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
     <string>Wrong answer</string>

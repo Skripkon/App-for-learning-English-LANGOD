@@ -11,6 +11,19 @@ import time
 class ContextModeWindow(QDialog):
     words: list[str] = []
     current_hint_index = 1
+    style_sheet_for_input_field: str = 'font: 19pt "Yrsa";' \
+                                       'color:black;' \
+                                       'selection-background-color:' \
+                                       'rgb(255, 255, 255);' \
+                                       'border-style: outset;' \
+                                       'border-width: 1px;' \
+                                       'border-radius: 15px;' \
+                                       'border-color: black;' \
+                                       'padding: 4px;' \
+                                       'selection-color: rgb(101, 145, 232);'
+    style_sheet_after_correct_answer = 'background-color:rgb(205, 247, 190);' + style_sheet_for_input_field
+    style_sheet_by_default = 'background-color:rgb(200, 211, 223);' + style_sheet_for_input_field
+    style_sheet_after_wrong_answer = 'background-color:rgb(255, 192, 192);' + style_sheet_for_input_field
 
     def __init__(self):
         super(ContextModeWindow, self).__init__()
@@ -40,21 +53,35 @@ class ContextModeWindow(QDialog):
         answer: str = self.input_text.text()
         if answer == Word.Word.current_word:
             self.wrong_answer_line.hide()
-            self.input_text.setStyleSheet('QLineEdit '
-                                          '{selection-background-color: rgb(255, 255, 255);'
-                                          'font-size:15pt;'
-                                          'background-color: #008000}')
+            self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
         else:
             self.wrong_answer_line.show()
-            self.input_text.setStyleSheet('QLineEdit '
-                                          '{selection-background-color: rgb(255, 255, 255);'
-                                          'font-size:15pt;'
-                                          'color: rgb(255, 255, 255)}')
+            self.input_text.setStyleSheet(self.style_sheet_after_wrong_answer)
         Windows.Windows.context_mode_window.setFocus()
 
     def hint_button_function(self):
+        if self.input_text.text() == Word.Word.current_word:
+            return None
         self.wrong_answer_line.hide()
-        self.input_text.setText(Word.Word.current_word[0:self.current_hint_index])
+        self.input_text.setStyleSheet(self.style_sheet_by_default)
+        if self.current_hint_index == 0:
+            self.input_text.setText(Word.Word.current_word[0:self.current_hint_index])
+        else:
+            if len(self.input_text.text()) < len(Word.Word.current_word):
+                IsPrefixTheSame: bool = True
+                for i in range(0, len(self.input_text.text())):
+                    if self.input_text.text()[i] != Word.Word.current_word[i]:
+                        IsPrefixTheSame = False
+                        break
+                if IsPrefixTheSame is True:
+                    self.current_hint_index = len(self.input_text.text())
+                    self.input_text.setText(Word.Word.current_word[0:self.current_hint_index + 1])
+                else:
+                    self.current_hint_index = 0
+                    self.input_text.setText(Word.Word.current_word[0])
+            else:
+                self.current_hint_index = 0
+                self.input_text.setText(Word.Word.current_word[0])
         self.current_hint_index += 1
         Windows.Windows.context_mode_window.setFocus()
 
@@ -62,6 +89,7 @@ class ContextModeWindow(QDialog):
         self.wrong_answer_line.hide()
         self.input_text.setText(Word.Word.current_word)
         self.current_hint_index = len(Word.Word.current_word)
+        self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
         Windows.Windows.context_mode_window.setFocus()
 
     @staticmethod
@@ -115,15 +143,15 @@ class ContextModeWindow(QDialog):
     def next_button_function(self):
         self.index_of_the_current_word -= 1
         if self.index_of_the_current_word < 0:
+            Windows.Windows.open_the_window("A study completed!",
+                                            "You went over all of your words!\nCongratulations!\n"
+                                            "You might review your words one more time or try other mods!")
             self.index_of_the_current_word = len(self.words) - 1
         self.clear_output()
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.display_the_usage()
         self.wrong_answer_line.hide()
-        self.input_text.setStyleSheet('QLineEdit '
-                                      '{selection-background-color: rgb(255, 255, 255);'
-                                      'font-size:15pt;'
-                                      'color: rgb(255, 255, 255)}')
+        self.input_text.setStyleSheet(self.style_sheet_by_default)
         Windows.Windows.context_mode_window.setFocus()
         self.current_hint_index = 1
 
@@ -131,4 +159,3 @@ class ContextModeWindow(QDialog):
         if event.nativeScanCode() == 36:  # button Enter pressed
             self.submit_button_function()
         Windows.Windows.context_mode_window.setFocus()
-

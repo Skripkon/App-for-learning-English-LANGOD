@@ -66,15 +66,15 @@ class SearchWindow(QDialog):
                 isComboBoxEmpty = False
         if not isComboBoxEmpty:
             Exerciser.Exerciser.array_of_words_for_exercise = \
-                Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]
+                Exerciser.Exerciser.dict_of_added_words[Windows.Windows.exerciser_window.choose_wordlist.currentText()]
             Windows.Windows.exerciser_window.show()
             Windows.Windows.search_window.hide()
             self.hide_the_interface()
         else:
             Windows.Windows.exerciser_window.hide()
             Windows.Windows.search_window.show()
-            self.Windows.Windows("error",
-                                 "to start exercising you must have at least one wordlist with at least 6 words")
+            Windows.Windows.open_the_window("error",
+                                            "to start exercising you must have at least one wordlist with at least 6 words")
         Windows.Windows.widget.setFocus()
 
     def connect_interface_with_functions(self):
@@ -98,7 +98,7 @@ class SearchWindow(QDialog):
             Windows.Windows.widget.addWidget(Windows.Windows.my_wordlists_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
         else:
-            Windows.Windows.my_wordlists_window.change_displayed_text\
+            Windows.Windows.my_wordlists_window.change_displayed_text \
                 (Windows.Windows.my_wordlists_window.choose_wordlist.currentText())
         Windows.Windows.search_window.hide()
         Windows.Windows.my_wordlists_window.show()
@@ -121,6 +121,7 @@ class SearchWindow(QDialog):
         self.choose_wordlist.addItem(name)
         self.create_new_wordlist_input.clear()
         Exerciser.Exerciser.dict_of_added_words[name] = []
+        Exerciser.Exerciser.privacy_settings_for_wordlists[name] = ["public"]
         Windows.Windows.search_window.setFocus()
 
     def add_word_button_function(self):

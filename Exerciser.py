@@ -6,12 +6,14 @@ import connection
 class Exerciser:
     dict_of_added_words: dict = {}
     array_of_words_for_exercise: list[str] = []
+    privacy_settings_for_wordlists: dict = {}
 
     def __init__(self):
         Exerciser.dict_of_added_words.clear()
         url1: str = "http://" + connection.IP.ip + f":{connection.IP.port}/GetTheListOfAddedWords"
         response = requests.get(url1, headers={'UserId': str(connection.IP.user_id)})
-        Exerciser.dict_of_added_words = response.json()
+        Exerciser.dict_of_added_words = response.json()[0]
+        Exerciser.privacy_settings_for_wordlists = response.json()[1]
 
     # random shuffle algorithm
     @staticmethod

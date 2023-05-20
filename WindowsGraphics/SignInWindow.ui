@@ -14,7 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 36, 0);
+   <string notr="true">background-color: rgb(32, 71, 105);
 border-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QLabel" name="label">
@@ -27,7 +27,8 @@ border-color: rgb(255, 255, 255);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(225, 225, 225); font-size:28pt;</string>
+    <string notr="true">color:rgb(225, 225, 225); 
+font: 35pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
     <string>Welcome to laNGod</string>
@@ -46,9 +47,16 @@ border-color: rgb(255, 255, 255);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(200, 211, 223);
+font: 19pt &quot;Yrsa&quot;;
+color:black;
 selection-background-color: rgb(255, 255, 255);
-background-color: rgb(3, 54, 22)</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;
+selection-color: rgb(101, 145, 232);</string>
    </property>
    <property name="placeholderText">
     <string/>
@@ -67,9 +75,16 @@ background-color: rgb(3, 54, 22)</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(200, 211, 223);
+font: 19pt &quot;Yrsa&quot;;
+color:black;
 selection-background-color: rgb(255, 255, 255);
-background-color: rgb(3, 54, 22)</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;
+selection-color: rgb(101, 145, 232);</string>
    </property>
    <property name="text">
     <string/>
@@ -85,9 +100,8 @@ background-color: rgb(3, 54, 22)</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:18pt;
-color: rgb(143, 240, 164);
-border-color: rgb(255, 255, 255);</string>
+    <string notr="true">color:rgb(225, 225, 225); 
+font: 25pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
     <string>Password</string>
@@ -103,11 +117,15 @@ border-color: rgb(255, 255, 255);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>Login</string>
@@ -116,15 +134,15 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>450</x>
+     <x>410</x>
      <y>630</y>
-     <width>300</width>
+     <width>391</width>
      <height>55</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:16pt; color:rgb(243, 243, 243);</string>
+    <string notr="true">color:rgb(225, 225, 225); 
+font: 25pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
     <string>Don't have an account?</string>
@@ -149,11 +167,15 @@ font-size:16pt; color:rgb(243, 243, 243);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>Create Account</string>
@@ -169,9 +191,8 @@ selection-background-color: rgb(255, 255, 255);
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size:18pt; 
-color: rgb(143, 240, 164);
-border-color: rgb(255, 255, 255);</string>
+    <string notr="true">color:rgb(225, 225, 225); 
+font: 25pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
     <string>Login</string>

@@ -14,25 +14,28 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0, 36, 0);
+   <string notr="true">background-color: rgb(32, 71, 105);
 border-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QPushButton" name="var2_button">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>310</y>
+     <x>75</x>
+     <y>330</y>
      <width>250</width>
      <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -41,18 +44,22 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var6_button">
    <property name="geometry">
     <rect>
-     <x>355</x>
-     <y>310</y>
+     <x>350</x>
+     <y>330</y>
      <width>250</width>
      <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -61,19 +68,22 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var5_button">
    <property name="geometry">
     <rect>
-     <x>630</x>
-     <y>310</y>
+     <x>625</x>
+     <y>330</y>
      <width>250</width>
      <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -82,18 +92,22 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var3_button">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>460</y>
+     <x>75</x>
+     <y>480</y>
      <width>250</width>
      <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -102,18 +116,22 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var1_button">
    <property name="geometry">
     <rect>
-     <x>355</x>
-     <y>460</y>
+     <x>350</x>
+     <y>480</y>
      <width>250</width>
      <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -122,18 +140,22 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="var4_button">
    <property name="geometry">
     <rect>
-     <x>630</x>
-     <y>460</y>
+     <x>625</x>
+     <y>480</y>
      <width>250</width>
      <height>120</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>PushButton</string>
@@ -149,11 +171,15 @@ selection-background-color: rgb(255, 255, 255);
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>shuffle</string>
@@ -169,11 +195,15 @@ selection-background-color: rgb(255, 255, 255);
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>exit</string>
@@ -182,18 +212,22 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="next_button">
    <property name="geometry">
     <rect>
-     <x>945</x>
-     <y>140</y>
+     <x>920</x>
+     <y>170</y>
      <width>151</width>
      <height>71</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>next</string>
@@ -202,18 +236,22 @@ selection-background-color: rgb(255, 255, 255);
   <widget class="QPushButton" name="right_answer_button">
    <property name="geometry">
     <rect>
-     <x>945</x>
-     <y>40</y>
+     <x>920</x>
+     <y>70</y>
      <width>151</width>
      <height>71</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(255, 0, 255);
-font-size:15pt; 
-color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
 selection-background-color: rgb(255, 255, 255);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
    </property>
    <property name="text">
     <string>answer</string>
@@ -225,15 +263,20 @@ selection-background-color: rgb(255, 255, 255);
      <x>80</x>
      <y>40</y>
      <width>800</width>
-     <height>200</height>
+     <height>251</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-color: rgb(255, 255, 255);
-font-size:14pt; color:rgb(243, 243, 243);
+    <string notr="true">background-color:rgb(200, 211, 223);
+font: 17pt &quot;Yrsa&quot;;
+color:black;
 selection-background-color: rgb(255, 255, 255);
-selection-color: rgb(46, 194, 126);
-</string>
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;
+selection-color: rgb(101, 145, 232);</string>
    </property>
   </widget>
  </widget>
