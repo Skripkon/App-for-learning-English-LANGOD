@@ -9,6 +9,7 @@ from WindowsGraphics import Windows
 
 class RevisionModeWindow(QDialog):
     words: list[str] = []
+    index_of_the_current_word: int
 
     def __init__(self):
         super(RevisionModeWindow, self).__init__()
@@ -16,13 +17,16 @@ class RevisionModeWindow(QDialog):
         Windows.Windows.revision_mode_window = self
         self.pronunciation_US.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.pronunciation_UK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
+        self.hide_definitions_and_usage()
         self.definitions_text.setReadOnly(True)
         self.examples_text.setReadOnly(True)
+        self.connect_interface_with_functions()
+        self.type_of_order = "straight"
+
+    def init_first_word(self):
         self.word_line.setText(self.words[-1])
         Word.Word.current_word = self.words[-1]
-        self.connect_interface_with_functions()
         self.index_of_the_current_word = len(self.words) - 1
-        self.type_of_order = "straight"
 
     def connect_interface_with_functions(self):
         self.pronunciation_US.clicked.connect(self.play_sound_with_us_accent)
@@ -43,6 +47,7 @@ class RevisionModeWindow(QDialog):
 
     def show_definitions_button_function(self):
         self.definitions_text.clear()
+        self.definitions_text.show()
         output_of_definitions = Word.Word.get_the_meaning_of_a_word()
         self.definitions_text.append(output_of_definitions)
         self.definitions_text.verticalScrollBar().setValue(0)
@@ -50,6 +55,7 @@ class RevisionModeWindow(QDialog):
 
     def show_examples_button_function(self):
         self.examples_text.clear()
+        self.examples_text.show()
         output_of_examples = Word.Word.get_the_usage_of_a_word()
         self.examples_text.append(output_of_examples)
         self.examples_text.verticalScrollBar().setValue(0)
@@ -89,14 +95,21 @@ class RevisionModeWindow(QDialog):
     def next_button_function(self):
         self.index_of_the_current_word -= 1
         if self.index_of_the_current_word < 0:
-            Windows.Windows.open_the_window("A study completed!",
-                                            "You went over all of your words!\nCongratulations!\n"
-                                            "You might review your words one more time or try other mods!")
-            self.index_of_the_current_word = len(self.words) - 1
+            action: str = Windows.Windows.open_window_after_all_words_reviewed()
+            if action == "break":
+                self.exit_button_function()
+                return None
+            else:
+                self.index_of_the_current_word = len(self.words) - 1
         self.clear_output()
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.word_line.setText(Word.Word.current_word)
+        self.hide_definitions_and_usage()
         Windows.Windows.revision_mode_window.setFocus()
+
+    def hide_definitions_and_usage(self):
+        self.examples_text.hide()
+        self.definitions_text.hide()
 
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 9:  # button ESC pressed

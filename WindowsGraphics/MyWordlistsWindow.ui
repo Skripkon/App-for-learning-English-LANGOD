@@ -17,13 +17,78 @@
    <string notr="true">background-color: rgb(32, 71, 105);
 border-color: rgb(255, 255, 255);</string>
   </property>
+  <widget class="QPushButton" name="delete_word_button">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>40</y>
+     <width>111</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
+   </property>
+   <property name="text">
+    <string>delete</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="change_privacy_button">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>690</y>
+     <width>171</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgb(30, 85, 138);
+font: 21pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;</string>
+   </property>
+   <property name="text">
+    <string>public</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="privacy_line">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>690</y>
+     <width>131</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 24pt &quot;Yrsa&quot;;</string>
+   </property>
+   <property name="text">
+    <string>privacy:</string>
+   </property>
+  </widget>
   <widget class="QPushButton" name="back_to_the_search_button">
    <property name="geometry">
     <rect>
-     <x>890</x>
+     <x>900</x>
      <y>40</y>
      <width>271</width>
-     <height>60</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -41,13 +106,42 @@ padding: 4px;</string>
     <string>Back to the search</string>
    </property>
   </widget>
+  <widget class="QTextEdit" name="words_text">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>130</y>
+     <width>341</width>
+     <height>531</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgb(200, 211, 223);
+font: 21pt &quot;Yrsa&quot;;
+color:black;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;
+selection-color: rgb(101, 145, 232);</string>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yrsa'; font-size:21pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu'; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
   <widget class="QLineEdit" name="delete_word_input">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>30</y>
-     <width>341</width>
-     <height>50</height>
+     <x>460</x>
+     <y>40</y>
+     <width>251</width>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -69,40 +163,11 @@ selection-color: rgb(101, 145, 232);</string>
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QTextEdit" name="word1_text">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>190</y>
-     <width>271</width>
-     <height>571</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgb(200, 211, 223);
-font: 19pt &quot;Yrsa&quot;;
-color:black;
-selection-background-color: rgb(255, 255, 255);
-border-style: outset;
-border-width: 1px;
-border-radius: 15px;
-border-color: black;
-padding: 4px;
-selection-color: rgb(101, 145, 232);</string>
-   </property>
-   <property name="html">
-    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yrsa'; font-size:19pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu'; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
   <widget class="QComboBox" name="choose_wordlist">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>110</y>
+     <x>50</x>
+     <y>40</y>
      <width>341</width>
      <height>51</height>
     </rect>
@@ -121,148 +186,13 @@ combobox-popup: 0;
 </string>
    </property>
   </widget>
-  <widget class="QPushButton" name="delete_word_button">
+  <widget class="QLabel" name="info1">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>30</y>
-     <width>111</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
-font: 19pt &quot;Yrsa&quot;;
-color:white;
-selection-background-color: rgb(255, 255, 255);
-border-style: outset;
-border-width: 1px;
-border-radius: 15px;
-border-color: black;
-padding: 4px;</string>
-   </property>
-   <property name="text">
-    <string>delete</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="word2_text">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>190</y>
-     <width>271</width>
-     <height>571</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgb(200, 211, 223);
-font: 19pt &quot;Yrsa&quot;;
-color:black;
-selection-background-color: rgb(255, 255, 255);
-border-style: outset;
-border-width: 1px;
-border-radius: 15px;
-border-color: black;
-padding: 4px;
-selection-color: rgb(101, 145, 232);</string>
-   </property>
-   <property name="html">
-    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yrsa'; font-size:19pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu'; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="word3_text">
-   <property name="geometry">
-    <rect>
-     <x>620</x>
-     <y>190</y>
-     <width>271</width>
-     <height>571</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgb(200, 211, 223);
-font: 19pt &quot;Yrsa&quot;;
-color:black;
-selection-background-color: rgb(255, 255, 255);
-border-style: outset;
-border-width: 1px;
-border-radius: 15px;
-border-color: black;
-padding: 4px;
-selection-color: rgb(101, 145, 232);</string>
-   </property>
-   <property name="html">
-    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yrsa'; font-size:19pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu'; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="word4_text">
-   <property name="geometry">
-    <rect>
-     <x>910</x>
-     <y>190</y>
-     <width>271</width>
-     <height>571</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgb(200, 211, 223);
-font: 19pt &quot;Yrsa&quot;;
-color:black;
-selection-background-color: rgb(255, 255, 255);
-border-style: outset;
-border-width: 1px;
-border-radius: 15px;
-border-color: black;
-padding: 4px;
-selection-color: rgb(101, 145, 232);</string>
-   </property>
-   <property name="html">
-    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Yrsa'; font-size:19pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu'; font-size:14pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="change_privacy_button">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>110</y>
-     <width>151</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
-font: 19pt &quot;Yrsa&quot;;
-color:white;
-selection-background-color: rgb(255, 255, 255);
-border-style: outset;
-border-width: 1px;
-border-radius: 15px;
-border-color: black;
-padding: 4px;</string>
-   </property>
-   <property name="text">
-    <string>public</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="privacy_line">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>110</y>
-     <width>101</width>
-     <height>51</height>
+     <x>460</x>
+     <y>130</y>
+     <width>641</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -270,7 +200,8 @@ padding: 4px;</string>
 font: 19pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
-    <string>privacy:</string>
+    <string>Write a word from the chosen wordlist and click
+'delete' if you want to remove it from your wordlist</string>
    </property>
   </widget>
  </widget>

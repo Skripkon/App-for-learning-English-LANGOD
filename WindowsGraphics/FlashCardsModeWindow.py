@@ -11,6 +11,7 @@ from functools import partial
 
 class FlashCardsModeWindow(QDialog):
     words: list[str] = []
+    index_of_the_current_word: int
     list_of_buttons: list[str] = []
     style_sheet_for_option: str = "selection-background-color: rgb(255, 255, 255);" \
                                   "border-style: outset;" \
@@ -32,13 +33,19 @@ class FlashCardsModeWindow(QDialog):
         Windows.Windows.flashcards_mode_window = self
         for i in range(1, 7):
             self.list_of_buttons.append("var" + str(i) + "_button")
+        # Word.Word.current_word = self.words[-1]
+        # self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
+        # self.index_of_the_current_word = len(self.words) - 1
+        self.connect_interface_with_functions()
+        self.type_of_order = "straight"
+        self.word_label.setReadOnly(True)
+
+    def init_first_word(self):
         Word.Word.current_word = self.words[-1]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
         self.index_of_the_current_word = len(self.words) - 1
-        self.connect_interface_with_functions()
         self.set_variants_function()
-        self.type_of_order = "straight"
-        self.word_label.setReadOnly(True)
+        self.set_default_colors()
 
     @staticmethod
     def exit_button_function():
@@ -94,10 +101,12 @@ class FlashCardsModeWindow(QDialog):
     def next_button_function(self):
         self.index_of_the_current_word -= 1
         if self.index_of_the_current_word < 0:
-            Windows.Windows.open_the_window("A study completed!",
-                                            "You went over all of your words!\nCongratulations!\n"
-                                            "You might review your words one more time or try other mods!")
-            self.index_of_the_current_word = len(self.words) - 1
+            action: str = Windows.Windows.open_window_after_all_words_reviewed()
+            if action == "break":
+                self.exit_button_function()
+                return None
+            else:
+                self.index_of_the_current_word = len(self.words) - 1
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
         self.word_label.verticalScrollBar().setValue(0)

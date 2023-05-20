@@ -163,7 +163,7 @@ font: 25pt &quot;Yrsa&quot;;</string>
      <x>450</x>
      <y>700</y>
      <width>300</width>
-     <height>55</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">

@@ -102,6 +102,7 @@ class SearchWindow(QDialog):
                 (Windows.Windows.my_wordlists_window.choose_wordlist.currentText())
         Windows.Windows.search_window.hide()
         Windows.Windows.my_wordlists_window.show()
+        Windows.Windows.my_wordlists_window.words_text.verticalScrollBar().setValue(0)
         Windows.Windows.widget.setFocus()
 
     @classmethod

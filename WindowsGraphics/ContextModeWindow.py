@@ -11,6 +11,7 @@ import time
 class ContextModeWindow(QDialog):
     words: list[str] = []
     current_hint_index = 1
+    index_of_the_current_word: int
     style_sheet_for_input_field: str = 'font: 19pt "Yrsa";' \
                                        'color:black;' \
                                        'selection-background-color:' \
@@ -33,11 +34,28 @@ class ContextModeWindow(QDialog):
         self.pronunciation_US.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.pronunciation_UK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
         self.usage_text.setReadOnly(True)
-        Word.Word.current_word = self.words[-1]
         self.connect_interface_with_functions()
-        self.index_of_the_current_word = len(self.words) - 1
         self.type_of_order = "straight"
-        # self.display_the_usage()
+        self.hide_pronunciation_buttons()
+
+    def init_first_word(self):
+        Word.Word.current_word = self.words[-1]
+        self.display_the_usage()
+        self.index_of_the_current_word = len(self.words) - 1
+        self.input_text.setStyleSheet(self.style_sheet_by_default)
+        self.hide_pronunciation_buttons()
+
+    def show_pronunciation_buttons(self):
+        self.pronunciation_US.show()
+        self.pronunciation_UK.show()
+        self.pronunciation_UK_text.show()
+        self.pronunciation_US_text.show()
+
+    def hide_pronunciation_buttons(self):
+        self.pronunciation_US.hide()
+        self.pronunciation_UK.hide()
+        self.pronunciation_UK_text.hide()
+        self.pronunciation_US_text.hide()
 
     def connect_interface_with_functions(self):
         self.pronunciation_US.clicked.connect(self.play_sound_with_us_accent)
@@ -54,6 +72,7 @@ class ContextModeWindow(QDialog):
         if answer == Word.Word.current_word:
             self.wrong_answer_line.hide()
             self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
+            self.show_pronunciation_buttons()
         else:
             self.wrong_answer_line.show()
             self.input_text.setStyleSheet(self.style_sheet_after_wrong_answer)
@@ -61,6 +80,7 @@ class ContextModeWindow(QDialog):
 
     def hint_button_function(self):
         if self.input_text.text() == Word.Word.current_word:
+            self.show_pronunciation_buttons()
             return None
         self.wrong_answer_line.hide()
         self.input_text.setStyleSheet(self.style_sheet_by_default)
@@ -91,6 +111,7 @@ class ContextModeWindow(QDialog):
         self.current_hint_index = len(Word.Word.current_word)
         self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
         Windows.Windows.context_mode_window.setFocus()
+        self.show_pronunciation_buttons()
 
     @staticmethod
     def play_sound_with_uk_accent():
@@ -143,10 +164,12 @@ class ContextModeWindow(QDialog):
     def next_button_function(self):
         self.index_of_the_current_word -= 1
         if self.index_of_the_current_word < 0:
-            Windows.Windows.open_the_window("A study completed!",
-                                            "You went over all of your words!\nCongratulations!\n"
-                                            "You might review your words one more time or try other mods!")
-            self.index_of_the_current_word = len(self.words) - 1
+            action: str = Windows.Windows.open_window_after_all_words_reviewed()
+            if action == "break":
+                self.exit_button_function()
+                return None
+            else:
+                self.index_of_the_current_word = len(self.words) - 1
         self.clear_output()
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.display_the_usage()
@@ -154,6 +177,7 @@ class ContextModeWindow(QDialog):
         self.input_text.setStyleSheet(self.style_sheet_by_default)
         Windows.Windows.context_mode_window.setFocus()
         self.current_hint_index = 1
+        self.hide_pronunciation_buttons()
 
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed

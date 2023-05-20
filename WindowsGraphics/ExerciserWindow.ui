@@ -20,10 +20,10 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="revision_mode_button">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>30</y>
+     <x>450</x>
+     <y>190</y>
      <width>300</width>
-     <height>55</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -44,10 +44,10 @@ padding: 4px;</string>
   <widget class="QPushButton" name="flashcards_mode_button">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>130</y>
+     <x>450</x>
+     <y>270</y>
      <width>300</width>
-     <height>55</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -68,10 +68,10 @@ padding: 4px;</string>
   <widget class="QPushButton" name="context_mode_button">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>230</y>
+     <x>450</x>
+     <y>350</y>
      <width>300</width>
-     <height>55</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -92,10 +92,10 @@ padding: 4px;</string>
   <widget class="QPushButton" name="back_to_the_search_button">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>710</y>
+     <x>450</x>
+     <y>620</y>
      <width>300</width>
-     <height>55</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -116,9 +116,9 @@ padding: 4px;</string>
   <widget class="QComboBox" name="choose_wordlist">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>410</y>
-     <width>300</width>
+     <x>450</x>
+     <y>110</y>
+     <width>311</width>
      <height>55</height>
     </rect>
    </property>
@@ -139,18 +139,35 @@ combobox-popup: 0;
   <widget class="QLabel" name="info_text">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>310</y>
-     <width>681</width>
+     <x>450</x>
+     <y>30</y>
+     <width>311</width>
      <height>71</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);
-font: 25pt &quot;Yrsa&quot;;</string>
+font: 30pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
-    <string>choose which wordlist you prefer to learn</string>
+    <string>choose wordlist</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="info_text_2">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>710</y>
+     <width>971</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 20pt &quot;Yrsa&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Note that you are eligible to choose wordlists that contain at least 6 words</string>
    </property>
   </widget>
  </widget>

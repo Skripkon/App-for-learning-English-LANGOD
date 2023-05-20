@@ -38,6 +38,7 @@ class ExerciserWindow(QDialog):
             RevisionModeWindow.RevisionModeWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.revision_mode_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        Windows.Windows.revision_mode_window.init_first_word()
         Windows.Windows.revision_mode_window.show()
         Windows.Windows.widget.setFocus()
 
@@ -49,8 +50,7 @@ class ExerciserWindow(QDialog):
             FlashCardsModeWindow.FlashCardsModeWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.flashcards_mode_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
-        else:
-            FlashCardsModeWindow.FlashCardsModeWindow.set_default_colors(Windows.Windows.flashcards_mode_window)
+        Windows.Windows.flashcards_mode_window.init_first_word()
         Windows.Windows.flashcards_mode_window.show()
         Windows.Windows.widget.setFocus()
 
@@ -62,6 +62,6 @@ class ExerciserWindow(QDialog):
             ContextModeWindow.ContextModeWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.context_mode_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
-            Windows.Windows.context_mode_window.display_the_usage()  # that's OK, I'm smarter
+        Windows.Windows.context_mode_window.init_first_word()
         Windows.Windows.context_mode_window.show()
         Windows.Windows.widget.setFocus()

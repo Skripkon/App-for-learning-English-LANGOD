@@ -23,7 +23,7 @@ border-color: rgb(255, 255, 255);</string>
      <x>45</x>
      <y>30</y>
      <width>300</width>
-     <height>55</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -67,7 +67,7 @@ font: 25pt &quot;Yrsa&quot;;</string>
      <x>370</x>
      <y>30</y>
      <width>300</width>
-     <height>55</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -135,7 +135,7 @@ selection-color: rgb(101, 145, 232);</string>
      <x>160</x>
      <y>720</y>
      <width>141</width>
-     <height>55</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -159,7 +159,7 @@ padding: 4px;</string>
      <x>740</x>
      <y>200</y>
      <width>200</width>
-     <height>55</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -182,8 +182,8 @@ padding: 4px;</string>
     <rect>
      <x>850</x>
      <y>110</y>
-     <width>41</width>
-     <height>41</height>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -212,7 +212,7 @@ padding: 4px;</string>
   <widget class="QLabel" name="pronunciation_UK_text">
    <property name="geometry">
     <rect>
-     <x>900</x>
+     <x>910</x>
      <y>120</y>
      <width>41</width>
      <height>31</height>
@@ -229,7 +229,7 @@ font: 21pt &quot;Yrsa&quot;;</string>
   <widget class="QLabel" name="pronunciation_US_text">
    <property name="geometry">
     <rect>
-     <x>790</x>
+     <x>800</x>
      <y>120</y>
      <width>41</width>
      <height>31</height>
@@ -248,8 +248,8 @@ font: 21pt &quot;Yrsa&quot;;</string>
     <rect>
      <x>740</x>
      <y>110</y>
-     <width>41</width>
-     <height>41</height>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -484,7 +484,7 @@ font: 21pt &quot;Yrsa&quot;;</string>
      <x>45</x>
      <y>720</y>
      <width>91</width>
-     <height>55</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">

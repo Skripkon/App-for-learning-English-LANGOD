@@ -6,6 +6,8 @@ import os
 import requests
 from nltk.corpus import wordnet, words
 
+from WindowsGraphics import Windows
+
 
 class Word:
     current_word: str = ""
@@ -89,6 +91,7 @@ class Word:
             playsound(target_path_of_the_file)
         else:
             playsound(target_path_of_the_file)
+        Windows.Windows.widget.setFocus()
 
     @classmethod
     def get_the_pronunciation_of_a_word_with_British_accent(cls):
@@ -101,6 +104,7 @@ class Word:
             playsound(target_path_of_the_file)
         else:
             playsound(target_path_of_the_file)
+            Windows.Windows.widget.setFocus()
 
     @classmethod
     def get_the_video_with_a_word(cls):

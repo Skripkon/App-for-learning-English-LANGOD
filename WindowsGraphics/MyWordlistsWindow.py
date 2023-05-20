@@ -21,10 +21,7 @@ class MyWordlistsWindow(QDialog):
         Windows.Windows.my_wordlists_window = self
         for wordlist in Exerciser.Exerciser.dict_of_added_words:
             self.choose_wordlist.addItem(wordlist)
-        self.word1_text.setReadOnly(True)
-        self.word2_text.setReadOnly(True)
-        self.word3_text.setReadOnly(True)
-        self.word4_text.setReadOnly(True)
+        self.words_text.setReadOnly(True)
 
     def change_privacy_button_function(self):
         wordlist = self.choose_wordlist.currentText()
@@ -61,21 +58,15 @@ class MyWordlistsWindow(QDialog):
         self.change_displayed_text(new_wordlist)
 
     def change_displayed_text(self, wordlist: str):
-        self.word1_text.clear()
-        self.word2_text.clear()
-        self.word3_text.clear()
-        self.word4_text.clear()
+        self.words_text.clear()
         index: int = 1
         if Exerciser.Exerciser.privacy_settings_for_wordlists[wordlist] == "public":
             self.change_privacy_button.setText("public")
         elif Exerciser.Exerciser.privacy_settings_for_wordlists[wordlist] == "private":
             self.change_privacy_button.setText("private")
         for word in Exerciser.Exerciser.dict_of_added_words[wordlist]:
-            field: str = "word" + str(index) + "_text"
-            getattr(self, field).append(word)
-            index += 1
-            if index == 5:
-                index = 1
+            self.words_text.append("• " + word)
+        self.words_text.verticalScrollBar().setValue(0)
 
     @staticmethod
     def back_to_the_search_button_function():
