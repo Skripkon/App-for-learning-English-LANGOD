@@ -20,8 +20,8 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="delete_word_button">
    <property name="geometry">
     <rect>
-     <x>710</x>
-     <y>680</y>
+     <x>700</x>
+     <y>120</y>
      <width>121</width>
      <height>60</height>
     </rect>
@@ -45,7 +45,7 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
   <widget class="QPushButton" name="change_privacy_button">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>230</x>
      <y>680</y>
      <width>171</width>
      <height>60</height>
@@ -70,7 +70,7 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
   <widget class="QLabel" name="privacy_line">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>60</x>
      <y>690</y>
      <width>131</width>
      <height>41</height>
@@ -112,10 +112,10 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
   <widget class="QTextEdit" name="words_text">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>120</y>
-     <width>381</width>
-     <height>541</height>
+     <x>60</x>
+     <y>200</y>
+     <width>341</width>
+     <height>461</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -142,7 +142,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>680</y>
+     <y>120</y>
      <width>251</width>
      <height>60</height>
     </rect>
@@ -229,6 +229,25 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
     <string>find wordlists</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="privacy_line_3">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>200</y>
+     <width>421</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 19pt &quot;Yrsa&quot;;</string>
+   </property>
+   <property name="text">
+    <string>To remove a specific word from
+your wordlist, choose the word
+and then press the 'delete' button</string>
    </property>
   </widget>
  </widget>
