@@ -45,6 +45,29 @@ class AddNewWordHandler(tornado.web.RequestHandler):
         self.write(str(n))
 
 
+class GetTheListOfAddedWordsFromParticularWordlistHandler(tornado.web.RequestHandler):
+    words_str: str = ""
+
+    @classmethod
+    def get_the_list_of_words(cls, name_of_wordlist: str):
+        words: list[str] = []
+        for i in range(1, 301):
+            current_word = 'word' + str(i)
+            sqlite_query = f'SELECT {current_word} FROM words_in_wordlists WHERE id_wordlist=?'
+            temp_word = DataBase.cursor_for_words_in_wordlists.execute(sqlite_query,
+                                                                       (name_of_wordlist,)).fetchone()
+            if temp_word[0] is not None:
+                words.append(temp_word[0])
+            else:
+                break
+        cls.words_str = json.dumps(words)
+
+    def get(self):
+        name_of_wordlist: str = self.request.headers["Wordlist"]
+        self.get_the_list_of_words(name_of_wordlist=name_of_wordlist)
+        self.write(self.words_str)
+
+
 class GetTheListOfAddedWordsHandler(tornado.web.RequestHandler):
     words_str: str = ""
     privacy_types_str: str = ""
@@ -243,8 +266,10 @@ class ChangePrivacySettingsHandler(tornado.web.RequestHandler):
 
     @staticmethod
     def change_privacy_settings(privacy_type: str, id_wordlist: str):
+        print(privacy_type, id_wordlist)
         sqlite_change_privacy_query = f"UPDATE words_in_wordlists SET privacy=? WHERE id_wordlist=?"
         DataBase.cursor_for_words_in_wordlists.execute(sqlite_change_privacy_query, (privacy_type, id_wordlist))
+        DataBase.sqlite_connection_with_db_words_in_wordlists.commit()
 
     def get(self):
         privacy_type: str = self.request.headers["PrivacyType"]
@@ -252,8 +277,29 @@ class ChangePrivacySettingsHandler(tornado.web.RequestHandler):
         self.change_privacy_settings(privacy_type=privacy_type, id_wordlist=id_wordlist)
 
 
+class FindWordlistsBySubstringHandler(tornado.web.RequestHandler):
+    wordlists_str: str = ""
+
+    @classmethod
+    def find_wordlists_by_substring(cls, substring: str, user_id: str):
+        user_id += '_'
+        query = ' SELECT id_wordlist, amount_of_words FROM words_in_wordlists' \
+                ' WHERE id_wordlist LIKE \'%' + substring + '%\' ' \
+                                                            ' AND amount_of_words > 1' \
+                                                            ' AND (privacy="public" OR id_wordlist LIKE \'' + user_id + '%\')'
+        list_of_wordlists = DataBase.cursor_for_words_in_wordlists.execute(query).fetchall()
+        cls.wordlists_str = json.dumps(list_of_wordlists)
+
+    def get(self):
+        substring = self.request.headers["Substring"]
+        user_id = self.request.headers["UserId"]
+        self.find_wordlists_by_substring(substring, user_id)
+        self.write(self.wordlists_str)
+
+
 class DeleteWordHandler(tornado.web.RequestHandler):
-    def delete_word_function(self, word, id_wordlist):
+    @staticmethod
+    def delete_word_function(word, id_wordlist):
         index_of_removable_word = 1
         while True:
             now_word = "word" + str(index_of_removable_word)
@@ -299,7 +345,9 @@ def make_app():
         (r"/AddNewWordlist", AddNewWordlistHandler),
         (r"/GetTheListOfAddedWordlists", GetTheListOfAddedWordlistsHandler),
         (r"/DeleteWord", DeleteWordHandler),
-        (r"/ChangePrivacySettings", ChangePrivacySettingsHandler)
+        (r"/ChangePrivacySettings", ChangePrivacySettingsHandler),
+        (r"/FindWordlistsBySubstring", FindWordlistsBySubstringHandler),
+        (r"/GetTheListOfAddedWordsFromParticularWordlist", GetTheListOfAddedWordsFromParticularWordlistHandler)
     ])
 
 

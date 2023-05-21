@@ -74,10 +74,16 @@ class Word:
                 break
             if len(example[0]) > 90:
                 continue
-            output += '- '
-            output += example[0]
-            output += '\n'
-            cnt += 1
+            example_with_replace_for_html = example[0].replace(' ' + Word.current_word + ' ',
+                                                               "<html style=\"color:rgb(30, 85, 138)\";><em>" + ' ' +
+                                                               Word.current_word + ' '+ "</em></html>")
+            if example_with_replace_for_html == example[0]:
+                continue
+            else:
+                output += '- '
+                output += example_with_replace_for_html
+                output += '<br/>'
+                cnt += 1
         return output
 
     @classmethod

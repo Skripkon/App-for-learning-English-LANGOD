@@ -65,8 +65,7 @@ class RevisionModeWindow(QDialog):
         if self.type_of_order == "straight":
             self.type_of_order = "shuffled"
             Exerciser.Exerciser.random_shuffle(self.words)
-            self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
-                                              'font-size:15pt; color: yellow;}')
+            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_on)
             self.word_line.setText(self.words[-1])
             Word.Word.current_word = self.words[-1]
         else:
@@ -75,8 +74,7 @@ class RevisionModeWindow(QDialog):
             self.words = Exerciser.Exerciser.dict_of_added_words[wordlist].copy()
             self.index_of_the_current_word = len(self.words) - 1
             self.word_line.setText(self.words[-1])
-            self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
-                                              'font-size:15pt; color: white;}')
+            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_off)
             Word.Word.current_word = self.words[-1]
         self.clear_output()
         Windows.Windows.revision_mode_window.setFocus()

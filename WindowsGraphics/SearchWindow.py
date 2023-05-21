@@ -46,6 +46,9 @@ class SearchWindow(QDialog):
         Windows.Windows.revision_mode_window = None
         Windows.Windows.flashcards_mode_window = None
         Windows.Windows.context_mode_window = None
+        Windows.Windows.find_wordlists_window = None
+        Windows.Windows.my_wordlists_window = None
+
 
     def clear_fields(self):
         self.search_field.clear()
@@ -194,7 +197,7 @@ class SearchWindow(QDialog):
         output_of_examples = Word.Word.get_the_usage_of_a_word()
         output_of_definitions = Word.Word.get_the_meaning_of_a_word()
         self.definitions_text.append(output_of_definitions)
-        self.usage_text.append(output_of_examples)
+        self.usage_text.setText(output_of_examples)
         if Word.Word.current_word in Exerciser.Exerciser.dict_of_added_words[self.choose_wordlist.currentText()]:
             self.add_word_button.setIcon(QIcon("WindowsGraphics/add_button_yellow.png"))
         else:

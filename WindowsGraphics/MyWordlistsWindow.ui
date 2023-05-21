@@ -20,14 +20,14 @@ border-color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="delete_word_button">
    <property name="geometry">
     <rect>
-     <x>730</x>
-     <y>40</y>
-     <width>111</width>
+     <x>710</x>
+     <y>680</y>
+     <width>121</width>
      <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
 font: 19pt &quot;Yrsa&quot;;
 color:white;
 selection-background-color: rgb(255, 255, 255);
@@ -35,7 +35,8 @@ border-style: outset;
 border-width: 1px;
 border-radius: 15px;
 border-color: black;
-padding: 4px;</string>
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
     <string>delete</string>
@@ -44,22 +45,23 @@ padding: 4px;</string>
   <widget class="QPushButton" name="change_privacy_button">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>690</y>
+     <x>180</x>
+     <y>680</y>
      <width>171</width>
      <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
-font: 21pt &quot;Yrsa&quot;;
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
 color:white;
 selection-background-color: rgb(255, 255, 255);
 border-style: outset;
 border-width: 1px;
 border-radius: 15px;
 border-color: black;
-padding: 4px;</string>
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
     <string>public</string>
@@ -68,10 +70,10 @@ padding: 4px;</string>
   <widget class="QLabel" name="privacy_line">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>30</x>
      <y>690</y>
      <width>131</width>
-     <height>51</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -85,14 +87,14 @@ font: 24pt &quot;Yrsa&quot;;</string>
   <widget class="QPushButton" name="back_to_the_search_button">
    <property name="geometry">
     <rect>
-     <x>900</x>
+     <x>890</x>
      <y>40</y>
      <width>271</width>
-     <height>61</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
 font: 19pt &quot;Yrsa&quot;;
 color:white;
 selection-background-color: rgb(255, 255, 255);
@@ -100,19 +102,20 @@ border-style: outset;
 border-width: 1px;
 border-radius: 15px;
 border-color: black;
-padding: 4px;</string>
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
-    <string>Back to the search</string>
+    <string>back to the search</string>
    </property>
   </widget>
   <widget class="QTextEdit" name="words_text">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>130</y>
-     <width>341</width>
-     <height>531</height>
+     <x>440</x>
+     <y>120</y>
+     <width>381</width>
+     <height>541</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -138,8 +141,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLineEdit" name="delete_word_input">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>40</y>
+     <x>440</x>
+     <y>680</y>
      <width>251</width>
      <height>60</height>
     </rect>
@@ -166,10 +169,10 @@ selection-color: rgb(101, 145, 232);</string>
   <widget class="QComboBox" name="choose_wordlist">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>40</y>
+     <x>60</x>
+     <y>120</y>
      <width>341</width>
-     <height>51</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -186,22 +189,46 @@ combobox-popup: 0;
 </string>
    </property>
   </widget>
-  <widget class="QLabel" name="info1">
+  <widget class="QLabel" name="privacy_line_2">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>130</y>
-     <width>641</width>
-     <height>101</height>
+     <x>50</x>
+     <y>40</y>
+     <width>761</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);
-font: 19pt &quot;Yrsa&quot;;</string>
+font: 24pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
-    <string>Write a word from the chosen wordlist and click
-'delete' if you want to remove it from your wordlist</string>
+    <string>Choose worldist to see the words that it contains</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="find_wordlists_button">
+   <property name="geometry">
+    <rect>
+     <x>890</x>
+     <y>110</y>
+     <width>271</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>find wordlists</string>
    </property>
   </widget>
  </widget>

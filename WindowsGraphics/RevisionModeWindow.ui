@@ -27,7 +27,7 @@ border-color: rgb(255, 255, 255);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
 font: 19pt &quot;Yrsa&quot;;
 color:white;
 selection-background-color: rgb(255, 255, 255);
@@ -35,7 +35,8 @@ border-style: outset;
 border-width: 1px;
 border-radius: 15px;
 border-color: black;
-padding: 4px;</string>
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
     <string>show definitions</string>
@@ -71,7 +72,7 @@ font: 25pt &quot;Yrsa&quot;;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
 font: 19pt &quot;Yrsa&quot;;
 color:white;
 selection-background-color: rgb(255, 255, 255);
@@ -79,7 +80,8 @@ border-style: outset;
 border-width: 1px;
 border-radius: 15px;
 border-color: black;
-padding: 4px;</string>
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
     <string>show examples</string>
@@ -139,7 +141,7 @@ selection-color: rgb(101, 145, 232);</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
 font: 19pt &quot;Yrsa&quot;;
 color:white;
 selection-background-color: rgb(255, 255, 255);
@@ -147,7 +149,8 @@ border-style: outset;
 border-width: 1px;
 border-radius: 15px;
 border-color: black;
-padding: 4px;</string>
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
     <string>shuffle</string>
@@ -163,7 +166,7 @@ padding: 4px;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
 font: 19pt &quot;Yrsa&quot;;
 color:white;
 selection-background-color: rgb(255, 255, 255);
@@ -171,7 +174,8 @@ border-style: outset;
 border-width: 1px;
 border-radius: 15px;
 border-color: black;
-padding: 4px;</string>
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
     <string>next</string>
@@ -488,7 +492,7 @@ font: 21pt &quot;Yrsa&quot;;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color:rgb(30, 85, 138);
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
 font: 19pt &quot;Yrsa&quot;;
 color:white;
 selection-background-color: rgb(255, 255, 255);
@@ -496,7 +500,8 @@ border-style: outset;
 border-width: 1px;
 border-radius: 15px;
 border-color: black;
-padding: 4px;</string>
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="text">
     <string>exit</string>

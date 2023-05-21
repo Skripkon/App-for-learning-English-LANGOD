@@ -73,14 +73,12 @@ class FlashCardsModeWindow(QDialog):
         if self.type_of_order == "straight":
             self.type_of_order = "shuffled"
             Exerciser.Exerciser.random_shuffle(self.words)
-            self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
-                                              'font-size:15pt; color: yellow;}')
+            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_on)
         else:
             self.type_of_order = "straight"
             wordlist: str = Windows.Windows.exerciser_window.choose_wordlist.currentText()
             self.words = Exerciser.Exerciser.dict_of_added_words[wordlist].copy()
-            self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
-                                              'font-size:15pt; color: white;}')
+            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_off)
 
         Word.Word.current_word = self.words[-1]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())

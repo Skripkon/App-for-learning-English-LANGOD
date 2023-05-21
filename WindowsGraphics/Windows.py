@@ -14,6 +14,23 @@ class Windows:
     flashcards_mode_window = None
     context_mode_window = None
     my_wordlists_window = None
+    find_wordlists_window = None
+    style_sheet_for_button: str = "selection-background-color: rgb(255, 255, 255);" \
+                                  "border-style: outset;" \
+                                  "border-width: 1px;" \
+                                  "border-radius: 15px;" \
+                                  "border-color: black;" \
+                                  "padding: 4px;}" \
+                                  "QPushButton:hover {background-color: rgb(20, 75, 130);}"
+
+    style_sheet_for_shuffle_button_off = "QPushButton {" \
+                                         "background-color:rgb(30, 85, 138);" \
+                                         "font: 19pt \"Yrsa\";" \
+                                         "color:white; " + style_sheet_for_button
+    style_sheet_for_shuffle_button_on = "QPushButton {" \
+                                        "background-color:rgb(30, 85, 138);" \
+                                        "font: 19pt \"Yrsa\";" \
+                                        "color:yellow; " + style_sheet_for_button
 
     @staticmethod
     def open_the_window(title_of_the_window: str, information: str):

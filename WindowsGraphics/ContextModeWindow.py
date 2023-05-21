@@ -136,8 +136,7 @@ class ContextModeWindow(QDialog):
         if self.type_of_order == "straight":
             self.type_of_order = "shuffled"
             Exerciser.Exerciser.random_shuffle(self.words)
-            self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
-                                              'font-size:15pt; color: yellow;}')
+            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_on)
             Word.Word.current_word = self.words[-1]
             self.display_the_usage()
 
@@ -147,8 +146,7 @@ class ContextModeWindow(QDialog):
             self.words = Exerciser.Exerciser.dict_of_added_words[wordlist].copy()
             Word.Word.current_word = self.words[-1]
             self.display_the_usage()
-            self.shuffle_button.setStyleSheet('QPushButton {selection-background-color: rgb(255, 255, 255); '
-                                              'font-size:15pt; color: white;}')
+            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_off)
         Windows.Windows.context_mode_window.setFocus()
 
     @staticmethod
