@@ -80,6 +80,7 @@ class ContextModeWindow(QDialog):
 
     def hint_button_function(self):
         if self.input_text.text() == Word.Word.current_word:
+            self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
             self.show_pronunciation_buttons()
             return None
         self.wrong_answer_line.hide()

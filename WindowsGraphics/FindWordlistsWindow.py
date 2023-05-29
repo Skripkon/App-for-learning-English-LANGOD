@@ -1,5 +1,6 @@
 import requests
-from PyQt5.QtWidgets import QDialog, QPushButton, QScrollArea, QGroupBox, QVBoxLayout, QFormLayout, QLabel
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QDialog, QPushButton, QScrollArea, QGroupBox, QVBoxLayout, QFormLayout, QLabel, QInputDialog
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 
@@ -12,6 +13,7 @@ from WindowsGraphics import Windows, RevisionModeWindow, FlashCardsModeWindow, C
 class FindWordlistsWindow(QDialog):
     labelList = []
     buttonList = []
+    list_of_words_to_add: list[str] = []
     scroll: QScrollArea = None
     groupBox: QGroupBox = None
     formLayout: QFormLayout = None
@@ -24,14 +26,19 @@ class FindWordlistsWindow(QDialog):
         self.words_text.setReadOnly(True)
         self.words_text.hide()
         self.find_wordlist_button.clicked.connect(self.search)
+        self.add_wordlist_button.clicked.connect(self.add_wordlist_button_function)
+
+    def add_wordlist_button_function(self):
+        # TODO
+        self.show_dialog()
 
     def change_displayed_text(self, wordlist: str):
         self.words_text.show()
         self.words_text.clear()
         url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/GetTheListOfAddedWordsFromParticularWordlist"
         response = requests.get(url, headers={'Wordlist': wordlist})
-        list_of_words = response.json()
-        for word in list_of_words:
+        self.list_of_words_to_add = response.json()
+        for word in self.list_of_words_to_add:
             self.words_text.append("• " + word)
         self.words_text.verticalScrollBar().setValue(0)
 
@@ -52,9 +59,6 @@ class FindWordlistsWindow(QDialog):
 
     def search(self):
         self.words_text.hide()
-        if self.scroll is not None:
-            for w in ["scroll", "groupBox"]:
-                getattr(self, w).hide()
         self.clear_last_search_data()
         self.formLayout = QFormLayout()
         self.groupBox = QGroupBox()
@@ -64,6 +68,7 @@ class FindWordlistsWindow(QDialog):
         response = requests.get(url1, headers={'Substring': search_text, 'UserId': str(connection.IP.user_id)})
         wordlists = response.json()  # wordlists[i] = [wordlist_i, amount_of_words_i]
         i: int = 0
+        wordlists.sort(key=lambda x: -x[1])
         for w in wordlists:
             wordlist = w[0]
             index: int = 0
@@ -91,6 +96,55 @@ class FindWordlistsWindow(QDialog):
         self.setLayout(self.verticalLayout)
         for w in ["scroll", "groupBox"]:
             getattr(self, w).show()
+
+    def show_dialog(self):
+        dialog = QInputDialog(self)
+        dialog.setLabelText("Name of new wordlist:")
+        dialog.setGeometry(300, 300, 400, 450)
+        dialog.setWindowTitle(" ")
+        dialog.setStyleSheet(
+                """ 
+                QInputDialog {
+                    background-color:rgb(200, 211, 223);
+                    color: #333333;
+                    font: 21pt "Yrsa";
+                    border: 1px solid #87AEDF;
+                }
+                QInputDialog QLabel {
+                    color:black;
+                    font: 22pt "Yrsa";
+                    background-color:rgb(200, 211, 223);
+                }
+                QInputDialog QLineEdit {
+                    background-color:white;
+                    font: 20pt "Yrsa";
+                    color:black;
+                    selection-background-color: rgb(255, 255, 255);
+                    border-style: outset;
+                    border-width: 1px;
+                    border-radius: 15px;
+                    border-color: black;
+                    padding: 4px;
+                    selection-color: rgb(101, 145, 232);
+                }
+                QInputDialog QPushButton {
+                    background-color: rgb(30, 85, 138);
+                    color: #FFFFFF;
+                    padding: 6px;
+                    border: 1px;
+                    font: 20pt "Yrsa";
+                }
+                QInputDialog QPushButton:hover {
+                    background-color: rgb(20, 75, 130);
+                }
+                QInputDialog QPushButton:pressed {
+                    background-color: #426C99;
+                }
+                """
+        )
+        answer: int = dialog.exec()
+        if answer == 1:
+            print(dialog.textValue())
 
     @staticmethod
     def back_to_my_wordlists_button_function():

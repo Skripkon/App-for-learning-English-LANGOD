@@ -66,17 +66,17 @@ class Word:
         return True
 
     @classmethod
-    def get_the_usage_of_a_word(cls, number_of_examples=12) -> str:
+    def get_the_usage_of_a_word(cls, number_of_examples=10) -> str:
         cnt = 0
         output = ""
         for example in cls.client.get_translation_samples(cls.current_word, cleanup=True):
             if cnt > number_of_examples:
                 break
-            if len(example[0]) > 90:
-                continue
+            # if len(example[0]) > 90:
+            #     continue
             example_with_replace_for_html = example[0].replace(' ' + Word.current_word + ' ',
                                                                "<html style=\"color:rgb(30, 85, 138)\";><em>" + ' ' +
-                                                               Word.current_word + ' '+ "</em></html>")
+                                                               Word.current_word + ' ' + "</em></html>")
             if example_with_replace_for_html == example[0]:
                 continue
             else:

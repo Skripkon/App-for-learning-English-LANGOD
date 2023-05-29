@@ -266,7 +266,6 @@ class ChangePrivacySettingsHandler(tornado.web.RequestHandler):
 
     @staticmethod
     def change_privacy_settings(privacy_type: str, id_wordlist: str):
-        print(privacy_type, id_wordlist)
         sqlite_change_privacy_query = f"UPDATE words_in_wordlists SET privacy=? WHERE id_wordlist=?"
         DataBase.cursor_for_words_in_wordlists.execute(sqlite_change_privacy_query, (privacy_type, id_wordlist))
         DataBase.sqlite_connection_with_db_words_in_wordlists.commit()

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
+    <width>1217</width>
     <height>800</height>
    </rect>
   </property>
@@ -170,6 +170,31 @@ font: 31pt &quot;Yrsa&quot;;</string>
      <number>70</number>
     </property>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="add_wordlist_button">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>690</y>
+     <width>281</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>add wordlist</string>
+   </property>
   </widget>
  </widget>
  <resources/>

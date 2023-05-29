@@ -31,7 +31,7 @@ border-color: rgb(255, 255, 255);</string>
 font: 35pt &quot;Yrsa&quot;;</string>
    </property>
    <property name="text">
-    <string>Welcome to laNGod</string>
+    <string>Welcome to LaNGod</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
