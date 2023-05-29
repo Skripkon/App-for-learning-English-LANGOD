@@ -62,7 +62,7 @@ class FlashCardsModeWindow(QDialog):
     def set_variants_function(self):
         set_of_words = {Word.Word.current_word}
         while len(set_of_words) < 6:
-            set_of_words.add(FlashCardsModeWindow.words[randint(1, len(FlashCardsModeWindow.words) - 1)])
+            set_of_words.add(FlashCardsModeWindow.words[randint(0, len(FlashCardsModeWindow.words) - 1)])
         set_of_words = list(set_of_words)
         for i in range(6):
             getattr(self, self.list_of_buttons[i]).setText(set_of_words[i])
@@ -87,9 +87,11 @@ class FlashCardsModeWindow(QDialog):
         Windows.Windows.flashcards_mode_window.setFocus()
 
     def answer_button_function(self, name_of_clicked_button):
-        if getattr(self, name_of_clicked_button).text() == Word.Word.current_word:
+        answer: str = getattr(self, name_of_clicked_button).text()
+        if answer == Word.Word.current_word:
             getattr(self, name_of_clicked_button).setStyleSheet(self.style_sheet_after_correct_answer)
         else:
+            Exerciser.Exerciser.array_of_mistakes.append(answer)
             getattr(self, name_of_clicked_button).setStyleSheet(self.style_sheet_after_wrong_answer)
         Windows.Windows.flashcards_mode_window.setFocus()
 
@@ -118,6 +120,7 @@ class FlashCardsModeWindow(QDialog):
             getattr(self, self.list_of_buttons[i]).setStyleSheet(self.style_sheet_by_default)
 
     def right_answer_button_function(self):
+        Exerciser.Exerciser.array_of_mistakes.append(Word.Word.current_word)
         for button in self.list_of_buttons:
             if getattr(self, button).text() == Word.Word.current_word:
                 getattr(self, button).setStyleSheet(self.style_sheet_after_correct_answer)

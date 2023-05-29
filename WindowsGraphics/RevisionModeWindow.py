@@ -36,6 +36,11 @@ class RevisionModeWindow(QDialog):
         self.exit_button.clicked.connect(self.exit_button_function)
         self.next_button.clicked.connect(self.next_button_function)
         self.shuffle_button.clicked.connect(self.shuffle_button_function)
+        self.not_sure_button.clicked.connect(self.not_sure_button_function)
+
+    def not_sure_button_function(self):
+        Exerciser.Exerciser.array_of_mistakes.append(self.words[self.index_of_the_current_word])
+        self.next_button_function()
 
     def play_sound_with_uk_accent(self):
         self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent())

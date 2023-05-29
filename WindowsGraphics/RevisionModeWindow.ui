@@ -507,6 +507,31 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
     <string>exit</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="not_sure_button">
+   <property name="geometry">
+    <rect>
+     <x>740</x>
+     <y>280</y>
+     <width>200</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>not sure</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

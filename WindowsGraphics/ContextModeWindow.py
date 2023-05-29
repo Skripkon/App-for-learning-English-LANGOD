@@ -74,6 +74,7 @@ class ContextModeWindow(QDialog):
             self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
             self.show_pronunciation_buttons()
         else:
+            Exerciser.Exerciser.array_of_mistakes.append(answer)
             self.wrong_answer_line.show()
             self.input_text.setStyleSheet(self.style_sheet_after_wrong_answer)
         Windows.Windows.context_mode_window.setFocus()
