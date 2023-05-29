@@ -20,6 +20,8 @@ class MyWordlistsWindow(QDialog):
         self.change_privacy_button.clicked.connect(self.change_privacy_button_function)
         self.find_wordlists_button.clicked.connect(self.find_wordlists_button_function)
         Windows.Windows.my_wordlists_window = self
+
+    def set_wordlists(self):
         for wordlist in Exerciser.Exerciser.dict_of_added_words:
             self.choose_wordlist.addItem(wordlist)
         self.words_text.setReadOnly(True)
