@@ -1,6 +1,6 @@
 import requests
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QDialog, QInputDialog
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
@@ -115,15 +115,69 @@ class SearchWindow(QDialog):
         else:
             return False
 
+    def show_dialog(self):
+        dialog = QInputDialog(self)
+        dialog.setLabelText("Name of new wordlist:")
+        dialog.setGeometry(300, 300, 400, 450)
+        dialog.setWindowTitle(" ")
+        dialog.setStyleSheet(
+            """ 
+                QInputDialog {
+                    background-color:rgb(200, 211, 223);
+                    color: #333333;
+                    font: 21pt "Yrsa";
+                    border: 1px solid #87AEDF;
+                }
+                QInputDialog QLabel {
+                    color:black;
+                    font: 22pt "Yrsa";
+                    background-color:rgb(200, 211, 223);
+                }
+                QInputDialog QLineEdit {
+                    background-color:white;
+                    font: 20pt "Yrsa";
+                    color:black;
+                    selection-background-color: rgb(255, 255, 255);
+                    border-style: outset;
+                    border-width: 1px;
+                    border-radius: 15px;
+                    border-color: black;
+                    padding: 4px;
+                    selection-color: rgb(101, 145, 232);
+                }
+                QInputDialog QPushButton {
+                    background-color: rgb(30, 85, 138);
+                    color: #FFFFFF;
+                    padding: 6px;
+                    border: 1px;
+                    font: 20pt "Yrsa";
+                }
+                QInputDialog QPushButton:hover {
+                    background-color: rgb(20, 75, 130);
+                }
+                QInputDialog QPushButton:pressed {
+                    background-color: #426C99;
+                }
+                """
+        )
+        answer: int = dialog.exec()
+        if answer == 1:
+            return dialog.textValue()
+        return None
+
     def create_new_wordlist_button_function(self):
-        name: str = self.create_new_wordlist_input.text()
+        name = self.show_dialog()
         if self.check_whether_wordlist_with_such_name_already_exists(name):
             Windows.Windows.open_the_window("Error", f"Wordlist with name '{name}' already exists")
+            return None
+        if not name:
+            return None
+        if name == "":
+            Windows.Windows.open_the_window("Error, Wordlist can't have empty name already exists")
             return None
         url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWordlist"
         requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})
         self.choose_wordlist.addItem(name)
-        self.create_new_wordlist_input.clear()
         Exerciser.Exerciser.dict_of_added_words[name] = []
         Exerciser.Exerciser.privacy_settings_for_wordlists[name] = ["public"]
         Windows.Windows.search_window.setFocus()
@@ -163,7 +217,6 @@ class SearchWindow(QDialog):
         self.add_word_button.hide()
         self.nothing_found_error_line.hide()
         self.choose_wordlist.hide()
-        self.create_new_wordlist_input.hide()
         self.create_new_wordlist_button.hide()
 
     def show_the_interface(self):
@@ -177,7 +230,6 @@ class SearchWindow(QDialog):
         self.usage_title.show()
         self.add_word_button.show()
         self.choose_wordlist.show()
-        self.create_new_wordlist_input.show()
         self.create_new_wordlist_button.show()
 
     def forbid_to_change_the_interface(self):

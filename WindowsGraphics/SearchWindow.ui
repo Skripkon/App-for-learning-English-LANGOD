@@ -345,31 +345,6 @@ combobox-popup: 0;
 </string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="create_new_wordlist_input">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>170</y>
-     <width>271</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color:rgb(200, 211, 223);
-font: 17pt &quot;Yrsa&quot;;
-color:black;
-selection-background-color: rgb(255, 255, 255);
-border-style: outset;
-border-width: 1px;
-border-radius: 15px;
-border-color: black;
-padding: 4px;
-selection-color: rgb(101, 145, 232);</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QPushButton" name="create_new_wordlist_button">
    <property name="geometry">
     <rect>
@@ -435,7 +410,6 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
   <zorder>definitions_title</zorder>
   <zorder>usage_title</zorder>
   <zorder>choose_wordlist</zorder>
-  <zorder>create_new_wordlist_input</zorder>
   <zorder>create_new_wordlist_button</zorder>
   <zorder>go_to_my_wordlists_button</zorder>
  </widget>
