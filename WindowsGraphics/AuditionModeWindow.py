@@ -1,3 +1,4 @@
+from PyQt5 import QtCore
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
@@ -5,7 +6,6 @@ from time import time
 import Exerciser
 import Word
 from WindowsGraphics import Windows
-
 
 class AuditionModeWindow(QDialog):
     words: list[str] = []
@@ -31,9 +31,12 @@ class AuditionModeWindow(QDialog):
     def __init__(self):
         super(AuditionModeWindow, self).__init__()
         loadUi("WindowsGraphics/AuditionModeWindow.ui", self)
+        Windows.Windows.audition_mode_window = self
         self.wrong_answer_line.hide()
         self.pronunciation_US.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
+        self.pronunciation_US.setIconSize(QtCore.QSize(251, 231))
         self.pronunciation_UK.setIcon(QIcon("WindowsGraphics/voiceButtonIcon.png"))
+        self.pronunciation_UK.setIconSize(QtCore.QSize(251, 231))
         self.connect_interface_with_functions()
 
     def connect_interface_with_functions(self):
@@ -80,7 +83,7 @@ class AuditionModeWindow(QDialog):
                 self.current_hint_index = 0
                 self.input_text.setText(Word.Word.current_word[0])
         self.current_hint_index += 1
-        Windows.Windows.context_mode_window.setFocus()
+        Windows.Windows.audition_mode_window.setFocus()
 
     @staticmethod
     def pronunciation_UK_function():
@@ -90,7 +93,12 @@ class AuditionModeWindow(QDialog):
     @staticmethod
     def pronunciation_US_function():
         Word.Word.get_the_pronunciation_of_a_word_with_American_accent()
-        Windows.Windows.context_mode_window.setFocus()
+        Windows.Windows.audition_mode_window.setFocus()
+
+    def init_first_word(self):
+        Word.Word.current_word = self.words[-1]
+        self.index_of_the_current_word = len(self.words) - 1
+        self.input_text.setStyleSheet(self.style_sheet_by_default)
 
     def shuffle_button_function(self):
         self.index_of_the_current_word = len(self.words) - 1
@@ -99,23 +107,19 @@ class AuditionModeWindow(QDialog):
             Exerciser.Exerciser.random_shuffle(self.words)
             self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_on)
             Word.Word.current_word = self.words[-1]
-            self.display_the_usage()
-
         else:
             self.type_of_order = "straight"
             wordlist: str = Windows.Windows.exerciser_window.choose_wordlist.currentText()
             self.words = Exerciser.Exerciser.dict_of_added_words[wordlist].copy()
             Word.Word.current_word = self.words[-1]
-            self.display_the_usage()
             self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_off)
-        Windows.Windows.context_mode_window.setFocus()
+        Windows.Windows.audition_mode_window.setFocus()
 
     def submit_button_function(self):
         answer: str = self.input_text.text()
         if answer == Word.Word.current_word:
             self.wrong_answer_line.hide()
             self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
-            self.show_pronunciation_buttons()
             if self.mistake_was_made == "None":
                 self.mistake_was_made = "False"
         else:
@@ -124,7 +128,7 @@ class AuditionModeWindow(QDialog):
                 self.mistake_was_made = "True"
             self.wrong_answer_line.show()
             self.input_text.setStyleSheet(self.style_sheet_after_wrong_answer)
-        Windows.Windows.context_mode_window.setFocus()
+        Windows.Windows.audition_mode_window.setFocus()
 
     def next_button_function(self):
         self.index_of_the_current_word -= 1
@@ -157,4 +161,7 @@ class AuditionModeWindow(QDialog):
         Windows.Windows.audition_mode_window.setFocus()
         self.current_hint_index = 1
 
-
+    def keyPressEvent(self, event):
+        if event.nativeScanCode() == 36:  # button Enter pressed
+            self.submit_button_function()
+        Windows.Windows.audition_mode_window.setFocus()

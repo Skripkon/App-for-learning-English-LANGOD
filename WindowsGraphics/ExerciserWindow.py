@@ -39,6 +39,7 @@ class ExerciserWindow(QDialog):
             AuditionModeWindow.AuditionModeWindow()
             Windows.Windows.widget.addWidget(Windows.Windows.audition_mode_window)
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        Windows.Windows.audition_mode_window.init_first_word()
         Windows.Windows.audition_mode_window.show()
         Windows.Windows.widget.setFocus()
 
