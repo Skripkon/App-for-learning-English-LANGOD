@@ -41,6 +41,7 @@ class FindWordlistsWindow(QDialog):
         url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWordlist"
         requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})
         url = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWord"
+        Exerciser.Exerciser.privacy_settings_for_wordlists[name] = "public"
         for word in self.list_of_words_to_add:
             Exerciser.Exerciser.dict_of_added_words[name].append(word)
             requests.get(url, headers={'Word': word,
@@ -168,7 +169,6 @@ class FindWordlistsWindow(QDialog):
 
     @staticmethod
     def back_to_my_wordlists_button_function():
-        # TODO: implement set_worlists function
         Windows.Windows.find_wordlists_window.hide()
         Windows.Windows.my_wordlists_window.show()
         Windows.Windows.widget.setFocus()

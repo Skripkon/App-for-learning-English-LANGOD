@@ -284,8 +284,9 @@ class FindWordlistsBySubstringHandler(tornado.web.RequestHandler):
         user_id += '_'
         query = ' SELECT id_wordlist, amount_of_words FROM words_in_wordlists' \
                 ' WHERE id_wordlist LIKE \'%' + substring + '%\' ' \
-                                                            ' AND amount_of_words > 1' \
-                                                            ' AND (privacy="public" OR id_wordlist LIKE \'' + user_id + '%\')'
+                ' AND amount_of_words > 1' \
+                ' AND privacy="public" ' \
+                ' AND id_wordlist NOT LIKE \'' + user_id + '%\' '
         list_of_wordlists = DataBase.cursor_for_words_in_wordlists.execute(query).fetchall()
         cls.wordlists_str = json.dumps(list_of_wordlists)
 

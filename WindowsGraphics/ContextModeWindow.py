@@ -25,6 +25,8 @@ class ContextModeWindow(QDialog):
     style_sheet_after_correct_answer = 'background-color:rgb(205, 247, 190);' + style_sheet_for_input_field
     style_sheet_by_default = 'background-color:rgb(200, 211, 223);' + style_sheet_for_input_field
     style_sheet_after_wrong_answer = 'background-color:rgb(255, 192, 192);' + style_sheet_for_input_field
+    array_of_mistakes: list[str] = []
+    mistake_was_made: str = "None" # other values of this variable are "True" and "False"
 
     def __init__(self):
         super(ContextModeWindow, self).__init__()
@@ -41,6 +43,8 @@ class ContextModeWindow(QDialog):
     def init_first_word(self):
         Word.Word.current_word = self.words[-1]
         self.display_the_usage()
+
+
         self.index_of_the_current_word = len(self.words) - 1
         self.input_text.setStyleSheet(self.style_sheet_by_default)
         self.hide_pronunciation_buttons()
@@ -73,13 +77,20 @@ class ContextModeWindow(QDialog):
             self.wrong_answer_line.hide()
             self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
             self.show_pronunciation_buttons()
+            if self.mistake_was_made == "None":
+                self.mistake_was_made = "False"
         else:
-            Exerciser.Exerciser.array_of_mistakes.append(answer)
+            if self.mistake_was_made == "None":
+                self.array_of_mistakes.append(answer)
+                self.mistake_was_made = "True"
             self.wrong_answer_line.show()
             self.input_text.setStyleSheet(self.style_sheet_after_wrong_answer)
         Windows.Windows.context_mode_window.setFocus()
 
     def hint_button_function(self):
+        if self.mistake_was_made == "None":
+            self.mistake_was_made = "True"
+            self.array_of_mistakes.append(Word.Word.current_word)
         if self.input_text.text() == Word.Word.current_word:
             self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
             self.show_pronunciation_buttons()
@@ -114,6 +125,9 @@ class ContextModeWindow(QDialog):
         self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
         Windows.Windows.context_mode_window.setFocus()
         self.show_pronunciation_buttons()
+        if self.mistake_was_made == "None":
+            self.mistake_was_made = "True"
+            self.array_of_mistakes.append(Word.Word.current_word)
 
     @staticmethod
     def play_sound_with_uk_accent():
@@ -163,21 +177,27 @@ class ContextModeWindow(QDialog):
 
     def next_button_function(self):
         self.index_of_the_current_word -= 1
+        if self.mistake_was_made == "None":
+            self.array_of_mistakes.append(Word.Word.current_word)
+        self.mistake_was_made = "None"
         if self.index_of_the_current_word < 0:
-            print(self.words)
-            print(Exerciser.Exerciser.array_of_mistakes)
-            action: str = Windows.Windows.open_window_after_all_words_reviewed()
+            action: str = Windows.Windows.open_window_after_all_words_reviewed(len(self.array_of_mistakes), len(self.words))
             if action == "break":
                 self.exit_button_function()
+                self.array_of_mistakes.clear()
+                self.mistake_was_made = "None"
                 return None
-            elif action == "retry":
-                self.words = Exerciser.Exerciser.array_of_mistakes.copy()
+            elif action == "Learn your mistakes":
+                self.words = self.array_of_mistakes.copy()
                 self.index_of_the_current_word = len(self.words) - 1
-                Exerciser.Exerciser.array_of_mistakes = []
+                self.array_of_mistakes.clear()
+                self.mistake_was_made = "None"
             else:
+                self.mistake_was_made = "None"
                 if self.words != Exerciser.Exerciser.array_of_words_for_exercise:
                     self.words = Exerciser.Exerciser.array_of_words_for_exercise
                 self.index_of_the_current_word = len(self.words) - 1
+                self.array_of_mistakes.clear()
         self.clear_output()
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.display_the_usage()

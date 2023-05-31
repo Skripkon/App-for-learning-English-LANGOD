@@ -338,7 +338,7 @@ color:rgb(0, 0, 0);
 selection-background-color: rgb(30, 85, 138);
 border-style: outset;
 border-width: 1px;
-border-radius: 4px;
+border-radius: 15px;
 border-color: black;
 padding: 2px;
 combobox-popup: 0;
@@ -348,9 +348,9 @@ combobox-popup: 0;
   <widget class="QPushButton" name="create_new_wordlist_button">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>170</y>
-     <width>211</width>
+     <x>360</x>
+     <y>180</y>
+     <width>271</width>
      <height>60</height>
     </rect>
    </property>

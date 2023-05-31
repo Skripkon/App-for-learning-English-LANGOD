@@ -43,22 +43,20 @@ class Windows:
         msg_box.exec_()
 
     @classmethod
-    def open_window_after_all_words_reviewed(cls, array_of_mistakes: list[str]) -> str:
+    def open_window_after_all_words_reviewed(cls, len_of_array_of_mistakes: int, len_of_words: int) -> str:
         message_box = QMessageBox()
-        percent_of_right_answers = 100 - 100 * round(len(array_of_mistakes) / len(Exerciser.Exerciser.array_of_words_for_exercise), 2)
-        message_box.setWindowTitle(f"A study completed, your result is {percent_of_right_answers}%")
+        percent_of_right_answers = 100 - 100 * round(len_of_array_of_mistakes / len_of_words, 2)
+        message_box.setWindowTitle(" ")
+        message_box.setText("You went over all of your words!\n"
+                            f"Your result is {percent_of_right_answers} %\n")
         if percent_of_right_answers == 100:
-            message_box.setText("You went over all of your words!\n"
-                                "\nYou might review all your words again or try other mods!")
             message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
         else:
-            message_box.setText("You went over all of your words!\n"
-                                "\nYou might review your words again, revise mistake words or try other mods!")
             message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
             buttonRevise = message_box.button(QMessageBox.Retry)
-            buttonRevise.setText('Retry')
+            buttonRevise.setText('Learn your mistakes')
         buttonContinue = message_box.button(QMessageBox.Ok)
-        buttonContinue.setText('Continue')
+        buttonContinue.setText('Restart')
         buttonExit = message_box.button(QMessageBox.Cancel)
         buttonExit.setText('Exit')
 
@@ -91,8 +89,8 @@ class Windows:
         )
         message_box.exec()
         if message_box.clickedButton() == buttonContinue:
-            return "continue"
+            return "Restart"
         elif message_box.clickedButton() == buttonExit:
             return "break"
         else:
-            return "revise"
+            return "Learn your mistakes"

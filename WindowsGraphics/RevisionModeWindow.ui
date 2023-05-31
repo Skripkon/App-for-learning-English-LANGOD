@@ -161,7 +161,7 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
     <rect>
      <x>740</x>
      <y>200</y>
-     <width>200</width>
+     <width>231</width>
      <height>60</height>
     </rect>
    </property>
@@ -512,7 +512,7 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
     <rect>
      <x>740</x>
      <y>280</y>
-     <width>200</width>
+     <width>231</width>
      <height>60</height>
     </rect>
    </property>

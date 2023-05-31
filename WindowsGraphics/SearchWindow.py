@@ -167,11 +167,13 @@ class SearchWindow(QDialog):
 
     def create_new_wordlist_button_function(self):
         name = self.show_dialog()
+        if name is None:
+            return None
         if self.check_whether_wordlist_with_such_name_already_exists(name):
             Windows.Windows.open_the_window("Error", f"Wordlist with name '{name}' already exists")
             return None
         if name == "":
-            Windows.Windows.open_the_window("Error, Wordlist can't have empty name already exists")
+            Windows.Windows.open_the_window("Error", "Name of wordlist have to contain at least one character")
             return None
         url: str = "http://" + connection.IP.ip + f":{connection.IP.port}/AddNewWordlist"
         requests.get(url, headers={'Wordlist': name, 'UserId': str(connection.IP.user_id)})

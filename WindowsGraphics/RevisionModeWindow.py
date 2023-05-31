@@ -99,22 +99,20 @@ class RevisionModeWindow(QDialog):
     def next_button_function(self):
         self.index_of_the_current_word -= 1
         if self.index_of_the_current_word < 0:
-            print(self.words)
-            print(self.array_of_mistakes)
-            action: str = Windows.Windows.open_window_after_all_words_reviewed(self.array_of_mistakes)
+            action: str = Windows.Windows.open_window_after_all_words_reviewed(len(self.array_of_mistakes), len(self.words))
             if action == "break":
                 self.exit_button_function()
                 self.array_of_mistakes.clear()
                 return None
-            elif action == "retry":
+            elif action == "Learn your mistakes":
                 self.words = self.array_of_mistakes.copy()
                 self.index_of_the_current_word = len(self.words) - 1
-                self.array_of_mistakes = []
+                self.array_of_mistakes.clear()
             else:
                 if self.words != Exerciser.Exerciser.array_of_words_for_exercise:
                     self.words = Exerciser.Exerciser.array_of_words_for_exercise
                 self.index_of_the_current_word = len(self.words) - 1
-                self.array_of_mistakes = []
+                self.array_of_mistakes.clear()
         self.clear_output()
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.word_line.setText(Word.Word.current_word)
