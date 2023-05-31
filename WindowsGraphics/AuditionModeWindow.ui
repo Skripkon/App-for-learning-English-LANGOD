@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(32, 71, 105);
+border-color: rgb(255, 255, 255);</string>
+  </property>
+  <widget class="QPushButton" name="hint_button">
+   <property name="geometry">
+    <rect>
+     <x>960</x>
+     <y>280</y>
+     <width>200</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>hint</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="answer_button">
+   <property name="geometry">
+    <rect>
+     <x>960</x>
+     <y>380</y>
+     <width>201</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>answer</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="next_button">
+   <property name="geometry">
+    <rect>
+     <x>960</x>
+     <y>490</y>
+     <width>201</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>next</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exit_button">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>710</y>
+     <width>151</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>exit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pronunciation_US">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>40</y>
+     <width>251</width>
+     <height>231</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>WindowsGraphics</normalon>
+     <activeon>:/voiceButtonIcon.png/voiceButtonIcon.png</activeon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pronunciation_US_text">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>310</y>
+     <width>251</width>
+     <height>231</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 150pt &quot;Yrsa&quot;;</string>
+   </property>
+   <property name="text">
+    <string>US</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pronunciation_UK">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>30</y>
+     <width>251</width>
+     <height>231</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>WindowsGraphics</normalon>
+     <activeon>:/voiceButtonIcon.png/voiceButtonIcon.png</activeon>
+    </iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>40</width>
+     <height>40</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pronunciation_UK_text">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>320</y>
+     <width>251</width>
+     <height>231</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 150pt &quot;Yrsa&quot;;</string>
+   </property>
+   <property name="text">
+    <string>UK</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="shuffle_button">
+   <property name="geometry">
+    <rect>
+     <x>1030</x>
+     <y>710</y>
+     <width>151</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>shuffle</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="wrong_answer_line">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>690</y>
+     <width>231</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+font: 23pt &quot;Yrsa&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Wrong answer</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="input_text">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>600</y>
+     <width>261</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgb(200, 211, 223);
+font: 19pt &quot;Yrsa&quot;;
+color:black;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;
+selection-color: rgb(101, 145, 232);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="submit_button">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>600</y>
+     <width>121</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {background-color:rgb(30, 85, 138);
+font: 19pt &quot;Yrsa&quot;;
+color:white;
+selection-background-color: rgb(255, 255, 255);
+border-style: outset;
+border-width: 1px;
+border-radius: 15px;
+border-color: black;
+padding: 4px;}
+QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
+   </property>
+   <property name="text">
+    <string>Submit</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

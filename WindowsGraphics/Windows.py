@@ -16,6 +16,7 @@ class Windows:
     context_mode_window = None
     my_wordlists_window = None
     find_wordlists_window = None
+    audition_mode_window = None
     style_sheet_for_button: str = "selection-background-color: rgb(255, 255, 255);" \
                                   "border-style: outset;" \
                                   "border-width: 1px;" \
