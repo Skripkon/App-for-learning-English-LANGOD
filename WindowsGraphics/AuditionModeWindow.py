@@ -43,10 +43,21 @@ class AuditionModeWindow(QDialog):
         self.exit_button.clicked.connect(self.exit_button_function)
         self.hint_button.clicked.connect(self.hint_button_function)
         self.pronunciation_UK.clicked.connect(self.pronunciation_UK_function)
-        self.pronunciation_UK.clicked.connect(self.pronunciation_US_function)
+        self.pronunciation_US.clicked.connect(self.pronunciation_US_function)
         self.shuffle_button.clicked.connect(self.shuffle_button_function)
         self.submit_button.clicked.connect(self.submit_button_function)
         self.next_button.clicked.connect(self.next_button_function)
+        self.answer_button.clicked.connect(self.answer_button_function)
+
+    def answer_button_function(self):
+        self.wrong_answer_line.hide()
+        self.input_text.setText(Word.Word.current_word)
+        self.current_hint_index = len(Word.Word.current_word)
+        self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
+        Windows.Windows.audition_mode_window.setFocus()
+        if self.mistake_was_made == "None":
+            self.mistake_was_made = "True"
+            self.array_of_mistakes.append(Word.Word.current_word)
 
     @staticmethod
     def exit_button_function():
