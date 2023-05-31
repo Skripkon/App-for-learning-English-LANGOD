@@ -6,7 +6,6 @@ import connection
 class Exerciser:
     dict_of_added_words: dict = {}
     array_of_words_for_exercise: list[str] = []
-    array_of_mistakes = []
     privacy_settings_for_wordlists: dict = {}
 
     def __init__(self):

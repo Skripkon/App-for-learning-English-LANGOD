@@ -20,6 +20,7 @@ class MyWordlistsWindow(QDialog):
         self.change_privacy_button.clicked.connect(self.change_privacy_button_function)
         self.find_wordlists_button.clicked.connect(self.find_wordlists_button_function)
         Windows.Windows.my_wordlists_window = self
+        self.set_wordlists()
 
     def set_wordlists(self):
         for wordlist in Exerciser.Exerciser.dict_of_added_words:

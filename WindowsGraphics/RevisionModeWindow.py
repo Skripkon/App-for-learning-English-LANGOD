@@ -9,6 +9,7 @@ from WindowsGraphics import Windows
 
 class RevisionModeWindow(QDialog):
     words: list[str] = []
+    array_of_mistakes = []
     index_of_the_current_word: int
 
     def __init__(self):
@@ -36,10 +37,10 @@ class RevisionModeWindow(QDialog):
         self.exit_button.clicked.connect(self.exit_button_function)
         self.next_button.clicked.connect(self.next_button_function)
         self.shuffle_button.clicked.connect(self.shuffle_button_function)
-        self.not_sure_button.clicked.connect(self.not_sure_button_function)
+        self.do_not_remember_button.clicked.connect(self.do_not_remember_button_function)
 
-    def not_sure_button_function(self):
-        Exerciser.Exerciser.array_of_mistakes.append(self.words[self.index_of_the_current_word])
+    def do_not_remember_button_function(self):
+        self.array_of_mistakes.append(self.words[self.index_of_the_current_word])
         self.next_button_function()
 
     def play_sound_with_uk_accent(self):
@@ -98,12 +99,22 @@ class RevisionModeWindow(QDialog):
     def next_button_function(self):
         self.index_of_the_current_word -= 1
         if self.index_of_the_current_word < 0:
-            action: str = Windows.Windows.open_window_after_all_words_reviewed()
+            print(self.words)
+            print(self.array_of_mistakes)
+            action: str = Windows.Windows.open_window_after_all_words_reviewed(self.array_of_mistakes)
             if action == "break":
                 self.exit_button_function()
+                self.array_of_mistakes.clear()
                 return None
-            else:
+            elif action == "retry":
+                self.words = self.array_of_mistakes.copy()
                 self.index_of_the_current_word = len(self.words) - 1
+                self.array_of_mistakes = []
+            else:
+                if self.words != Exerciser.Exerciser.array_of_words_for_exercise:
+                    self.words = Exerciser.Exerciser.array_of_words_for_exercise
+                self.index_of_the_current_word = len(self.words) - 1
+                self.array_of_mistakes = []
         self.clear_output()
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.word_line.setText(Word.Word.current_word)

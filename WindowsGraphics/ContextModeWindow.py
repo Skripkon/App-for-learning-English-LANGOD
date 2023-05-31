@@ -164,11 +164,19 @@ class ContextModeWindow(QDialog):
     def next_button_function(self):
         self.index_of_the_current_word -= 1
         if self.index_of_the_current_word < 0:
+            print(self.words)
+            print(Exerciser.Exerciser.array_of_mistakes)
             action: str = Windows.Windows.open_window_after_all_words_reviewed()
             if action == "break":
                 self.exit_button_function()
                 return None
+            elif action == "retry":
+                self.words = Exerciser.Exerciser.array_of_mistakes.copy()
+                self.index_of_the_current_word = len(self.words) - 1
+                Exerciser.Exerciser.array_of_mistakes = []
             else:
+                if self.words != Exerciser.Exerciser.array_of_words_for_exercise:
+                    self.words = Exerciser.Exerciser.array_of_words_for_exercise
                 self.index_of_the_current_word = len(self.words) - 1
         self.clear_output()
         Word.Word.current_word = self.words[self.index_of_the_current_word]

@@ -2,7 +2,8 @@ import PyQt5
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
-
+import Exerciser
+import math
 
 class Windows:
     widget: PyQt5.QtWidgets.QStackedWidget = None
@@ -41,13 +42,21 @@ class Windows:
         msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msg_box.exec_()
 
-    @staticmethod
-    def open_window_after_all_words_reviewed() -> str:
+    @classmethod
+    def open_window_after_all_words_reviewed(cls, array_of_mistakes: list[str]) -> str:
         message_box = QMessageBox()
-        message_box.setWindowTitle("A study completed")
-        message_box.setText("You went over all of your words!\n"
-                            "\nYou might review your words again or try other mods!")
-        message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        percent_of_right_answers = 100 - 100 * round(len(array_of_mistakes) / len(Exerciser.Exerciser.array_of_words_for_exercise), 2)
+        message_box.setWindowTitle(f"A study completed, your result is {percent_of_right_answers}%")
+        if percent_of_right_answers == 100:
+            message_box.setText("You went over all of your words!\n"
+                                "\nYou might review all your words again or try other mods!")
+            message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        else:
+            message_box.setText("You went over all of your words!\n"
+                                "\nYou might review your words again, revise mistake words or try other mods!")
+            message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
+            buttonRevise = message_box.button(QMessageBox.Retry)
+            buttonRevise.setText('Retry')
         buttonContinue = message_box.button(QMessageBox.Ok)
         buttonContinue.setText('Continue')
         buttonExit = message_box.button(QMessageBox.Cancel)
@@ -85,3 +94,5 @@ class Windows:
             return "continue"
         elif message_box.clickedButton() == buttonExit:
             return "break"
+        else:
+            return "revise"

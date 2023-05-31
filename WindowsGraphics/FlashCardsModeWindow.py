@@ -102,7 +102,13 @@ class FlashCardsModeWindow(QDialog):
             if action == "break":
                 self.exit_button_function()
                 return None
+            elif action == "retry":
+                self.words = Exerciser.Exerciser.array_of_mistakes.copy()
+                self.index_of_the_current_word = len(self.words) - 1
+                Exerciser.Exerciser.array_of_mistakes = []
             else:
+                if self.words != Exerciser.Exerciser.array_of_words_for_exercise:
+                    self.words = Exerciser.Exerciser.array_of_words_for_exercise
                 self.index_of_the_current_word = len(self.words) - 1
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())

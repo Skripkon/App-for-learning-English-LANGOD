@@ -46,6 +46,7 @@ class FindWordlistsWindow(QDialog):
             requests.get(url, headers={'Word': word,
                                        'UserId': str(connection.IP.user_id),
                                        'Wordlist': name})
+        Windows.Windows.my_wordlists_window.choose_wordlist.addItem(name)
 
     def change_displayed_text(self, wordlist: str):
         self.words_text.show()

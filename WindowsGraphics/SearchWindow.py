@@ -170,8 +170,6 @@ class SearchWindow(QDialog):
         if self.check_whether_wordlist_with_such_name_already_exists(name):
             Windows.Windows.open_the_window("Error", f"Wordlist with name '{name}' already exists")
             return None
-        if not name:
-            return None
         if name == "":
             Windows.Windows.open_the_window("Error, Wordlist can't have empty name already exists")
             return None
