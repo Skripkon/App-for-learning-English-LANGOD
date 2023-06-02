@@ -1,7 +1,5 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
-
 import Exerciser
 from WindowsGraphics import Windows, RevisionModeWindow, FlashCardsModeWindow, ContextModeWindow
 

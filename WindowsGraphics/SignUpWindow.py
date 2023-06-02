@@ -1,8 +1,6 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
-import sqlite3
 from PyQt5 import QtWidgets
-import connection
 from WindowsGraphics import Windows
 import requests
 import connection

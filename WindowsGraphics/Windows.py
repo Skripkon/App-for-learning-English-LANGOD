@@ -1,9 +1,15 @@
+from time import time
+
 import PyQt5
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
 import Exerciser
 import math
+from time import time
+
+import Word
+
 
 class Windows:
     widget: PyQt5.QtWidgets.QStackedWidget = None
@@ -94,3 +100,27 @@ class Windows:
             return "break"
         else:
             return "Learn your mistakes"
+
+    @classmethod
+    def play_sound_with_uk_accent(cls):
+        cls.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent())
+        # getattr(Windows, window).setFocus()
+        Windows.widget.setFocus()
+
+    @classmethod
+    def play_sound_with_us_accent(cls):
+        cls.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent())
+        # getattr(Windows, window).setFocus()
+        Windows.widget.setFocus()
+
+    @staticmethod
+    def time_required(f):
+        last = [time()]
+
+        def decorator():
+            if time() - last[0] < 1:
+                return None
+            last[0] = time()
+            return f()
+
+        return decorator

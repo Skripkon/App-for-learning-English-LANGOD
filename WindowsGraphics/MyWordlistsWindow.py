@@ -1,10 +1,7 @@
 import requests
-from PyQt5.QtWidgets import QDialog, QPushButton, QScrollArea, QGroupBox, QVBoxLayout, QFormLayout, QLabel
+from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
-
 import Exerciser
-import Word
 import connection
 from WindowsGraphics import Windows, FindWordlistsWindow
 

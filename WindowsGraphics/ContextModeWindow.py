@@ -1,11 +1,9 @@
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
-from time import time
 import Exerciser
 import Word
 from WindowsGraphics import Windows
-import time
 
 
 class ContextModeWindow(QDialog):
@@ -43,8 +41,6 @@ class ContextModeWindow(QDialog):
     def init_first_word(self):
         Word.Word.current_word = self.words[-1]
         self.display_the_usage()
-
-
         self.index_of_the_current_word = len(self.words) - 1
         self.input_text.setStyleSheet(self.style_sheet_by_default)
         self.hide_pronunciation_buttons()
@@ -62,8 +58,8 @@ class ContextModeWindow(QDialog):
         self.pronunciation_US_text.hide()
 
     def connect_interface_with_functions(self):
-        self.pronunciation_US.clicked.connect(self.play_sound_with_us_accent)
-        self.pronunciation_UK.clicked.connect(self.play_sound_with_uk_accent)
+        self.pronunciation_US.clicked.connect(Windows.Windows.play_sound_with_us_accent)
+        self.pronunciation_UK.clicked.connect(Windows.Windows.play_sound_with_uk_accent)
         self.exit_button.clicked.connect(self.exit_button_function)
         self.next_button.clicked.connect(self.next_button_function)
         self.shuffle_button.clicked.connect(self.shuffle_button_function)
@@ -129,16 +125,6 @@ class ContextModeWindow(QDialog):
             self.mistake_was_made = "True"
             self.array_of_mistakes.append(Word.Word.current_word)
 
-    @staticmethod
-    def play_sound_with_uk_accent():
-        Word.Word.get_the_pronunciation_of_a_word_with_British_accent()
-        Windows.Windows.context_mode_window.setFocus()
-
-    @staticmethod
-    def play_sound_with_us_accent():
-        Word.Word.get_the_pronunciation_of_a_word_with_American_accent()
-        Windows.Windows.context_mode_window.setFocus()
-
     def display_the_usage(self):
         self.clear_output()
         output_of_examples = Word.Word.get_the_usage_of_a_word()
@@ -155,7 +141,6 @@ class ContextModeWindow(QDialog):
             self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_on)
             Word.Word.current_word = self.words[-1]
             self.display_the_usage()
-
         else:
             self.type_of_order = "straight"
             wordlist: str = Windows.Windows.exerciser_window.choose_wordlist.currentText()

@@ -1,11 +1,9 @@
-import os
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5 import QtWidgets
 from nltk.corpus import wordnet
 import connection
-
-from WindowsGraphics import SignInWindow, Windows, SignUpWindow
+from WindowsGraphics import SignInWindow, Windows
 import nltk
 
 

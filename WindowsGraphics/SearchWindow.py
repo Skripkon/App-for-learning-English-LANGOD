@@ -2,9 +2,7 @@ import requests
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QInputDialog
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
-from time import time
 import Exerciser
 import Word
 import connection
@@ -83,10 +81,8 @@ class SearchWindow(QDialog):
     def connect_interface_with_functions(self):
         self.back_to_the_main_page_button.clicked.connect(self.back_to_the_main_page_button_function)
         self.search_button.clicked.connect(self.search_button_function)
-        self.pronunciation_US.clicked.connect(
-            self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent))
-        self.pronunciation_UK.clicked.connect(
-            self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent))
+        self.pronunciation_US.clicked.connect(Windows.Windows.play_sound_with_us_accent)
+        self.pronunciation_UK.clicked.connect(Windows.Windows.play_sound_with_uk_accent)
         self.go_to_the_exerciser_button.clicked.connect(self.go_to_the_exerciser_button_function)
         self.add_word_button.clicked.connect(self.add_word_button_function)
         self.add_word_button.released.connect(self.add_word_button_released_function)
@@ -263,15 +259,3 @@ class SearchWindow(QDialog):
     def keyPressEvent(self, event):
         if event.nativeScanCode() == 36:  # button Enter pressed
             self.search_button_function()
-
-    @staticmethod
-    def time_required(f):
-        last = [time()]
-
-        def decorator():
-            if time() - last[0] < 1:
-                return None
-            last[0] = time()
-            return f()
-
-        return decorator

@@ -1,13 +1,9 @@
 import requests
-from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QDialog, QPushButton, QScrollArea, QGroupBox, QVBoxLayout, QFormLayout, QLabel, QInputDialog
+from PyQt5.QtWidgets import QDialog, QPushButton, QScrollArea, QGroupBox, QFormLayout, QLabel, QInputDialog
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
-
 import Exerciser
-import Word
 import connection
-from WindowsGraphics import Windows, RevisionModeWindow, FlashCardsModeWindow, ContextModeWindow
+from WindowsGraphics import Windows
 
 
 class FindWordlistsWindow(QDialog):

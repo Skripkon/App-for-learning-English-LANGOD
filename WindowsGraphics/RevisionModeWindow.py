@@ -1,7 +1,6 @@
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
-from time import time
 import Exerciser
 import Word
 from WindowsGraphics import Windows
@@ -30,8 +29,8 @@ class RevisionModeWindow(QDialog):
         self.index_of_the_current_word = len(self.words) - 1
 
     def connect_interface_with_functions(self):
-        self.pronunciation_US.clicked.connect(self.play_sound_with_us_accent)
-        self.pronunciation_UK.clicked.connect(self.play_sound_with_uk_accent)
+        self.pronunciation_US.clicked.connect(Windows.Windows.play_sound_with_us_accent)
+        self.pronunciation_UK.clicked.connect(Windows.Windows.play_sound_with_uk_accent)
         self.show_definitions_button.clicked.connect(self.show_definitions_button_function)
         self.show_examples_button.clicked.connect(self.show_examples_button_function)
         self.exit_button.clicked.connect(self.exit_button_function)
@@ -42,14 +41,6 @@ class RevisionModeWindow(QDialog):
     def do_not_remember_button_function(self):
         self.array_of_mistakes.append(self.words[self.index_of_the_current_word])
         self.next_button_function()
-
-    def play_sound_with_uk_accent(self):
-        self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent())
-        Windows.Windows.revision_mode_window.setFocus()
-
-    def play_sound_with_us_accent(self):
-        self.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent())
-        Windows.Windows.revision_mode_window.setFocus()
 
     def show_definitions_button_function(self):
         self.definitions_text.clear()
@@ -127,22 +118,10 @@ class RevisionModeWindow(QDialog):
         if event.nativeScanCode() == 9:  # button ESC pressed
             self.exit_button_function()
         if event.nativeScanCode() == 39:  # button s pressed
-            self.play_sound_with_us_accent()
+            Windows.Windows.play_sound_with_us_accent()
         if event.nativeScanCode() == 26:  # button e pressed
             self.show_examples_button_function()
         if event.nativeScanCode() == 40:  # button d pressed
             self.show_definitions_button_function()
         if event.nativeScanCode() == 65:  # button space pressed
             self.next_button_function()
-
-    @staticmethod
-    def time_required(f):
-        last = [time()]
-
-        def decorator():
-            if time() - last[0] < 1:
-                return None
-            last[0] = time()
-            return f()
-
-        return decorator

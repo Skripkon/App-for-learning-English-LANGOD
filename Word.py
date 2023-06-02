@@ -4,8 +4,7 @@ from reverso_context_api import Client
 import shutil
 import os
 import requests
-from nltk.corpus import wordnet, words
-
+from nltk.corpus import wordnet
 from WindowsGraphics import Windows
 
 

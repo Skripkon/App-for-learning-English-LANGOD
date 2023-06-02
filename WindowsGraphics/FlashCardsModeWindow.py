@@ -1,7 +1,5 @@
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QDialog, QApplication
+from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
-from time import time
 import Exerciser
 import Word
 from WindowsGraphics import Windows
