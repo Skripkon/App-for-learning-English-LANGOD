@@ -10,19 +10,6 @@ class ContextModeWindow(QDialog):
     words: list[str] = []
     current_hint_index = 1
     index_of_the_current_word: int
-    style_sheet_for_input_field: str = 'font: 19pt "Yrsa";' \
-                                       'color:black;' \
-                                       'selection-background-color:' \
-                                       'rgb(255, 255, 255);' \
-                                       'border-style: outset;' \
-                                       'border-width: 1px;' \
-                                       'border-radius: 15px;' \
-                                       'border-color: black;' \
-                                       'padding: 4px;' \
-                                       'selection-color: rgb(101, 145, 232);'
-    style_sheet_after_correct_answer = 'background-color:rgb(205, 247, 190);' + style_sheet_for_input_field
-    style_sheet_by_default = 'background-color:rgb(200, 211, 223);' + style_sheet_for_input_field
-    style_sheet_after_wrong_answer = 'background-color:rgb(255, 192, 192);' + style_sheet_for_input_field
     array_of_mistakes: list[str] = []
     mistake_was_made: str = "None" # other values of this variable are "True" and "False"
 
@@ -42,7 +29,7 @@ class ContextModeWindow(QDialog):
         Word.Word.current_word = self.words[-1]
         self.display_the_usage()
         self.index_of_the_current_word = len(self.words) - 1
-        self.input_text.setStyleSheet(self.style_sheet_by_default)
+        self.input_text.setStyleSheet(Windows.Windows.style_sheet_by_default)
         self.hide_pronunciation_buttons()
 
     def show_pronunciation_buttons(self):
@@ -71,7 +58,7 @@ class ContextModeWindow(QDialog):
         answer: str = self.input_text.text()
         if answer == Word.Word.current_word:
             self.wrong_answer_line.hide()
-            self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
+            self.input_text.setStyleSheet(Windows.Windows.style_sheet_after_correct_answer)
             self.show_pronunciation_buttons()
             if self.mistake_was_made == "None":
                 self.mistake_was_made = "False"
@@ -80,7 +67,7 @@ class ContextModeWindow(QDialog):
                 self.array_of_mistakes.append(answer)
                 self.mistake_was_made = "True"
             self.wrong_answer_line.show()
-            self.input_text.setStyleSheet(self.style_sheet_after_wrong_answer)
+            self.input_text.setStyleSheet(Windows.Windows.style_sheet_after_wrong_answer)
         Windows.Windows.context_mode_window.setFocus()
 
     def hint_button_function(self):
@@ -88,11 +75,11 @@ class ContextModeWindow(QDialog):
             self.mistake_was_made = "True"
             self.array_of_mistakes.append(Word.Word.current_word)
         if self.input_text.text() == Word.Word.current_word:
-            self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
+            self.input_text.setStyleSheet(Windows.Windows.style_sheet_after_correct_answer)
             self.show_pronunciation_buttons()
             return None
         self.wrong_answer_line.hide()
-        self.input_text.setStyleSheet(self.style_sheet_by_default)
+        self.input_text.setStyleSheet(Windows.Windows.style_sheet_by_default)
         if self.current_hint_index == 0:
             self.input_text.setText(Word.Word.current_word[0:self.current_hint_index])
         else:
@@ -118,7 +105,7 @@ class ContextModeWindow(QDialog):
         self.wrong_answer_line.hide()
         self.input_text.setText(Word.Word.current_word)
         self.current_hint_index = len(Word.Word.current_word)
-        self.input_text.setStyleSheet(self.style_sheet_after_correct_answer)
+        self.input_text.setStyleSheet(Windows.Windows.style_sheet_after_correct_answer)
         Windows.Windows.context_mode_window.setFocus()
         self.show_pronunciation_buttons()
         if self.mistake_was_made == "None":
@@ -187,7 +174,7 @@ class ContextModeWindow(QDialog):
         Word.Word.current_word = self.words[self.index_of_the_current_word]
         self.display_the_usage()
         self.wrong_answer_line.hide()
-        self.input_text.setStyleSheet(self.style_sheet_by_default)
+        self.input_text.setStyleSheet(Windows.Windows.style_sheet_by_default)
         Windows.Windows.context_mode_window.setFocus()
         self.current_hint_index = 1
         self.hide_pronunciation_buttons()

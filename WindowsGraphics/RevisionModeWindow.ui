@@ -199,7 +199,7 @@ QPushButton:hover {background-color: rgb(20, 75, 130);}</string>
    </property>
    <property name="icon">
     <iconset>
-     <normalon>WindowsGraphics</normalon>
+     <normalon>../../../.designer/backup/WindowsGraphics</normalon>
      <activeon>:/voiceButtonIcon.png/voiceButtonIcon.png</activeon>
     </iconset>
    </property>
@@ -257,14 +257,14 @@ font: 21pt &quot;Yrsa&quot;;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string/>
    </property>
    <property name="icon">
     <iconset>
-     <normalon>WindowsGraphics</normalon>
+     <normalon>../../../.designer/backup/WindowsGraphics</normalon>
      <activeon>:/voiceButtonIcon.png/voiceButtonIcon.png</activeon>
     </iconset>
    </property>

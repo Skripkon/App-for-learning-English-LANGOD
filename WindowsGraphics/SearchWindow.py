@@ -46,7 +46,7 @@ class SearchWindow(QDialog):
         Windows.Windows.context_mode_window = None
         Windows.Windows.find_wordlists_window = None
         Windows.Windows.my_wordlists_window = None
-
+        Windows.Windows.audition_mode_window = None
 
     def clear_fields(self):
         self.search_field.clear()

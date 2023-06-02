@@ -20,6 +20,7 @@ class Windows:
     revision_mode_window = None
     flashcards_mode_window = None
     context_mode_window = None
+    audition_mode_window = None
     my_wordlists_window = None
     find_wordlists_window = None
     style_sheet_for_button: str = "selection-background-color: rgb(255, 255, 255);" \
@@ -38,36 +39,8 @@ class Windows:
                                         "background-color:rgb(30, 85, 138);" \
                                         "font: 19pt \"Yrsa\";" \
                                         "color:yellow; " + style_sheet_for_button
-
-    @staticmethod
-    def open_the_window(title_of_the_window: str, information: str):
-        msg_box = QtWidgets.QMessageBox()
-        msg_box.setText(information)
-        msg_box.setWindowTitle(title_of_the_window)
-        msg_box.setIcon(QtWidgets.QMessageBox.Information)
-        msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        msg_box.exec_()
-
-    @classmethod
-    def open_window_after_all_words_reviewed(cls, len_of_array_of_mistakes: int, len_of_words: int) -> str:
-        message_box = QMessageBox()
-        percent_of_right_answers = 100 - 100 * round(len_of_array_of_mistakes / len_of_words, 2)
-        message_box.setWindowTitle(" ")
-        message_box.setText("You went over all of your words!\n"
-                            f"Your result is {percent_of_right_answers} %\n")
-        if percent_of_right_answers == 100:
-            message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-        else:
-            message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
-            buttonRevise = message_box.button(QMessageBox.Retry)
-            buttonRevise.setText('Learn your mistakes')
-        buttonContinue = message_box.button(QMessageBox.Ok)
-        buttonContinue.setText('Restart')
-        buttonExit = message_box.button(QMessageBox.Cancel)
-        buttonExit.setText('Exit')
-
-        message_box.setStyleSheet(
-            """
+    style_sheet_for_message_box = \
+        """
             QMessageBox {
                 background-color: #E8F1FD;
                 color: #333333;
@@ -91,8 +64,49 @@ class Windows:
             QMessageBox QPushButton:pressed {
                 background-color: #426C99;
             }
-            """
-        )
+        """
+    style_sheet_for_input_field: str = 'font: 19pt "Yrsa";' \
+                                       'color:black;' \
+                                       'selection-background-color:' \
+                                       'rgb(255, 255, 255);' \
+                                       'border-style: outset;' \
+                                       'border-width: 1px;' \
+                                       'border-radius: 15px;' \
+                                       'border-color: black;' \
+                                       'padding: 4px;' \
+                                       'selection-color: rgb(101, 145, 232);'
+    style_sheet_after_correct_answer = 'background-color:rgb(205, 247, 190);' + style_sheet_for_input_field
+    style_sheet_by_default = 'background-color:rgb(200, 211, 223);' + style_sheet_for_input_field
+    style_sheet_after_wrong_answer = 'background-color:rgb(255, 192, 192);' + style_sheet_for_input_field
+
+    @classmethod
+    def open_the_window(cls, title_of_the_window: str, information: str):  # mostly for errors
+        msg_box = QtWidgets.QMessageBox()
+        msg_box.setText(information)
+        msg_box.setWindowTitle(title_of_the_window)
+        msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        msg_box.setStyleSheet(cls.style_sheet_for_message_box)
+        msg_box.exec_()
+
+    @classmethod
+    def open_window_after_all_words_reviewed(cls, len_of_array_of_mistakes: int, len_of_words: int) -> str:
+        message_box = QMessageBox()
+        percent_of_right_answers = 100 - 100 * round(len_of_array_of_mistakes / len_of_words, 2)
+        message_box.setWindowTitle(" ")
+        message_box.setText("You went over all of your words!\n"
+                            f"Your result is {percent_of_right_answers} %\n")
+        if percent_of_right_answers == 100:
+            message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        else:
+            message_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Retry | QMessageBox.Cancel)
+            buttonRevise = message_box.button(QMessageBox.Retry)
+            buttonRevise.setText('Learn your mistakes')
+        buttonContinue = message_box.button(QMessageBox.Ok)
+        buttonContinue.setText('Restart')
+        buttonExit = message_box.button(QMessageBox.Cancel)
+        buttonExit.setText('Exit')
+
+        message_box.setStyleSheet(cls.style_sheet_for_message_box)
         message_box.exec()
         if message_box.clickedButton() == buttonContinue:
             return "Restart"

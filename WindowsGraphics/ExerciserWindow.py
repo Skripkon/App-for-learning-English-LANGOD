@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 import Exerciser
-from WindowsGraphics import Windows, RevisionModeWindow, FlashCardsModeWindow, ContextModeWindow
+from WindowsGraphics import Windows, RevisionModeWindow, FlashCardsModeWindow, ContextModeWindow, AuditionModeWindow
 
 
 class ExerciserWindow(QDialog):
@@ -13,6 +13,7 @@ class ExerciserWindow(QDialog):
         self.revision_mode_button.clicked.connect(self.revision_mode_button_function)
         self.flashcards_mode_button.clicked.connect(self.flashcards_mode_button_function)
         self.context_mode_button.clicked.connect(self.context_mode_window_button_function)
+        self.audition_mode_button.clicked.connect(self.audition_mode_window_button_function)
         Windows.Windows.exerciser_window = self
         self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
 
@@ -62,4 +63,16 @@ class ExerciserWindow(QDialog):
             Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
         Windows.Windows.context_mode_window.init_first_word()
         Windows.Windows.context_mode_window.show()
+        Windows.Windows.widget.setFocus()
+
+    @staticmethod
+    def audition_mode_window_button_function():
+        AuditionModeWindow.AuditionModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
+        Windows.Windows.exerciser_window.hide()
+        if Windows.Windows.audition_mode_window is None:
+            AuditionModeWindow.AuditionModeWindow()
+            Windows.Windows.widget.addWidget(Windows.Windows.audition_mode_window)
+            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        Windows.Windows.audition_mode_window.init_first_word()
+        Windows.Windows.audition_mode_window.show()
         Windows.Windows.widget.setFocus()
