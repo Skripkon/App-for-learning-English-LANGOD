@@ -118,13 +118,11 @@ class Windows:
     @classmethod
     def play_sound_with_uk_accent(cls):
         cls.time_required(Word.Word.get_the_pronunciation_of_a_word_with_British_accent())
-        # getattr(Windows, window).setFocus()
         Windows.widget.setFocus()
 
     @classmethod
     def play_sound_with_us_accent(cls):
         cls.time_required(Word.Word.get_the_pronunciation_of_a_word_with_American_accent())
-        # getattr(Windows, window).setFocus()
         Windows.widget.setFocus()
 
     @staticmethod
