@@ -1,6 +1,4 @@
-import time
-
-from PyQt5.QtGui import QIcon, QPalette
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog
 from PyQt5.uic import loadUi
 from PyQt5 import QtCore
