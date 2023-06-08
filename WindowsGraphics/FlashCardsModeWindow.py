@@ -8,8 +8,6 @@ from functools import partial
 
 
 class FlashCardsModeWindow(QDialog):
-    words: list[str] = []
-    index_of_the_current_word: int
     list_of_buttons: list[str] = []
     style_sheet_for_option: str = "selection-background-color: rgb(255, 255, 255);" \
                                   "border-style: outset;" \
@@ -24,8 +22,7 @@ class FlashCardsModeWindow(QDialog):
                                      'font: 19pt \"Yrsa\"; color:black;' + style_sheet_for_option
     style_sheet_by_default = 'background-color:rgb(30, 85, 138); ' \
                              'font: 19pt \"Yrsa\"; color:white;' + style_sheet_for_option
-    array_of_mistakes: list[str] = []
-    first_answer = "None" # unless you give any answer
+    first_answer = "None"  # unless you give any answer
     # other values of "first_answer" are "Right" and "Wrong"
 
     def __init__(self):
@@ -37,20 +34,15 @@ class FlashCardsModeWindow(QDialog):
         self.connect_interface_with_functions()
         self.type_of_order = "straight"
         self.word_label.setReadOnly(True)
+        self.init_first_word()
 
     def init_first_word(self):
-        Word.Word.current_word = self.words[-1]
-        self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
-        self.index_of_the_current_word = len(self.words) - 1
-        self.set_variants_function()
-        self.set_default_colors()
+        Windows.Windows.initialization_after_mode_was_opened()
+        self.display_current_word()
 
     @staticmethod
     def exit_button_function():
-        # Exerciser.Exerciser.array_of_words_for_exercise.clear()
-        Windows.Windows.flashcards_mode_window.hide()
-        Windows.Windows.exerciser_window.show()
-        Windows.Windows.flashcards_mode_window.setFocus()
+        Windows.Windows.exit_button_function("flashcards_mode_window")
 
     def connect_interface_with_functions(self):
         self.exit_button.clicked.connect(self.exit_button_function)
@@ -68,24 +60,15 @@ class FlashCardsModeWindow(QDialog):
         for i in range(6):
             getattr(self, self.list_of_buttons[i]).setText(set_of_words[i])
 
-    def shuffle_button_function(self):
-        self.index_of_the_current_word = len(self.words) - 1
+    def display_current_word(self):
         self.set_default_colors()
-        if self.type_of_order == "straight":
-            self.type_of_order = "shuffled"
-            Exerciser.Exerciser.random_shuffle(self.words)
-            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_on)
-        else:
-            self.type_of_order = "straight"
-            wordlist: str = Windows.Windows.exerciser_window.choose_wordlist.currentText()
-            self.words = Exerciser.Exerciser.dict_of_added_words[wordlist].copy()
-            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_off)
-
-        Word.Word.current_word = self.words[-1]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
         self.word_label.verticalScrollBar().setValue(0)
         self.set_variants_function()
-        Windows.Windows.flashcards_mode_window.setFocus()
+
+    @staticmethod
+    def shuffle_button_function(self):
+        Windows.Windows.shuffle_button_function("flashcards_mode_window")
 
     def answer_button_function(self, name_of_clicked_button):
         answer: str = getattr(self, name_of_clicked_button).text()
@@ -100,34 +83,34 @@ class FlashCardsModeWindow(QDialog):
                 pass
             elif self.first_answer == "None":
                 self.first_answer = "Wrong"
-                self.array_of_mistakes.append(self.words[self.index_of_the_current_word])
+                Exerciser.Exerciser.array_of_mistakes.append(Exerciser.Exerciser.words_for_exercise[Exerciser.Exerciser.index_of_the_current_word])
             getattr(self, name_of_clicked_button).setStyleSheet(self.style_sheet_after_wrong_answer)
         Windows.Windows.flashcards_mode_window.setFocus()
 
     def next_button_function(self):
-        self.index_of_the_current_word -= 1
+        Exerciser.Exerciser.index_of_the_current_word -= 1
         if self.first_answer == "None":
-            self.array_of_mistakes.append(Word.Word.current_word)
+            Exerciser.Exerciser.array_of_mistakes.append(Word.Word.current_word)
         self.first_answer = "None"
-        if self.index_of_the_current_word < 0:
-            action: str = Windows.Windows.open_window_after_all_words_reviewed(len(self.array_of_mistakes), len(self.words))
+        if Exerciser.Exerciser.index_of_the_current_word < 0:
+            action: str = Windows.Windows.open_window_after_all_words_reviewed()
             if action == "break":
                 self.exit_button_function()
-                self.array_of_mistakes.clear()
+                Exerciser.Exerciser.array_of_mistakes.clear()
                 self.first_answer = "None"
                 return None
             elif action == "Learn your mistakes":
-                self.words = self.array_of_mistakes.copy()
-                self.index_of_the_current_word = len(self.words) - 1
-                self.array_of_mistakes.clear()
+                Exerciser.Exerciser.words_for_exercise = Exerciser.Exerciser.array_of_mistakes.copy()
+                Exerciser.Exerciser.index_of_the_current_word = len(Exerciser.Exerciser.words_for_exercise) - 1
+                Exerciser.Exerciser.array_of_mistakes.clear()
                 self.first_answer = None
             else:
                 self.first_answer = "None"
-                if self.words != Exerciser.Exerciser.array_of_words_for_exercise:
-                    self.words = Exerciser.Exerciser.array_of_words_for_exercise
-                self.index_of_the_current_word = len(self.words) - 1
-                self.array_of_mistakes.clear()
-        Word.Word.current_word = self.words[self.index_of_the_current_word]
+                if Exerciser.Exerciser.words_for_exercise != Exerciser.Exerciser.words_for_exercise:
+                    Exerciser.Exerciser.words_for_exercise = Exerciser.Exerciser.words_for_exercise
+                Exerciser.Exerciser.index_of_the_current_word = len(Exerciser.Exerciser.words_for_exercise) - 1
+                Exerciser.Exerciser.array_of_mistakes.clear()
+        Word.Word.current_word = Exerciser.Exerciser.words_for_exercise[Exerciser.Exerciser.index_of_the_current_word]
         self.word_label.setText(Word.Word.get_the_meaning_of_a_word())
         self.word_label.verticalScrollBar().setValue(0)
         self.set_variants_function()
@@ -148,6 +131,6 @@ class FlashCardsModeWindow(QDialog):
                 getattr(self, button).setStyleSheet(self.style_sheet_after_correct_answer)
                 break
         if self.first_answer == "None":
-            self.array_of_mistakes.append(self.words[self.index_of_the_current_word])
+            Exerciser.Exerciser.array_of_mistakes.append(Exerciser.Exerciser.words_for_exercise[Exerciser.Exerciser.index_of_the_current_word])
             self.first_answer = "Wrong"
         Windows.Windows.flashcards_mode_window.setFocus()

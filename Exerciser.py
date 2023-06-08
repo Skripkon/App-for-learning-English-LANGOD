@@ -5,8 +5,10 @@ import connection
 
 class Exerciser:
     dict_of_added_words: dict = {}
-    array_of_words_for_exercise: list[str] = []
+    words_for_exercise: list[str] = []
     privacy_settings_for_wordlists: dict = {}
+    array_of_mistakes = []
+    index_of_the_current_word: int
 
     def __init__(self):
         Exerciser.dict_of_added_words.clear()

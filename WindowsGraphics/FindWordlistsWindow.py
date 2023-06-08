@@ -1,3 +1,5 @@
+import time
+
 import requests
 from PyQt5.QtWidgets import QDialog, QPushButton, QScrollArea, QGroupBox, QFormLayout, QLabel, QInputDialog
 from PyQt5.uic import loadUi
@@ -22,9 +24,14 @@ class FindWordlistsWindow(QDialog):
         Windows.Windows.find_wordlists_window = self
         self.words_text.setReadOnly(True)
         self.words_text.hide()
-        self.find_wordlist_button.clicked.connect(self.search)
+        self.find_wordlist_button.pressed.connect(self.search)
+        self.find_wordlist_button.released.connect(self.blink)
         self.add_wordlist_button.clicked.connect(self.add_wordlist_button_function)
         self.add_wordlist_button.hide()
+
+    def blink(self):
+        time.sleep(0.1)
+        self.find_wordlist_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_off)
 
     def add_wordlist_button_function(self):
         name = self.show_dialog()
@@ -73,6 +80,7 @@ class FindWordlistsWindow(QDialog):
             self.verticalLayout.removeWidget(self.scroll)
 
     def search(self):
+        self.find_wordlist_button.setStyleSheet(Windows.Windows.style_sheet_for_pressed_button)
         self.add_wordlist_button.hide()
         self.words_text.hide()
         self.clear_last_search_data()

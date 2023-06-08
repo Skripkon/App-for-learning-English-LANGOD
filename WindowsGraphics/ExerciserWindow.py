@@ -15,13 +15,6 @@ class ExerciserWindow(QDialog):
         self.context_mode_button.clicked.connect(self.context_mode_window_button_function)
         self.audition_mode_button.clicked.connect(self.audition_mode_window_button_function)
         Windows.Windows.exerciser_window = self
-        self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
-
-    def currentTextChangedFunction(self):
-        new_wordlist: str = self.choose_wordlist.currentText()
-        if new_wordlist == "":
-            return None
-        Exerciser.Exerciser.array_of_words_for_exercise = Exerciser.Exerciser.dict_of_added_words[new_wordlist]
 
     @staticmethod
     def back_to_the_search_button_function():
@@ -31,48 +24,43 @@ class ExerciserWindow(QDialog):
 
     @staticmethod
     def revision_mode_button_function():
-        RevisionModeWindow.RevisionModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
         Windows.Windows.exerciser_window.hide()
-        if Windows.Windows.revision_mode_window is None:
-            RevisionModeWindow.RevisionModeWindow()
-            Windows.Windows.widget.addWidget(Windows.Windows.revision_mode_window)
-            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        RevisionModeWindow.RevisionModeWindow()
+        Windows.Windows.widget.addWidget(Windows.Windows.revision_mode_window)
+        Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
         Windows.Windows.revision_mode_window.init_first_word()
         Windows.Windows.revision_mode_window.show()
         Windows.Windows.widget.setFocus()
 
     @staticmethod
     def flashcards_mode_button_function():
-        FlashCardsModeWindow.FlashCardsModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
+        FlashCardsModeWindow.FlashCardsModeWindow.words = Exerciser.Exerciser.words_for_exercise.copy()
         Windows.Windows.exerciser_window.hide()
-        if Windows.Windows.flashcards_mode_window is None:
-            FlashCardsModeWindow.FlashCardsModeWindow()
-            Windows.Windows.widget.addWidget(Windows.Windows.flashcards_mode_window)
-            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        FlashCardsModeWindow.FlashCardsModeWindow()
+        Windows.Windows.widget.addWidget(Windows.Windows.flashcards_mode_window)
+        Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
         Windows.Windows.flashcards_mode_window.init_first_word()
         Windows.Windows.flashcards_mode_window.show()
         Windows.Windows.widget.setFocus()
 
     @staticmethod
     def context_mode_window_button_function():
-        ContextModeWindow.ContextModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
+        ContextModeWindow.ContextModeWindow.words = Exerciser.Exerciser.words_for_exercise.copy()
         Windows.Windows.exerciser_window.hide()
-        if Windows.Windows.context_mode_window is None:
-            ContextModeWindow.ContextModeWindow()
-            Windows.Windows.widget.addWidget(Windows.Windows.context_mode_window)
-            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        ContextModeWindow.ContextModeWindow()
+        Windows.Windows.widget.addWidget(Windows.Windows.context_mode_window)
+        Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
         Windows.Windows.context_mode_window.init_first_word()
         Windows.Windows.context_mode_window.show()
         Windows.Windows.widget.setFocus()
 
     @staticmethod
     def audition_mode_window_button_function():
-        AuditionModeWindow.AuditionModeWindow.words = Exerciser.Exerciser.array_of_words_for_exercise.copy()
+        AuditionModeWindow.AuditionModeWindow.words = Exerciser.Exerciser.words_for_exercise.copy()
         Windows.Windows.exerciser_window.hide()
-        if Windows.Windows.audition_mode_window is None:
-            AuditionModeWindow.AuditionModeWindow()
-            Windows.Windows.widget.addWidget(Windows.Windows.audition_mode_window)
-            Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
+        AuditionModeWindow.AuditionModeWindow()
+        Windows.Windows.widget.addWidget(Windows.Windows.audition_mode_window)
+        Windows.Windows.widget.setCurrentIndex(Windows.Windows.widget.currentIndex() + 1)
         Windows.Windows.audition_mode_window.init_first_word()
         Windows.Windows.audition_mode_window.show()
         Windows.Windows.widget.setFocus()

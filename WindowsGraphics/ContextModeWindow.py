@@ -7,10 +7,7 @@ from WindowsGraphics import Windows
 
 
 class ContextModeWindow(QDialog):
-    words: list[str] = []
     current_hint_index = 1
-    index_of_the_current_word: int
-    array_of_mistakes: list[str] = []
     mistake_was_made: str = "None" # other values of this variable are "True" and "False"
 
     def __init__(self):
@@ -24,11 +21,11 @@ class ContextModeWindow(QDialog):
         self.connect_interface_with_functions()
         self.type_of_order = "straight"
         self.hide_pronunciation_buttons()
+        self.init_first_word()
 
     def init_first_word(self):
-        Word.Word.current_word = self.words[-1]
+        Windows.Windows.initialization_after_mode_was_opened()
         self.display_the_usage()
-        self.index_of_the_current_word = len(self.words) - 1
         self.input_text.setStyleSheet(Windows.Windows.style_sheet_by_default)
         self.hide_pronunciation_buttons()
 
@@ -64,7 +61,7 @@ class ContextModeWindow(QDialog):
                 self.mistake_was_made = "False"
         else:
             if self.mistake_was_made == "None":
-                self.array_of_mistakes.append(answer)
+                Exerciser.Exerciser.array_of_mistakes.append(answer)
                 self.mistake_was_made = "True"
             self.wrong_answer_line.show()
             self.input_text.setStyleSheet(Windows.Windows.style_sheet_after_wrong_answer)
@@ -73,7 +70,7 @@ class ContextModeWindow(QDialog):
     def hint_button_function(self):
         if self.mistake_was_made == "None":
             self.mistake_was_made = "True"
-            self.array_of_mistakes.append(Word.Word.current_word)
+            Exerciser.Exerciser.array_of_mistakes.append(Word.Word.current_word)
         if self.input_text.text() == Word.Word.current_word:
             self.input_text.setStyleSheet(Windows.Windows.style_sheet_after_correct_answer)
             self.show_pronunciation_buttons()
@@ -110,7 +107,7 @@ class ContextModeWindow(QDialog):
         self.show_pronunciation_buttons()
         if self.mistake_was_made == "None":
             self.mistake_was_made = "True"
-            self.array_of_mistakes.append(Word.Word.current_word)
+            Exerciser.Exerciser.array_of_mistakes.append(Word.Word.current_word)
 
     def display_the_usage(self):
         self.clear_output()
@@ -120,58 +117,46 @@ class ContextModeWindow(QDialog):
         self.usage_text.verticalScrollBar().setValue(0)
         Windows.Windows.context_mode_window.setFocus()
 
-    def shuffle_button_function(self):
-        self.index_of_the_current_word = len(self.words) - 1
-        if self.type_of_order == "straight":
-            self.type_of_order = "shuffled"
-            Exerciser.Exerciser.random_shuffle(self.words)
-            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_on)
-            Word.Word.current_word = self.words[-1]
-            self.display_the_usage()
-        else:
-            self.type_of_order = "straight"
-            wordlist: str = Windows.Windows.exerciser_window.choose_wordlist.currentText()
-            self.words = Exerciser.Exerciser.dict_of_added_words[wordlist].copy()
-            Word.Word.current_word = self.words[-1]
-            self.display_the_usage()
-            self.shuffle_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_off)
-        Windows.Windows.context_mode_window.setFocus()
+    @staticmethod
+    def shuffle_button_function():
+        Windows.Windows.shuffle_button_function("context_mode_window")
+
+    def display_first_word(self):
+        self.display_current_word()
 
     @staticmethod
     def exit_button_function():
-        Windows.Windows.context_mode_window.hide()
-        Windows.Windows.exerciser_window.show()
-        Windows.Windows.context_mode_window.setFocus()
+        Windows.Windows.exit_button_function("context_mode_window")
 
     def clear_output(self):
         self.usage_text.clear()
         self.input_text.clear()
 
     def next_button_function(self):
-        self.index_of_the_current_word -= 1
+        Exerciser.Exerciser.index_of_the_current_word -= 1
         if self.mistake_was_made == "None":
-            self.array_of_mistakes.append(Word.Word.current_word)
+            Exerciser.Exerciser.array_of_mistakes.append(Word.Word.current_word)
         self.mistake_was_made = "None"
-        if self.index_of_the_current_word < 0:
-            action: str = Windows.Windows.open_window_after_all_words_reviewed(len(self.array_of_mistakes), len(self.words))
+        if Exerciser.Exerciser.index_of_the_current_word < 0:
+            action: str = Windows.Windows.open_window_after_all_words_reviewed()
             if action == "break":
                 self.exit_button_function()
-                self.array_of_mistakes.clear()
+                Exerciser.Exerciser.array_of_mistakes.clear()
                 self.mistake_was_made = "None"
                 return None
             elif action == "Learn your mistakes":
-                self.words = self.array_of_mistakes.copy()
-                self.index_of_the_current_word = len(self.words) - 1
-                self.array_of_mistakes.clear()
+                Exerciser.Exerciser.words_for_exercise = Exerciser.Exerciser.array_of_mistakes.copy()
+                Exerciser.Exerciser.index_of_the_current_word = len(Exerciser.Exerciser.words_for_exercise) - 1
+                Exerciser.Exerciser.array_of_mistakes.clear()
                 self.mistake_was_made = "None"
             else:
                 self.mistake_was_made = "None"
-                if self.words != Exerciser.Exerciser.array_of_words_for_exercise:
-                    self.words = Exerciser.Exerciser.array_of_words_for_exercise
-                self.index_of_the_current_word = len(self.words) - 1
-                self.array_of_mistakes.clear()
+                if Exerciser.Exerciser.words_for_exercise != Exerciser.Exerciser.words_for_exercise:
+                    Exerciser.Exerciser.words_for_exercise = Exerciser.Exerciser.words_for_exercise
+                Exerciser.Exerciser.index_of_the_current_word = len(Exerciser.Exerciser.words_for_exercise) - 1
+                Exerciser.Exerciser.array_of_mistakes.clear()
         self.clear_output()
-        Word.Word.current_word = self.words[self.index_of_the_current_word]
+        Word.Word.current_word = Exerciser.Exerciser.words_for_exercise[Exerciser.Exerciser.index_of_the_current_word]
         self.display_the_usage()
         self.wrong_answer_line.hide()
         self.input_text.setStyleSheet(Windows.Windows.style_sheet_by_default)

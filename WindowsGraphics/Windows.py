@@ -30,7 +30,16 @@ class Windows:
                                   "border-color: black;" \
                                   "padding: 4px;}" \
                                   "QPushButton:hover {background-color: rgb(20, 75, 130);}"
-
+    style_sheet_for_pressed_button: str = "QPushButton {" \
+                                          "background-color:rgb(30, 85, 138);" \
+                                          "font: 19pt \"Yrsa\";" \
+                                          "color:white; " \
+                                          "selection-background-color: rgb(255, 255, 255);" \
+                                          "border-style: outset;" \
+                                          "border-width: 1px;" \
+                                          "border-radius: 15px;" \
+                                          "border-color: black;" \
+                                          "padding: 4px;}"
     style_sheet_for_shuffle_button_off = "QPushButton {" \
                                          "background-color:rgb(30, 85, 138);" \
                                          "font: 19pt \"Yrsa\";" \
@@ -77,6 +86,7 @@ class Windows:
                                        'selection-color: rgb(101, 145, 232);'
     style_sheet_after_correct_answer = 'background-color:rgb(205, 247, 190);' + style_sheet_for_input_field
     style_sheet_by_default = 'background-color:rgb(200, 211, 223);' + style_sheet_for_input_field
+
     style_sheet_after_wrong_answer = 'background-color:rgb(255, 192, 192);' + style_sheet_for_input_field
 
     @classmethod
@@ -89,9 +99,12 @@ class Windows:
         msg_box.exec_()
 
     @classmethod
-    def open_window_after_all_words_reviewed(cls, len_of_array_of_mistakes: int, len_of_words: int) -> str:
+    def open_window_after_all_words_reviewed(cls) -> str:
+        wordlist: str = Windows.exerciser_window.choose_wordlist.currentText()
+        len_of_words = len(Exerciser.Exerciser.dict_of_added_words[wordlist])
+        len_of_array_of_mistakes = len(Exerciser.Exerciser.array_of_mistakes)
         message_box = QMessageBox()
-        percent_of_right_answers = 100 - 100 * round(len_of_array_of_mistakes / len_of_words, 2)
+        percent_of_right_answers = round(100 - 100 * len_of_array_of_mistakes / len_of_words)
         message_box.setWindowTitle(" ")
         message_box.setText("You went over all of your words!\n"
                             f"Your result is {percent_of_right_answers} %\n")
@@ -136,3 +149,35 @@ class Windows:
             return f()
 
         return decorator
+
+    @staticmethod
+    def shuffle_button_function(window):
+        Exerciser.Exerciser.array_of_mistakes.clear()
+        win = getattr(Windows, window)
+        if win.type_of_order == "straight":
+            win.type_of_order = "shuffled"
+            Exerciser.Exerciser.random_shuffle(Exerciser.Exerciser.words_for_exercise)
+            win.shuffle_button.setStyleSheet(Windows.style_sheet_for_shuffle_button_on)
+        else:
+            win.type_of_order = "straight"
+            wordlist: str = Windows.exerciser_window.choose_wordlist.currentText()
+            Exerciser.Exerciser.words_for_exercise = Exerciser.Exerciser.dict_of_added_words[wordlist].copy()
+            win.shuffle_button.setStyleSheet(Windows.style_sheet_for_shuffle_button_off)
+        Exerciser.Exerciser.index_of_the_current_word = len(Exerciser.Exerciser.words_for_exercise) - 1
+        Word.Word.current_word = Exerciser.Exerciser.words_for_exercise[-1]
+        win.display_current_word()
+        Windows.widget.setFocus()
+
+    @staticmethod
+    def exit_button_function(window):
+        getattr(Windows, window).hide()
+        Windows.exerciser_window.show()
+        Windows.widget.setFocus()
+
+    @staticmethod
+    def initialization_after_mode_was_opened():
+        Exerciser.Exerciser.array_of_mistakes.clear()
+        Exerciser.Exerciser.index_of_the_current_word = len(Exerciser.Exerciser.words_for_exercise) - 1
+        new_wordlist: str = Windows.exerciser_window.choose_wordlist.currentText()
+        Exerciser.Exerciser.words_for_exercise = Exerciser.Exerciser.dict_of_added_words[new_wordlist]
+        Word.Word.current_word = Exerciser.Exerciser.words_for_exercise[-1]

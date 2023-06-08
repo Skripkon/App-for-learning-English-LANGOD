@@ -1,3 +1,5 @@
+import time
+
 import requests
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QInputDialog
@@ -66,7 +68,7 @@ class SearchWindow(QDialog):
                 Windows.Windows.exerciser_window.choose_wordlist.addItem(item)
                 isComboBoxEmpty = False
         if not isComboBoxEmpty:
-            Exerciser.Exerciser.array_of_words_for_exercise = \
+            Exerciser.Exerciser.words_for_exercise = \
                 Exerciser.Exerciser.dict_of_added_words[Windows.Windows.exerciser_window.choose_wordlist.currentText()]
             Windows.Windows.exerciser_window.show()
             Windows.Windows.search_window.hide()
@@ -80,7 +82,8 @@ class SearchWindow(QDialog):
 
     def connect_interface_with_functions(self):
         self.back_to_the_main_page_button.clicked.connect(self.back_to_the_main_page_button_function)
-        self.search_button.clicked.connect(self.search_button_function)
+        self.search_button.pressed.connect(self.search_button_function)
+        self.search_button.released.connect(self.blink)
         self.pronunciation_US.clicked.connect(Windows.Windows.play_sound_with_us_accent)
         self.pronunciation_UK.clicked.connect(Windows.Windows.play_sound_with_uk_accent)
         self.go_to_the_exerciser_button.clicked.connect(self.go_to_the_exerciser_button_function)
@@ -89,6 +92,10 @@ class SearchWindow(QDialog):
         self.create_new_wordlist_button.clicked.connect(self.create_new_wordlist_button_function)
         self.go_to_my_wordlists_button.clicked.connect(self.go_to_my_wordlists_button_function)
         self.choose_wordlist.currentTextChanged.connect(self.currentTextChangedFunction)
+
+    def blink(self):
+        time.sleep(0.1)
+        self.search_button.setStyleSheet(Windows.Windows.style_sheet_for_shuffle_button_off)
 
     @staticmethod
     def go_to_my_wordlists_button_function():
@@ -233,6 +240,7 @@ class SearchWindow(QDialog):
         self.usage_text.setReadOnly(True)
 
     def search_button_function(self):
+        self.search_button.setStyleSheet(Windows.Windows.style_sheet_for_pressed_button)
         self.definitions_text.clear()
         self.usage_text.clear()
         Word.Word.current_word = self.search_field.text().lower()
