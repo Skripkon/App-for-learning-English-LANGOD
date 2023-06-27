@@ -19,3 +19,7 @@ https://github.com/Skripkon/App-for-learning-English-LANGOD/assets/78466953/c860
 | Pronunciation | ```gtts```                  |
 | Definitions   | ```wordnet```               |
 | Usage         | ```reverso_context_api```   |
+
+# Application architecture
+
+recent:///9b015f617a281ae324fe96c1649aa762
