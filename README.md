@@ -22,4 +22,4 @@ https://github.com/Skripkon/App-for-learning-English-LANGOD/assets/78466953/c860
 
 # Application architecture
 
-recent:///9b015f617a281ae324fe96c1649aa762
+![Screenshot from 2023-06-27 12-09-53](https://github.com/Skripkon/App-for-learning-English-LANGOD/assets/78466953/974dcee5-2ded-4d6b-90d1-2c5f660333f1)
