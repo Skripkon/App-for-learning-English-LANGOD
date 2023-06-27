@@ -1,4 +1,4 @@
-# LANGOD: app for learning English for Linux
+# LANGOD: app for learning English
 
 # Demo:
 
