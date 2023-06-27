@@ -6,5 +6,4 @@ https://github.com/Skripkon/App-for-learning-English-LANGOD/assets/78466953/c860
 
 # How to run a server (local):
 
-write '''python3 ./Server/server.py''' from ~/App-for-learning-English-LANGOD directory
- 
+```python3 ./Server/server.py``` from ~/App-for-learning-English-LANGOD directory
