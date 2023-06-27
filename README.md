@@ -1,1 +1,6 @@
 # LANGOD: app for learning English for Linux
+
+# Demo:
+
+https://github.com/Skripkon/App-for-learning-English-LANGOD/assets/78466953/c860045e-b7b5-4c69-80e0-86413ea7ddc1
+
